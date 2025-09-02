@@ -3,289 +3,369 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MEDS-TRIAL • Đăng ký & Tra cứu liên kết</title>
+  <title>MEDS-TRIAL • Đăng ký & Xác thực email</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root{
-      /* 🎨 Màu thương hiệu (đồng bộ logo/UI) */
       --meds-primary:#2563eb; --meds-dark:#1e40af; --meds-accent:#06b6d4;
-      --meds-text:#0f172a; --meds-bg:#0b1220;   /* đổi nền base tối cho vibe startup */
-      --meds-border:#1f2a44; --surface:#0f172aE6; /* glass surface */
-      --meds-info-bg:#0b1120; --meds-info-br:#1e3a8a;
-      --meds-ok-bg:#052e2a;  --meds-ok-br:#2dd4bf;
-      --meds-new-bg:#3a1a01; --meds-new-br:#f59e0b;
-
-      /* Logo */
-      --logo-max:340px; --logo-nudge:20px;
+      --meds-text:#e5e7eb; --meds-bg:#0b1220;
+      --meds-border:#1f2a44; --surface:rgba(15,23,42,.88);
+      --meds-info-br:#1e3a8a; --logo-max:320px; --logo-nudge:18px;
+      --meds-ok-br:#2dd4bf; --meds-ok-bg:#052e2a;
+      --meds-new-br:#f59e0b; --meds-new-bg:#3a1a01;
     }
 
-    /* ======= NỀN STARTUP: gradient + aurora + grid ======= */
-    body{ background: var(--meds-bg); color: #e5e7eb; }
+    /* ===== Nền & layering ===== */
+    html,body{min-height:100%; background:var(--meds-bg);}
+    body{color:var(--meds-text); isolation:isolate;}
+    #bg{position:fixed; inset:0; z-index:0; pointer-events:none;}
+    #content{position:relative; z-index:1;}
 
-    .scene {
-      position: fixed; inset: 0; z-index: -2; pointer-events: none;
+    .scene{
+      position:absolute; inset:0;
       background:
         radial-gradient(60% 40% at 15% 10%, rgba(37,99,235,.30) 0%, transparent 60%),
         radial-gradient(50% 35% at 85% 15%, rgba(6,182,212,.25) 0%, transparent 60%),
         radial-gradient(70% 50% at 50% 95%, rgba(30,64,175,.35) 0%, transparent 70%),
         linear-gradient(180deg, #0b1220 0%, #0b1120 30%, #0b1220 100%);
-      filter: saturate(1.1);
+      filter:saturate(1.06);
     }
-    .grid {
-      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    .gridbg{
+      position:absolute; inset:0;
       background-image:
         linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
-      background-size: 24px 24px;
+      background-size:24px 24px;
       mask-image: radial-gradient(60% 60% at 50% 40%, rgba(0,0,0,.9), rgba(0,0,0,0));
-      opacity: .5;
+      opacity:.5;
     }
-    .aurora, .aurora::before, .aurora::after{
-      position: fixed; inset: 0; pointer-events: none;
-      filter: blur(36px);
-      mix-blend-mode: screen;
+    .aurora,.aurora::before,.aurora::after{
+      position:absolute; inset:0; filter:blur(30px); mix-blend-mode:screen;
     }
     .aurora{
-      z-index: -1;
       background:
         radial-gradient(30% 30% at 10% 20%, rgba(37,99,235,.25), transparent 60%),
         radial-gradient(25% 30% at 90% 10%, rgba(6,182,212,.20), transparent 60%),
         radial-gradient(20% 25% at 80% 85%, rgba(59,130,246,.18), transparent 60%);
-      animation: float 18s ease-in-out infinite alternate;
+      animation:float 18s ease-in-out infinite alternate;
     }
-    .aurora::before{
-      content:"";
-      background: radial-gradient(28% 28% at 30% 85%, rgba(99,102,241,.20), transparent 60%);
-      animation: float2 22s ease-in-out infinite alternate;
+    .aurora::before{content:""; background:radial-gradient(28% 28% at 30% 85%, rgba(99,102,241,.20), transparent 60%); animation:float2 22s ease-in-out infinite alternate;}
+    .aurora::after {content:""; background:radial-gradient(22% 22% at 75% 55%, rgba(59,130,246,.18), transparent 60%); animation:float3 26s ease-in-out infinite alternate;}
+    @keyframes float{from{transform:translateY(-6px)}to{transform:translateY(6px)}}
+    @keyframes float2{from{transform:translateX(-8px)}to{transform:translateX(8px)}}
+    @keyframes float3{from{transform:translate(6px,-4px)}to{transform:translate(-6px,4px)}}
+    @media (max-width: 640px){
+      .aurora,.aurora::before,.aurora::after{ mix-blend-mode:normal; filter:blur(22px); opacity:.75; }
     }
-    .aurora::after{
-      content:"";
-      background: radial-gradient(22% 22% at 75% 55%, rgba(59,130,246,.18), transparent 60%);
-      animation: float3 26s ease-in-out infinite alternate;
-    }
-    @keyframes float   { from{transform:translateY(-6px)} to{transform:translateY(6px)} }
-    @keyframes float2  { from{transform:translateX(-8px)} to{transform:translateX(8px)} }
-    @keyframes float3  { from{transform:translate(6px,-4px)} to{transform:translate(-6px,4px)} }
 
-    /* ======= Logo ======= */
-    .logo-wrap { filter: drop-shadow(0 8px 22px rgba(14,165,233,.20)); }
-    .logo-svg {
-      width: 100%; height: auto; max-width: var(--logo-max);
-      display:block; margin-inline:auto;
-    }
-    .logo-visual { transform-box:view-box; transform-origin:50% 50%; transform:translateX(var(--logo-nudge)); }
+    /* Logo */
+    .logo-wrap{filter:drop-shadow(0 8px 22px rgba(14,165,233,.20));}
+    .logo-svg{width:100%;height:auto;max-width:var(--logo-max);display:block;margin-inline:auto;}
+    .logo-visual{transform-box:view-box;transform-origin:50% 50%;transform:translateX(var(--logo-nudge));}
 
-    /* ======= Card glass ======= */
-    .glass {
-      background: var(--surface);
-      backdrop-filter: blur(14px);
-      border: 1px solid var(--meds-border);
-      box-shadow:
-        0 10px 30px rgba(2,6,23,.35),
-        0 1px 0 0 rgba(255,255,255,.04) inset;
+    /* Card glass (không pseudo để tránh đè) */
+    .glass{
+      background:var(--surface);
+      border:1px solid var(--meds-border);
+      border-radius:1rem;
+      box-shadow:0 10px 30px rgba(2,6,23,.35), 0 1px 0 0 rgba(255,255,255,.04) inset;
+    }
+    @supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)){
+      .glass{
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        background:rgba(15,23,42,.72);
+      }
+    }
+
+    .input{
+      width:100%;
+      background:rgba(2,6,23,.45);
       color:#e5e7eb;
+      border:1px solid #21314f;
+      border-radius:0.75rem;
+      padding:0.675rem 1rem;
     }
-    .glass a{ color:#93c5fd; }
-    .glass .input {
-      background: rgba(2,6,23,.45);
-      color:#e5e7eb;
-      border-color: #21314f;
-    }
-    .glass .input:focus{
-      border-color: var(--meds-primary);
-      box-shadow: 0 0 0 4px rgba(37,99,235,.18);
-      outline: none;
-    }
+    .input::placeholder{ color: #94a3b8; }
+    .input:focus{ border-color:var(--meds-primary); box-shadow:0 0 0 4px rgba(37,99,235,.18); outline:none; }
 
-    /* Result badge colors */
+    /* OTP */
+    #otp{letter-spacing:.35em; text-align:center; font-variant-numeric:tabular-nums; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
+
+    /* Badge */
     .badge-old{ border-color:var(--meds-ok-br); background:var(--meds-ok-bg); color:#99f6e4; }
     .badge-new{ border-color:var(--meds-new-br); background:var(--meds-new-bg); color:#fdba74; }
   </style>
 </head>
+<body>
+  <!-- NỀN -->
+  <div id="bg" aria-hidden="true">
+    <div class="scene"></div>
+    <div class="aurora"></div>
+    <div class="gridbg"></div>
+  </div>
 
-<body class="min-h-screen text-[var(--meds-text)]">
-  <!-- Nền startup -->
-  <div class="scene" aria-hidden="true"></div>
-  <div class="aurora" aria-hidden="true"></div>
-  <div class="grid" aria-hidden="true"></div>
-
-  <main class="mx-auto w-full max-w-xl px-4 py-10">
-    <!-- Header + Logo -->
-    <header class="mb-8 text-center">
-      <div class="logo-wrap mx-auto mb-4 flex justify-center">
-        <svg class="logo-svg" viewBox="0 0 900 260" preserveAspectRatio="xMidYMid meet"
-             xmlns="http://www.w3.org/2000/svg" aria-labelledby="title desc" role="img">
-          <title id="title">MedS Logo</title><desc id="desc">MedS logo</desc>
-          <defs>
-            <filter id="ds" x="-20%" y="-20%" width="140%" height="140%">
-              <feOffset dx="0" dy="4" in="SourceAlpha" result="off"/><feGaussianBlur in="off" stdDeviation="6" result="blur"/>
-              <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0 .22 0" result="shadow"/><feBlend in="SourceGraphic" in2="shadow" mode="normal"/>
-            </filter>
-            <linearGradient id="gShield" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="var(--meds-primary)"/><stop offset="100%" stop-color="var(--meds-dark)"/>
-            </linearGradient>
-            <linearGradient id="gHead" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="var(--meds-primary)"/><stop offset="100%" stop-color="#3b82f6"/>
-            </linearGradient>
-          </defs>
-          <g class="logo-visual">
-            <g transform="translate(20,20)" filter="url(#ds)">
-              <path d="M100,0 L200,30 L200,120 C200,170 160,210 100,240 C40,210 0,170 0,120 L0,30 Z" fill="url(#gShield)"/>
-              <g transform="translate(35,40)">
-                <rect x="0" y="18" rx="10" ry="10" width="130" height="110" fill="white" opacity="0.96"/>
-                <rect x="0" y="18" width="130" height="28" rx="10" ry="10" fill="url(#gHead)"/>
-                <circle cx="28" cy="18" r="6.5" fill="white"/><circle cx="102" cy="18" r="6.5" fill="white"/>
-                <g fill="#d1d5db">
-                  <rect x="12" y="56" width="18" height="16" rx="3"/><rect x="36" y="56" width="18" height="16" rx="3"/>
-                  <rect x="60" y="56" width="18" height="16" rx="3"/><rect x="84" y="56" width="18" height="16" rx="3"/>
-                  <rect x="12" y="78" width="18" height="16" rx="3"/><rect x="36" y="78" width="18" height="16" rx="3"/>
-                  <rect x="60" y="78" width="18" height="16" rx="3"/><rect x="84" y="78" width="18" height="16" rx="3"/>
-                  <rect x="12" y="100" width="18" height="16" rx="3"/><rect x="36" y="100" width="18" height="16" rx="3"/>
-                  <rect x="60" y="100" width="18" height="16" rx="3"/><rect x="84" y="100" width="18" height="16" rx="3"/>
-                </g>
-                <g transform="translate(92,92)">
-                  <rect x="-10" y="-26" width="20" height="52" rx="3" fill="var(--meds-accent)"/>
-                  <rect x="-26" y="-10" width="52" height="20" rx="3" fill="var(--meds-accent)"/>
+  <!-- NỘI DUNG -->
+  <div id="content">
+    <main class="mx-auto w-full max-w-xl px-4 py-10">
+      <header class="mb-8 text-center">
+        <div class="logo-wrap mx-auto mb-4 flex justify-center">
+          <!-- SVG logo -->
+          <svg class="logo-svg" viewBox="0 0 900 260" preserveAspectRatio="xMidYMid meet"
+               xmlns="http://www.w3.org/2000/svg" aria-labelledby="title desc" role="img">
+            <title id="title">MedS Logo</title><desc id="desc">MedS logo</desc>
+            <defs>
+              <filter id="ds" x="-20%" y="-20%" width="140%" height="140%">
+                <feOffset dx="0" dy="4" in="SourceAlpha" result="off"/><feGaussianBlur in="off" stdDeviation="6" result="blur"/>
+                <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0 .22 0" result="shadow"/><feBlend in="SourceGraphic" in2="shadow" mode="normal"/>
+              </filter>
+              <linearGradient id="gShield" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="var(--meds-primary)"/><stop offset="100%" stop-color="var(--meds-dark)"/>
+              </linearGradient>
+              <linearGradient id="gHead" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="var(--meds-primary)"/><stop offset="100%" stop-color="#3b82f6"/>
+              </linearGradient>
+            </defs>
+            <g class="logo-visual">
+              <g transform="translate(20,20)" filter="url(#ds)">
+                <path d="M100,0 L200,30 L200,120 C200,170 160,210 100,240 C40,210 0,170 0,120 L0,30 Z" fill="url(#gShield)"/>
+                <g transform="translate(35,40)">
+                  <rect x="0" y="18" rx="10" ry="10" width="130" height="110" fill="white" opacity="0.96"/>
+                  <rect x="0" y="18" width="130" height="28" rx="10" ry="10" fill="url(#gHead)"/>
+                  <circle cx="28" cy="18" r="6.5" fill="white"/><circle cx="102" cy="18" r="6.5" fill="white"/>
+                  <g fill="#d1d5db">
+                    <rect x="12" y="56" width="18" height="16" rx="3"/><rect x="36" y="56" width="18" height="16" rx="3"/>
+                    <rect x="60" y="56" width="18" height="16" rx="3"/><rect x="84" y="56" width="18" height="16" rx="3"/>
+                    <rect x="12" y="78" width="18" height="16" rx="3"/><rect x="36" y="78" width="18" height="16" rx="3"/>
+                    <rect x="60" y="78" width="18" height="16" rx="3"/><rect x="84" y="78" width="18" height="16" rx="3"/>
+                    <rect x="12" y="100" width="18" height="16" rx="3"/><rect x="36" y="100" width="18" height="16" rx="3"/>
+                    <rect x="60" y="100" width="18" height="16" rx="3"/><rect x="84" y="100" width="18" height="16" rx="3"/>
+                  </g>
+                  <g transform="translate(92,92)"><rect x="-10" y="-26" width="20" height="52" rx="3" fill="var(--meds-accent)"/><rect x="-26" y="-10" width="52" height="20" rx="3" fill="var(--meds-accent)"/></g>
                 </g>
               </g>
+              <g transform="translate(280,150)">
+                <text x="0" y="0" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-weight="800" font-size="90" fill="#e5e7eb">MED</text>
+                <text x="210" y="0" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-weight="900" font-size="96" fill="var(--meds-primary)">S+</text>
+              </g>
             </g>
-            <g transform="translate(280,150)">
-              <text x="0" y="0" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-weight="800" font-size="90" fill="#e5e7eb">MED</text>
-              <text x="210" y="0" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-weight="900" font-size="96" fill="var(--meds-primary)">S+</text>
-            </g>
-          </g>
-        </svg>
-      </div>
-      <p class="mt-1 text-sm text-slate-300">Nhập <strong>Họ tên</strong> và <strong>Số điện thoại</strong> để <em>đăng ký hoặc tra cứu liên kết truy cập</em>.</p>
-    </header>
-
-    <section class="glass rounded-2xl p-6">
-      <form id="trialForm" class="space-y-5">
-        <div>
-          <label for="hoten" class="mb-1.5 block text-sm font-medium text-slate-200">Họ và tên</label>
-          <input id="hoten" name="hoten" type="text" required placeholder="Ví dụ: Nguyễn Văn A"
-                 class="input w-full rounded-xl border px-4 py-2.5 text-sm">
+          </svg>
         </div>
+        <p class="mt-1 text-sm text-slate-300">Nhập thông tin để xác thực email và nhận liên kết truy cập.</p>
+      </header>
 
-        <div>
-          <label for="sdt" class="mb-1.5 block text-sm font-medium text-slate-200">Số điện thoại (Zalo)</label>
-          <input id="sdt" name="sdt" type="tel" inputmode="numeric" required placeholder="Ví dụ: 0901234567"
-                 class="input w-full rounded-xl border px-4 py-2.5 text-sm">
-          <p class="mt-1 text-xs text-slate-400">Gợi ý: Quên tài khoản? Nhập <strong>SĐT đã đăng ký</strong> để tra cứu liên kết.</p>
-        </div>
-
-        <div class="flex items-center gap-3 pt-2">
-          <button id="submitBtn" type="submit"
-                  class="inline-flex items-center gap-2 rounded-xl bg-[var(--meds-primary)] px-4 py-2.5 text-sm font-semibold text-white shadow hover:bg-[var(--meds-dark)] focus:outline-none focus:ring-2 focus:ring-[color:rgba(37,99,235,.25)] disabled:opacity-60">
-            <svg id="spinner" class="hidden h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 0 1 8-8v4A4 4 0 0 0 8 12H4z"></path>
-            </svg>
-            <span>Nhận liên kết</span>
-          </button>
-          <span id="statusText" class="text-sm text-slate-300"></span>
-        </div>
-
-        <!-- Error -->
-        <div id="errorBox" class="hidden rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300"></div>
-
-        <!-- Result -->
-        <div id="resultBox" class="hidden rounded-2xl border border-[var(--meds-info-br)] bg-[color:rgba(30,58,138,.35)] p-4 backdrop-blur">
-          <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <div class="min-w-0">
-              <p class="text-sm font-medium text-slate-200">Liên kết truy cập • Mật khẩu: <span class="font-semibold">meds</span></p>
-              <a id="deployLink" href="#" target="_blank" rel="noopener" class="block truncate text-sm text-blue-300 underline">Đang xử lý…</a>
-              <span id="modeBadge" class="mt-1 inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold"></span>
+      <section class="glass p-6 md:p-8">
+        <form id="trialForm" class="space-y-6">
+          <!-- Hàng 1: họ tên + sđt -->
+          <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div>
+              <label for="hoten" class="mb-1.5 block text-sm font-medium text-slate-100">Họ và tên</label>
+              <input id="hoten" name="hoten" type="text" required placeholder="Ví dụ: Nguyễn Văn A" class="input placeholder:text-slate-400">
             </div>
-            <div class="mt-2 flex shrink-0 gap-2 sm:mt-0">
-              <button type="button" id="openBtn" class="rounded-xl border border-[var(--meds-border)] bg-white/5 px-3 py-2 text-sm font-medium text-slate-200 hover:bg-white/10">
-                Mở liên kết
-              </button>
-              <button type="button" id="copyBtn" class="rounded-xl bg-[var(--meds-primary)] px-3 py-2 text-sm font-semibold text-white hover:bg-[var(--meds-dark)]">
-                Sao chép
-              </button>
+            <div>
+              <label for="sdt" class="mb-1.5 block text-sm font-medium text-slate-100">Số điện thoại (Zalo)</label>
+              <input id="sdt" name="sdt" type="tel" inputmode="numeric" required placeholder="Ví dụ: 0901234567" class="input placeholder:text-slate-400">
+              <p class="mt-1 text-xs text-slate-400">Quên tài khoản? Nhập <b>SĐT đã đăng ký</b> để tra cứu liên kết.</p>
+            </div>
+
+            <!-- Email full hàng để tránh va chạm -->
+            <div class="sm:col-span-2">
+              <label for="email" class="mb-1.5 block text-sm font-medium text-slate-100">Email nhận mã xác thực</label>
+              <input id="email" name="email" type="email" required placeholder="you@domain.com" class="input placeholder:text-slate-400">
             </div>
           </div>
-        </div>
-      </form>
-    </section>
 
-    <footer class="mt-8 text-center text-xs text-slate-400">
-      © <span id="y"></span> MEDS • Phát triển bởi LTP Co., Ltd.
-    </footer>
-  </main>
+          <!-- Bước 1 -->
+          <div class="text-xs uppercase tracking-wide text-slate-300/80">Bước 1/2 • Gửi mã xác thực</div>
+          <div id="step1" class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
+            <button id="sendOtpBtn" type="button"
+                    class="inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--meds-primary)] px-5 py-2.5 text-sm font-semibold text-white shadow hover:bg-[var(--meds-dark)] focus:outline-none focus:ring-2 focus:ring-[color:rgba(37,99,235,.25)] disabled:opacity-60">
+              <svg id="spinner1" class="hidden h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 0 1 8-8v4A4 4 0 0 0 8 12H4z"></path>
+              </svg>
+              <span>Gửi mã xác thực</span>
+            </button>
+            <span id="status1" class="text-sm text-slate-300" aria-live="polite"></span>
+          </div>
+
+          <!-- Bước 2 -->
+          <div id="step2" class="hidden space-y-4">
+            <div class="text-xs uppercase tracking-wide text-slate-300/80">Bước 2/2 • Nhập mã & nhận liên kết</div>
+
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-end">
+              <div class="grow">
+                <label for="otp" class="mb-1.5 block text-sm font-medium text-slate-100">
+                  Nhập mã 6 số đã gửi tới <span id="emailMasked" class="font-semibold"></span>
+                </label>
+                <input id="otp" name="otp" inputmode="numeric" pattern="\\d{6}" maxlength="6"
+                       placeholder="• • • • • •" class="input">
+              </div>
+              <button id="resendBtn" type="button"
+                      class="rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm hover:bg-white/10">
+                Gửi lại mã
+              </button>
+            </div>
+
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
+              <button id="verifyBtn" type="button"
+                      class="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white shadow hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-300 disabled:opacity-60">
+                <svg id="spinner2" class="hidden h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 0 1 8-8v4A4 4 0 0 0 8 12H4z"></path>
+                </svg>
+                <span>Xác nhận & Nhận liên kết</span>
+              </button>
+              <span id="status2" class="text-sm text-slate-300" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div id="errorBox" role="alert" class="hidden rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300"></div>
+
+          <!-- Result -->
+          <div id="resultBox" class="hidden rounded-2xl border border-[var(--meds-info-br)] bg-[color:rgba(30,58,138,.35)] p-4 backdrop-blur">
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div class="min-w-0">
+                <p class="text-sm font-medium text-slate-200">Liên kết truy cập • Mật khẩu mặc định: <span class="font-semibold">meds</span></p>
+                <a id="deployLink" href="#" target="_blank" rel="noopener" class="block truncate text-sm text-blue-300 underline">Đang xử lý…</a>
+                <span id="modeBadge" class="mt-1 inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold"></span>
+              </div>
+              <div class="flex shrink-0 gap-2">
+                <button type="button" id="openBtn" class="rounded-xl border border-[var(--meds-border)] bg-white/5 px-3 py-2 text-sm font-medium text-slate-200 hover:bg-white/10">Mở liên kết</button>
+                <button type="button" id="copyBtn" class="rounded-xl bg-[var(--meds-primary)] px-3 py-2 text-sm font-semibold text-white hover:bg-[var(--meds-dark)]">Sao chép</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <footer class="mt-8 text-center text-xs text-slate-400">
+        © <span id="y"></span> MEDS • Phát triển bởi LTP Co., Ltd.
+      </footer>
+    </main>
+  </div>
 
   <script>
-    // 🔗 THAY BẰNG URL /exec CỦA APPS SCRIPT (Phiên bản A)
-    const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwUG-n6YMUr1VLuOMGQifSH0rH285pS92GY1PlefVQYSQlmJjWNs2fRSy7JHlyEX1bI/exec';
+    // THAY = URL /exec của Web App
+    const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwFSIJKMIdJ5-zuIw7OGYP1WovqLBZ3BIx0vtaPegdxBgxG9n16a_XALH3bHhXNKMN7/exec';
 
-    const normalizePhone = s => String(s || '').replace(/\D/g,'');
+    const normalizePhone = s => String(s||'').replace(/\D/g,'');
     const isValidPhone = d => /^\d{9,12}$/.test(d);
-    const $ = sel => document.querySelector(sel);
-    const show = (el, yes=true) => el.classList.toggle('hidden', !yes);
+    const isValidEmail = e => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(e||'').trim());
+    const $ = s => document.querySelector(s);
+    const show = (el, yes=true)=> el.classList.toggle('hidden', !yes);
 
-    async function dangKyTrial(hoten, sdt){
-      try{
-        const res = await fetch(WEBAPP_URL, {
-          method:'POST',
-          headers:{ 'Content-Type':'text/plain;charset=utf-8' },
-          body: JSON.stringify({ hoten, sdt }),
-          cache:'no-store', redirect:'follow'
-        });
-        return await res.json();
-      }catch(_){
-        const url = WEBAPP_URL + '?hoten=' + encodeURIComponent(hoten) + '&sdt=' + encodeURIComponent(sdt);
-        const res2 = await fetch(url, { method:'GET', cache:'no-store' });
-        return await res2.json();
-      }
+    let OTP_TOKEN = '';
+    let RESEND_COOLDOWN = 0, resendTimer = null;
+
+    async function api(body){
+      const res = await fetch(WEBAPP_URL, {
+        method:'POST',
+        headers:{ 'Content-Type':'text/plain;charset=utf-8' },
+        body: JSON.stringify(body),
+        cache:'no-store', redirect:'follow'
+      });
+      return await res.json();
     }
 
-    $('#trialForm').addEventListener('submit', async (e)=>{
-      e.preventDefault();
+    // Gửi OTP
+    $('#sendOtpBtn').addEventListener('click', async ()=>{
       const hoten = $('#hoten').value.trim();
       const sdt = normalizePhone($('#sdt').value.trim());
-      const status = $('#statusText'), errorBx = $('#errorBox'), result = $('#resultBox');
-      const submit = $('#submitBtn'), spinner = $('#spinner');
+      const email = $('#email').value.trim();
 
-      show(errorBx,false); show(result,false); status.textContent='';
-      if(!hoten){ errorBx.textContent='Vui lòng nhập họ và tên.'; return show(errorBx,true); }
-      if(!isValidPhone(sdt)){ errorBx.textContent='Số điện thoại không hợp lệ (vui lòng nhập 9–12 chữ số).'; return show(errorBx,true); }
+      const err = $('#errorBox'), st1 = $('#status1'), btn = $('#sendOtpBtn'), sp = $('#spinner1');
+      show(err,false); st1.textContent='';
 
-      submit.disabled=true; show(spinner,true); status.textContent='Đang xử lý yêu cầu…';
+      if(!hoten){ err.textContent='Vui lòng nhập họ và tên.'; return show(err,true); }
+      if(!isValidPhone(sdt)){ err.textContent='Số điện thoại không hợp lệ (9–12 chữ số).'; return show(err,true); }
+      if(!isValidEmail(email)){ err.textContent='Email không hợp lệ.'; return show(err,true); }
 
+      btn.disabled=true; show(sp,true); st1.textContent='Đang gửi mã…';
       try{
-        const data = await dangKyTrial(hoten, sdt);
+        const data = await api({ action:'request_otp', hoten, sdt, email });
         if(data?.success){
-          const link = data.link || '#', mode = data.mode;
-          const a = $('#deployLink'), badge = $('#modeBadge');
-          a.href = link; a.textContent = link;
-
-          const isOld = mode === 'exists';
-          badge.textContent = isOld ? 'ĐÃ ĐĂNG KÝ' : 'VỪA CẤP MỚI';
-          badge.className = 'mt-1 inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold ' +
-            (isOld ? 'badge-old' : 'badge-new');
-
-          show(result,true);
-          status.textContent = isOld ? 'Tra cứu thành công.' : 'Đăng ký thành công.';
+          OTP_TOKEN = data.token;
+          $('#emailMasked').textContent = data.emailMasked || email;
+          show($('#step2'), true);
+          st1.textContent = `Đã gửi mã xác thực (hết hạn sau ${Math.floor((data.expiresIn||600)/60)} phút).`;
+          startResendCooldown(30);
         }else{
-          throw new Error(data?.error || 'Không thể xử lý yêu cầu.');
+          throw new Error(data?.error || 'Không thể gửi mã.');
         }
-      }catch(err){
-        errorBx.textContent = err.message || String(err);
-        show(errorBx,true);
-        status.textContent='';
+      }catch(e){
+        err.textContent = e.message || String(e);
+        show(err,true);
       }finally{
-        submit.disabled=false; show(spinner,false);
+        btn.disabled=false; show(sp,false);
       }
     });
 
+    // Gửi lại mã
+    $('#resendBtn').addEventListener('click', ()=>{
+      if(RESEND_COOLDOWN>0) return;
+      $('#sendOtpBtn').click();
+    });
+
+    function startResendCooldown(s){
+      RESEND_COOLDOWN = s;
+      const btn = $('#resendBtn');
+      btn.disabled = true;
+      btn.textContent = `Gửi lại mã (${RESEND_COOLDOWN}s)`;
+      clearInterval(resendTimer);
+      resendTimer = setInterval(()=>{
+        RESEND_COOLDOWN--;
+        if(RESEND_COOLDOWN<=0){
+          clearInterval(resendTimer);
+          btn.disabled = false;
+          btn.textContent = 'Gửi lại mã';
+        }else{
+          btn.textContent = `Gửi lại mã (${RESEND_COOLDOWN}s)`;
+        }
+      },1000);
+    }
+
+    // Xác minh OTP & nhận link
+    $('#verifyBtn').addEventListener('click', async ()=>{
+      const code = ($('#otp').value || '').replace(/\D/g,'').slice(0,6);
+      const err = $('#errorBox'), st2 = $('#status2'), btn = $('#verifyBtn'), sp = $('#spinner2');
+      const result = $('#resultBox');
+
+      show(err,false); st2.textContent=''; show(result,false);
+      if(!OTP_TOKEN){ err.textContent='Chưa yêu cầu mã xác thực.'; return show(err,true); }
+      if(!/^\d{6}$/.test(code)){ err.textContent='Mã xác thực không hợp lệ (6 chữ số).'; return show(err,true); }
+
+      btn.disabled=true; show(sp,true); st2.textContent='Đang xác nhận…';
+      try{
+        const data = await api({ action:'verify', token: OTP_TOKEN, code });
+        if(data?.success){
+          const a = $('#deployLink'), badge = $('#modeBadge');
+          a.href = data.link || '#'; a.textContent = data.link || '(không có liên kết)';
+          const isOld = data.mode === 'exists';
+          badge.textContent = isOld ? 'ĐÃ ĐĂNG KÝ' : 'VỪA CẤP MỚI';
+          badge.className = 'mt-1 inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold ' + (isOld ? 'badge-old' : 'badge-new');
+          show(result,true);
+          st2.textContent = isOld ? 'Tra cứu thành công.' : 'Đăng ký thành công.';
+        }else{
+          throw new Error(data?.error || 'Xác thực thất bại.');
+        }
+      }catch(e){
+        err.textContent = e.message || String(e);
+        show(err,true);
+        st2.textContent='';
+      }finally{
+        btn.disabled=false; show(sp,false);
+      }
+    });
+
+    // Phụ trợ
     $('#openBtn').addEventListener('click', ()=>{ const href=$('#deployLink').href; if(href) window.open(href,'_blank','noopener'); });
     $('#copyBtn').addEventListener('click', async ()=>{
       const href = $('#deployLink').href || '';
       try{ await navigator.clipboard.writeText(href); alert('Đã sao chép liên kết.'); }
       catch{ alert('Không thể sao chép. Vui lòng copy thủ công.'); }
     });
-
     $('#y').textContent = new Date().getFullYear();
   </script>
 </body>
