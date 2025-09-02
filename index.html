@@ -95,6 +95,38 @@
     /* Badge */
     .badge-old{ border-color:var(--meds-ok-br); background:var(--meds-ok-bg); color:#99f6e4; }
     .badge-new{ border-color:var(--meds-new-br); background:var(--meds-new-bg); color:#fdba74; }
+    /* --- Floating Zalo Button --- */
+.contact-fab {
+  position: fixed; right: 16px; bottom: 16px;
+  width: 56px; height: 56px; border-radius: 9999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #06b6d4; /* cyan-500 (hợp tông giao diện) */
+  color: white; box-shadow: 0 10px 25px rgba(6, 182, 212, .35);
+  border: 1px solid rgba(255,255,255,.15);
+  z-index: 50; /* nổi trên mọi thứ */
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.contact-fab:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(6,182,212,.45); background:#0891b2; }
+.contact-fab:active { transform: translateY(0); }
+.contact-fab:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(6,182,212,.25); }
+
+.contact-tooltip {
+  position: absolute; right: 68px; bottom: 50%;
+  transform: translateY(50%);
+  background: rgba(15,23,42,.9); color: #e5e7eb;
+  border: 1px solid var(--meds-border);
+  padding: 6px 10px; font-size: 12px; border-radius: 8px;
+  white-space: nowrap; pointer-events: none; opacity: 0;
+  transition: opacity .15s ease, transform .15s ease;
+}
+.contact-fab:hover .contact-tooltip { opacity: 1; transform: translate(0,50%); }
+@media (max-width: 640px){
+  .contact-tooltip{ display:none; } /* gọn trên mobile */
+}
+@media print{
+  .contact-fab{ display:none; }
+}
+
   </style>
 </head>
 <body>
@@ -151,7 +183,7 @@
             </g>
           </svg>
         </div>
-        <p class="mt-1 text-sm text-slate-300">MEDS - MEDICAL SCHEDULE Hệ thống quản lý chia giờ dịch vụ kỹ thuật tự động</p>
+        <p class="mt-1 text-sm text-slate-300">MEDS • MEDICAL SCHEDULE • Hệ thống quản lý và chia giờ dịch vụ kỹ thuật tự động</p>
         <p class="mt-1 text-sm text-slate-300">Nhập thông tin để xác thực email và nhận liên kết truy cập.</p>
       </header>
 
@@ -166,13 +198,13 @@
             <div>
               <label for="sdt" class="mb-1.5 block text-sm font-medium text-slate-100">Số điện thoại (Zalo)</label>
               <input id="sdt" name="sdt" type="tel" inputmode="numeric" required placeholder="Ví dụ: 0901234567" class="input placeholder:text-slate-400">
-              <p class="mt-1 text-xs text-slate-400">Quên tài khoản? Nhập <b>SĐT đã đăng ký</b> để tra cứu liên kết.</p>
+              <p class="mt-1 text-xs text-slate-400">Gợi ý: Quên tài khoản? Nhập <b>SĐT đã đăng ký</b> để tra cứu liên kết.</p>
             </div>
 
             <!-- Email full hàng để tránh va chạm -->
             <div class="sm:col-span-2">
               <label for="email" class="mb-1.5 block text-sm font-medium text-slate-100">Email nhận mã xác thực</label>
-              <input id="email" name="email" type="email" required placeholder="example@gmail.com" class="input placeholder:text-slate-400">
+              <input id="email" name="email" type="email" required placeholder="Ví dụ: example@gmail.com" class="input placeholder:text-slate-400">
             </div>
           </div>
 
@@ -242,7 +274,7 @@
       </section>
 
       <footer class="mt-8 text-center text-xs text-slate-400">
-        © <span id="y"></span> MEDS • Phát triển bởi LTP Co., Ltd.
+        © <span id="y"></span> MEDS • Phát triển bởi Bác sĩ Hồ Vũ Việt Thắng
       </footer>
     </main>
   </div>
@@ -369,5 +401,21 @@
     });
     $('#y').textContent = new Date().getFullYear();
   </script>
+  <!-- Floating Zalo Contact Button -->
+<a href="https://zalo.me/0345056117" target="_blank" rel="noopener"
+class="contact-fab" aria-label="Liên hệ Zalo 0345056117" title="Liên hệ Zalo">
+<!-- Icon Zalo (SVG) -->
+<svg width="26" height="26" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+ <rect x="4" y="8" width="40" height="32" rx="8" fill="white"/>
+ <path d="M13 17h6l-6 14h6" stroke="#06b6d4" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M23 31V17h8" stroke="#06b6d4" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M31 24h-8" stroke="#06b6d4" stroke-width="2.6" stroke-linecap="round"/>
+ <circle cx="35.5" cy="24" r="1.8" fill="#06b6d4"/>
+ <circle cx="35.5" cy="19" r="1.8" fill="#06b6d4"/>
+ <circle cx="35.5" cy="29" r="1.8" fill="#06b6d4"/>
+</svg>
+<span class="contact-tooltip">BS Việt Thắng: 0345 056 117</span>
+</a>
+
 </body>
 </html>
