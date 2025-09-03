@@ -1,1 +1,205 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MEDS • Hướng dẫn cấu hình bảng NHANVIEN</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --meds-primary:#2563eb; /* indigo-600 */
+      --meds-accent:#06b6d4;  /* cyan-500   */
+      --meds-ink:#0f172a;     /* slate-900  */
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-800">
+  <article class="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+    <!-- Hero / Title -->
+    <header class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div class="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-indigo-100 blur-2xl"></div>
+      <div class="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-cyan-100 blur-2xl"></div>
+      <div class="relative p-8 sm:p-10">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-[13px] font-medium text-indigo-700">
+          <span>🧭</span>
+          <span>MEDS · Cấu hình cơ bản</span>
+        </div>
+        <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          Cấu hình bảng <span class="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent">NHANVIEN</span>
+        </h1>
+        <p class="mt-3 max-w-3xl text-slate-600">
+          <strong>Mục tiêu:</strong> phần <b>NHANVIEN</b>. Đây là nơi khai báo nhân sự, chuyên môn, ca làm, và (nếu là bác sĩ) nhóm dịch vụ chỉ định để MEDS xếp lịch chính xác."
+        </p>
+      </div>
+    </header>
+    <!-- Example Table -->
+    <section class="mt-10">
+      <h2 class="mb-3 text-xl font-bold text-slate-900">Ví dụ minh hoạ nhanh (3 dòng)</h2>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <table class="min-w-full text-left text-sm">
+          <thead class="bg-slate-50 text-slate-600">
+            <tr>
+              <th class="px-4 py-3 font-semibold">HOTEN</th>
+              <th class="px-4 py-3 font-semibold">CHUYENMON</th>
+              <th class="px-4 py-3 font-semibold">KHOAPHONG</th>
+              <th class="px-4 py-3 font-semibold">BUOI</th>
+              <th class="px-4 py-3 font-semibold">MORNINGSTART</th>
+              <th class="px-4 py-3 font-semibold">MORNINGSEND</th>
+              <th class="px-4 py-3 font-semibold">AFFTERNOONSTART</th>
+              <th class="px-4 py-3 font-semibold">AFFTERNOONEND</th>
+              <th class="px-4 py-3 font-semibold">NHOMDICHVU</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3 font-medium text-slate-900">KTV Nguyễn Văn A</td>
+              <td class="px-4 py-3">DX,SA,LA,VD</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
+              <td class="px-4 py-3">07:30</td>
+              <td class="px-4 py-3">11:30</td>
+              <td class="px-4 py-3">13:30</td>
+              <td class="px-4 py-3">17:00</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3 font-medium text-slate-900">YS Trần Thị B</td>
+              <td class="px-4 py-3">DC</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
+              <td class="px-4 py-3">Sáng</td>
+              <td class="px-4 py-3">07:30</td>
+              <td class="px-4 py-3">11:30</td>
+              <td class="px-4 py-3">13:30</td>
+              <td class="px-4 py-3">17:00</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3 font-medium text-slate-900">BS. Lê Minh C</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
+              <td class="px-4 py-3">07:30</td>
+              <td class="px-4 py-3">11:30</td>
+              <td class="px-4 py-3">13:30</td>
+              <td class="px-4 py-3">17:00</td>
+              <td class="px-4 py-3">YHCT,PHCN</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <!-- Structure -->
+    <section class="mt-10 grid gap-6 lg:grid-cols-3">
+      <div class="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 class="mb-3 text-xl font-bold text-slate-900">Cấu trúc bảng</h2>
+        <p class="mb-4 text-slate-600">Bảng có các cột:</p>
+        <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🧑‍⚕️</span>Họ tên (HOTEN)</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🧩</span>Chuyên môn (CHUYENMON)</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🏥</span>Khoa phòng (KHOAPHONG)</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🕒</span>Buổi (BUOI)</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🌅</span>Bắt đầu buổi sáng (MORNINGSTART)</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>☀️</span>Kết thúc buổi sáng (MORNINGSEND)</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🌇</span>Bắt đầu buổi chiều (AFFTERNOONSTART)</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🌆</span>Kết thúc buổi chiều (AFFTERNOONEND)</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🗂️</span>Nhóm dịch vụ (NHOMDICHVU)</li>
+        </ul>
+      </div>
 
+      <aside class="rounded-2xl border border-indigo-200 bg-indigo-50 p-6 text-indigo-900">
+        <h3 class="mb-2 text-base font-semibold">🎯 Tip nhanh</h3>
+        <ul class="list-disc pl-5 text-sm leading-6">
+          <li>Giữ <b>đồng bộ</b> tên viết tắt dịch vụ với bảng <b>THOIGIAN</b>.</li>
+          <li>Định dạng thời gian: <b>HH:MM</b> (ví dụ 07:30, 11:30, 13:30, 17:00).</li>
+          <li>Các khung giờ là <b>giới hạn</b> để MEDS xếp ca; ngoài khung hệ thống sẽ không xếp.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- Field Guides -->
+    <section class="mt-8 grid gap-6 md:grid-cols-2">
+      <!-- Họ tên -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-2 text-lg font-bold">Họ tên (HOTEN) – <span class="text-indigo-600">bắt buộc</span>, chuẩn hoá</h3>
+        <p class="text-slate-600">Nhập <b>đầy đủ</b>. Tên phải <b>đồng bộ 100%</b> với các chỗ khác (ví dụ cột <b>QUANLY</b> trong <b>MAYMOC</b>) để hệ thống nhận diện đúng.</p>
+      </div>
+
+      <!-- Chuyên môn -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-2 text-lg font-bold">Chuyên môn (CHUYENMON) – viết tắt dịch vụ thực hiện</h3>
+        <p class="text-slate-600">Liệt kê <b>viết tắt</b> dịch vụ nhân viên có thể trực tiếp thực hiện, ngăn cách bằng <b>dấu phẩy</b>.</p>
+        <div class="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm">
+          <p class="mb-2">Ví dụ:</p>
+          <code class="block whitespace-pre-wrap leading-6">DX, SA, TT, SN, LA, VD</code>
+          <p class="mt-2 text-slate-600">Tương ứng: Điện xung, Siêu âm, Từ trường, Sóng ngắn, Laser, Tập vận động. Các viết tắt phải đồng bộ với bảng <b>THOIGIAN</b>.</p>
+        </div>
+      </div>
+
+      <!-- Khoa phòng -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-2 text-lg font-bold">Khoa phòng (KHOAPHONG) – dùng nhiều khoa thì điền</h3>
+        <p class="text-slate-600">Nếu hệ thống chỉ dùng <b>một khoa</b>, có thể <b>để trống</b>. Nếu dùng <b>nhiều khoa</b>, hãy điền đúng tên khoa để phân ca theo khoa.</p>
+      </div>
+
+      <!-- Buổi -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-2 text-lg font-bold">Buổi (BUOI) – khung thời gian làm việc</h3>
+        <ul class="list-disc pl-5 text-slate-600">
+          <li><b>Để trống</b> = làm cả ngày</li>
+          <li><b>Gõ "Sang"</b> = chỉ làm buổi sáng</li>
+          <li><b>Gõ "Chieu"</b> = chỉ làm buổi chiều</li>
+        </ul>
+      </div>
+
+      <!-- Khung giờ -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:col-span-2">
+        <h3 class="mb-2 text-lg font-bold">Khung giờ làm việc – 4 cột thời gian</h3>
+        <p class="text-slate-600">Điền giờ <b>bắt đầu/kết thúc</b> cho buổi sáng và buổi chiều theo định dạng <b>HH:MM</b> (ví dụ 07:30, 11:30, 13:30, 17:00). Các khung giờ này là <b>giới hạn</b> để MEDS xếp ca; ngoài khung, hệ thống sẽ không xếp.</p>
+      </div>
+
+      <!-- Nhóm dịch vụ -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:col-span-2">
+        <h3 class="mb-2 text-lg font-bold">Nhóm dịch vụ (NHOMDICHVU)– <span class="text-indigo-600">chỉ dùng cho BÁC SĨ chỉ định</span></h3>
+        <ul class="list-disc pl-5 text-slate-600">
+          <li>Nếu bác sĩ chỉ định <b>YHCT</b>, điền <b>YHCT</b>.</li>
+          <li>Nếu bác sĩ chỉ định <b>PHCN</b>, điền <b>PHCN</b>.</li>
+          <li>Nếu chỉ định cả hai, điền <b>YHCT, PHCN</b>.</li>
+          <li>Các chức danh khác như Điều dưỡng; Kỹ thuật viên;... không làm chỉ định thì <b>để trống</b> cột này.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Actions -->
+    <section class="mt-6 grid gap-6 md:grid-cols-2">
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-2 text-lg font-bold">Thêm & Lưu</h3>
+        <ol class="list-decimal pl-5 text-slate-600">
+          <li>Nhấn <b>“Thêm dòng”</b> để thêm nhân viên mới.</li>
+          <li>Sau khi thiết lập xong, nhớ nhấn <b>Lưu</b> trước khi chuyển sang bảng khác để tránh mất dữ liệu.</li>
+        </ol>
+        <div class="mt-4 flex gap-3">
+          <button class="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">+ Thêm dòng</button>
+          <button class="rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95">💾 Lưu</button>
+        </div>
+      </div>
+
+      <!-- Quick Checks -->
+      <div class="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-amber-900">
+        <h3 class="mb-2 text-base font-semibold">✅ Checklist trước khi rời trang</h3>
+        <ul class="list-disc pl-5 text-sm leading-6">
+          <li>Đã điền <b>Họ tên</b> chuẩn 100% như các bảng khác.</li>
+          <li>Đã liệt kê <b>CHUYENMON</b> đúng viết tắt & khớp <b>THOIGIAN</b>.</li>
+          <li>Đã chọn <b>BUOI</b> phù hợp (hoặc để trống nếu làm cả ngày).</li>
+          <li>Đã nhập đúng <b>khung giờ</b> hợp lệ.</li>
+          <li>Nếu là <b>Bác sĩ</b>, đã điền đúng <b>NHOMDICHVU</b>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer note -->
+    <footer class="mt-10 rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-600">
+      <p><span class="font-semibold text-slate-900">Ghi nhớ:</span> Tên viết tắt DV (DX, SA, TT, SN, LA, VD, …) phải trùng với bảng <b>THOIGIAN</b>. Đổi viết tắt ở một nơi, hãy cập nhật ở tất cả các bảng liên quan.</p>
+    </footer>
+  </article>
+</body>
+</html>
