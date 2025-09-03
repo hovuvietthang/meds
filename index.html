@@ -281,7 +281,7 @@
 
   <script>
     // THAY = URL /exec của Web App
-    const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwFSIJKMIdJ5-zuIw7OGYP1WovqLBZ3BIx0vtaPegdxBgxG9n16a_XALH3bHhXNKMN7/exec';
+    const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxrJ6fbQmUeyuSLCd5JF_5soEFLgEgQwySqzG6MBrJVJ1TXdK8Xo7gglChnl8ypbAFt/exec';
 
     const normalizePhone = s => String(s||'').replace(/\D/g,'');
     const isValidPhone = d => /^\d{9,12}$/.test(d);
@@ -358,7 +358,26 @@
         }
       },1000);
     }
+    async function sendLinkEmail(link){
+    const hoten = $('#hoten').value.trim();
+    const email = $('#email').value.trim();
+    const sdt   = normalizePhone($('#sdt').value.trim());
 
+    try{
+      const r = await api({
+        action: 'send_link_email',
+        token : OTP_TOKEN,   // server có thể tra ngược email/sdt từ token
+        link,
+        hoten,
+        email,
+        sdt
+      });
+      return r?.success === true;
+    }catch(e){
+      console.warn('send_link_email error:', e);
+      return false;
+    }
+  }
     // Xác minh OTP & nhận link
     $('#verifyBtn').addEventListener('click', async ()=>{
       const code = ($('#otp').value || '').replace(/\D/g,'').slice(0,6);
@@ -372,15 +391,23 @@
       btn.disabled=true; show(sp,true); st2.textContent='Đang xác nhận…';
       try{
         const data = await api({ action:'verify', token: OTP_TOKEN, code });
-        if(data?.success){
-          const a = $('#deployLink'), badge = $('#modeBadge');
-          a.href = data.link || '#'; a.textContent = data.link || '(không có liên kết)';
-          const isOld = data.mode === 'exists';
-          badge.textContent = isOld ? 'ĐÃ ĐĂNG KÝ' : 'VỪA CẤP MỚI';
-          badge.className = 'mt-1 inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold ' + (isOld ? 'badge-old' : 'badge-new');
-          show(result,true);
-          st2.textContent = isOld ? 'Tra cứu thành công.' : 'Đăng ký thành công.';
-        }else{
+       if(data?.success){
+  const a = $('#deployLink'), badge = $('#modeBadge');
+  const link = data.link || '#';
+  a.href = link; a.textContent = link;
+
+  const isOld = data.mode === 'exists';
+  badge.textContent = isOld ? 'ĐÃ ĐĂNG KÝ' : 'VỪA CẤP MỚI';
+  badge.className = 'mt-1 inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold ' + (isOld ? 'badge-old' : 'badge-new');
+  show(result,true);
+
+  // Gửi email thông báo kèm liên kết
+  st2.textContent = (isOld ? 'Tra cứu thành công.' : 'Đăng ký thành công.') + ' Đang gửi liên kết về email…';
+  const mailed = await sendLinkEmail(link);
+  st2.textContent = (isOld ? 'Tra cứu thành công.' : 'Đăng ký thành công.')
+    + (mailed ? ' Đã gửi liên kết về email.' : ' Không gửi được email, vui lòng sao chép liên kết bên dưới.');
+}
+else{
           throw new Error(data?.error || 'Xác thực thất bại.');
         }
       }catch(e){
@@ -419,3 +446,4 @@ class="contact-fab" aria-label="Liên hệ Zalo 0345056117" title="Liên hệ Za
 
 </body>
 </html>
+
