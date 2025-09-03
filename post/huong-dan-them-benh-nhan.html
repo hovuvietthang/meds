@@ -11,7 +11,88 @@
       --meds-accent:#06b6d4;  /* cyan-500   */
       --meds-ink:#0f172a;     /* slate-900  */
     }
-    /* ===== Guide Dock (Mục lục hướng dẫn) ===== */
+/* Khóa cuộn nền khi mở modal */
+body.modal-open { overflow: hidden; }
+
+/* Panel modal: giới hạn chiều cao theo viewport, cho layout cột */
+.guide-sheet{
+  max-height: calc(100vh - 4rem);
+  display: flex;            /* header + list (flex-col) */
+  flex-direction: column;
+  overflow: hidden;         /* phần list sẽ cuộn, panel không tràn */
+}
+@media (max-width: 640px){
+  .guide-sheet{ max-height: calc(100vh - 2rem); }
+}
+
+/* Vùng danh sách: cuộn dọc, mượt mobile */
+.guide-list{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain; /* chạm đáy không “bật” nền */
+}
+
+/* Chống tràn ngang bởi link dài */
+.guide-list a{ overflow-wrap: anywhere; }
+
+/* (Tuỳ chọn) Làm scrollbar gọn gàng */
+.guide-list::-webkit-scrollbar{ width: 10px; }
+.guide-list::-webkit-scrollbar-thumb{ background: rgba(148,163,184,.35); border-radius: 8px; }
+.guide-list::-webkit-scrollbar-track{ background: transparent; }
+/* Khóa cuộn nền khi mở modal */
+body.modal-open { overflow: hidden; }
+
+/* Panel modal: giới hạn chiều cao theo viewport, cho layout cột */
+.guide-sheet{
+  max-height: calc(100vh - 4rem);
+  display: flex;            /* header + list (flex-col) */
+  flex-direction: column;
+  overflow: hidden;         /* phần list sẽ cuộn, panel không tràn */
+}
+@media (max-width: 640px){
+  .guide-sheet{ max-height: calc(100vh - 2rem); }
+}
+
+/* Vùng danh sách: cuộn dọc, mượt mobile */
+.guide-list{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain; /* chạm đáy không “bật” nền */
+}
+
+/* Chống tràn ngang bởi link dài */
+.guide-list a{ overflow-wrap: anywhere; }
+
+/* (Tuỳ chọn) Làm scrollbar gọn gàng */
+.guide-list::-webkit-scrollbar{ width: 10px; }
+.guide-list::-webkit-scrollbar-thumb{ background: rgba(148,163,184,.35); border-radius: 8px; }
+.guide-list::-webkit-scrollbar-track{ background: transparent; }
+     /* ===== Guide Dock (Mục lục hướng dẫn) ===== */
+.guide-dock {
+  position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
+  z-index: 40;
+}
+@media (max-width: 640px){
+  /* Tránh đè nút Zalo: đưa lên trên nút Zalo ~86px */
+  .guide-dock{ top: auto; bottom: 86px; transform: none; right: 12px; }
+}
+
+/* Nhỏ nhắn, đồng bộ theme */
+.guide-btn {
+  width: 44px; height: 44px;
+  border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface); color: #e5e7eb;
+  border: 1px solid var(--meds-border);
+  box-shadow: 0 10px 25px rgba(2,6,23,.35);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.guide-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(2,6,23,.5); background: rgba(255,255,255,.06); }
+.guide-btn:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(37,99,235,.25); }
+
+/* Modal animation (nhẹ) */
+.guide-fade { animation: guideFade .18s ease-out; }
+@keyframes guideFade { from { opacity: 0; transform: scale(.98) translateY(6px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+/* ===== Guide Dock (Mục lục hướng dẫn) ===== */
 .guide-dock {
   position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
   z-index: 40;
@@ -64,34 +145,6 @@ body.modal-open { overflow: hidden; }
 .guide-list::-webkit-scrollbar{ width: 10px; }
 .guide-list::-webkit-scrollbar-thumb{ background: rgba(148,163,184,.35); border-radius: 8px; }
 .guide-list::-webkit-scrollbar-track{ background: transparent; }
-/* Khóa cuộn nền khi mở modal */
-body.modal-open { overflow: hidden; }
-
-/* Panel modal: giới hạn chiều cao theo viewport, cho layout cột */
-.guide-sheet{
-  max-height: calc(100vh - 4rem);
-  display: flex;            /* header + list (flex-col) */
-  flex-direction: column;
-  overflow: hidden;         /* phần list sẽ cuộn, panel không tràn */
-}
-@media (max-width: 640px){
-  .guide-sheet{ max-height: calc(100vh - 2rem); }
-}
-
-/* Vùng danh sách: cuộn dọc, mượt mobile */
-.guide-list{
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain; /* chạm đáy không “bật” nền */
-}
-
-/* Chống tràn ngang bởi link dài */
-.guide-list a{ overflow-wrap: anywhere; }
-
-/* (Tuỳ chọn) Làm scrollbar gọn gàng */
-.guide-list::-webkit-scrollbar{ width: 10px; }
-.guide-list::-webkit-scrollbar-thumb{ background: rgba(148,163,184,.35); border-radius: 8px; }
-.guide-list::-webkit-scrollbar-track{ background: transparent; }
 
   </style>
 </head>
@@ -110,7 +163,7 @@ body.modal-open { overflow: hidden; }
           Thêm <span class="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent">bệnh nhân mới</span>
         </h1>
         <p class="mt-3 max-w-3xl text-slate-600">
-          <strong>Mục tiêu:</strong> "Tiếp theo, mình sẽ hướng dẫn phần <b>thêm bệnh nhân mới</b>. Đây là bảng nhập danh sách bệnh nhân để công cụ <b>chia giờ tự động</b>."
+          <strong></strong>Tiếp theo, mình sẽ hướng dẫn phần <b>thêm bệnh nhân mới</b>. Đây là bảng nhập danh sách bệnh nhân để công cụ <b>chia giờ tự động</b>.
         </p>
       </div>
     </header>
@@ -139,7 +192,7 @@ body.modal-open { overflow: hidden; }
         <h3 class="mb-2 text-base font-semibold">🎯 Tip nhanh</h3>
         <ul class="list-disc pl-5 text-sm leading-6">
           <li>Định dạng <b>Ngày</b>: nên dùng <b>dd/mm/yyyy</b> để thống nhất.</li>
-          <li><b>Dịch vụ</b> viết tắt phải khớp với bảng <b>THOIGIAN</b>.</li>
+          <li><b>Dịch vụ</b> viết tắt phải khớp với các dịch vụ trong bảng <b>THOIGIAN</b>.</li>
           <li><b>HSBA</b> là <b>duy nhất</b> cho mỗi bệnh nhân.</li>
         </ul>
       </aside>
@@ -305,6 +358,41 @@ body.modal-open { overflow: hidden; }
     </div>
   </div>
 </div>
+<!-- ===== MỤC LỤC HƯỚNG DẪN (NÚT MỞ) ===== -->
+<div class="guide-dock">
+  <button id="openGuideBtn" class="guide-btn" aria-label="Mở mục lục hướng dẫn" title="Mục lục hướng dẫn">
+    <!-- Icon sách -->
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16.5A1.5 1.5 0 0 1 18.5 21H6.5A2.5 2.5 0 0 0 4 23V5.5Z" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M8 7h8M8 10h8M8 13h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+
+<!-- ===== MODAL MỤC LỤC ===== -->
+<div id="guideModal" class="hidden fixed inset-0 z-50">
+  <!-- overlay -->
+  <div id="guideOverlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+  <!-- sheet -->
+  <div class="absolute inset-x-0 top-10 mx-auto w-full max-w-2xl px-4">
+    <div class="glass guide-fade p-5 md:p-6">
+      <div class="mb-4 flex items-center justify-between gap-3">
+        <h2 class="text-lg font-bold text-slate-100">Mục lục hướng dẫn</h2>
+        <button id="closeGuideBtn" class="rounded-xl border border-[var(--meds-border)] bg-white/5 px-3 py-1.5 text-sm text-slate-200 hover:bg-white/10">
+          Đóng
+        </button>
+      </div>
+
+      <!-- danh sách -->
+      <div class="space-y-3" id="guideList" role="list"></div>
+
+      <div class="mt-4 text-xs text-slate-400">
+        * Nút <span class="font-semibold">Video</span> chỉ hiện khi có liên kết video tương ứng.
+      </div>
+    </div>
+  </div>
+</div>
 <script>
   // ===== DỮ LIỆU HƯỚNG DẪN (GIỮ ĐÚNG THỨ TỰ BẠN ĐƯA) =====
   // Mẹo: nếu url KHÔNG bắt đầu bằng http, mình tự động thêm domain /post/
@@ -370,12 +458,10 @@ body.modal-open { overflow: hidden; }
     lastActive = document.activeElement;
     renderGuideList();
     guideModal.classList.remove('hidden');
-    document.body.classList.add('modal-open')
     closeGuideBtn.focus();
   }
   function closeGuide() {
     guideModal.classList.add('hidden');
-     document.body.classList.remove('modal-open');
     if (lastActive && typeof lastActive.focus === 'function') lastActive.focus();
   }
 
@@ -384,5 +470,6 @@ body.modal-open { overflow: hidden; }
   guideOverlay.addEventListener('click', closeGuide);
   document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && !guideModal.classList.contains('hidden')) closeGuide(); });
 </script>
+
 </body>
 </html>

@@ -39,6 +39,84 @@ body.modal-open { overflow: hidden; }
 .guide-list::-webkit-scrollbar{ width: 10px; }
 .guide-list::-webkit-scrollbar-thumb{ background: rgba(148,163,184,.35); border-radius: 8px; }
 .guide-list::-webkit-scrollbar-track{ background: transparent; }
+    /* ===== Guide Dock (Mục lục hướng dẫn) ===== */
+    .guide-dock {
+  position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
+  z-index: 40;
+}
+@media (max-width: 640px){
+  /* Tránh đè nút Zalo: đưa lên trên nút Zalo ~86px */
+  .guide-dock{ top: auto; bottom: 86px; transform: none; right: 12px; }
+}
+
+/* Nhỏ nhắn, đồng bộ theme */
+.guide-btn {
+  width: 44px; height: 44px;
+  border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface); color: #e5e7eb;
+  border: 1px solid var(--meds-border);
+  box-shadow: 0 10px 25px rgba(2,6,23,.35);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.guide-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(2,6,23,.5); background: rgba(255,255,255,.06); }
+.guide-btn:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(37,99,235,.25); }
+
+/* Modal animation (nhẹ) */
+.guide-fade { animation: guideFade .18s ease-out; }
+@keyframes guideFade { from { opacity: 0; transform: scale(.98) translateY(6px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+/* ===== Guide Dock (Mục lục hướng dẫn) ===== */
+.guide-dock {
+  position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
+  z-index: 40;
+}
+@media (max-width: 640px){
+  /* Tránh đè nút Zalo: đưa lên trên nút Zalo ~86px */
+  .guide-dock{ top: auto; bottom: 86px; transform: none; right: 12px; }
+}
+
+/* Nhỏ nhắn, đồng bộ theme */
+.guide-btn {
+  width: 44px; height: 44px;
+  border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface); color: #e5e7eb;
+  border: 1px solid var(--meds-border);
+  box-shadow: 0 10px 25px rgba(2,6,23,.35);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.guide-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(2,6,23,.5); background: rgba(255,255,255,.06); }
+.guide-btn:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(37,99,235,.25); }
+
+/* Modal animation (nhẹ) */
+.guide-fade { animation: guideFade .18s ease-out; }
+@keyframes guideFade { from { opacity: 0; transform: scale(.98) translateY(6px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+/* Khóa cuộn nền khi mở modal */
+body.modal-open { overflow: hidden; }
+
+/* Panel modal: giới hạn chiều cao theo viewport, cho layout cột */
+.guide-sheet{
+  max-height: calc(100vh - 4rem);
+  display: flex;            /* header + list (flex-col) */
+  flex-direction: column;
+  overflow: hidden;         /* phần list sẽ cuộn, panel không tràn */
+}
+@media (max-width: 640px){
+  .guide-sheet{ max-height: calc(100vh - 2rem); }
+}
+
+/* Vùng danh sách: cuộn dọc, mượt mobile */
+.guide-list{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain; /* chạm đáy không “bật” nền */
+}
+
+/* Chống tràn ngang bởi link dài */
+.guide-list a{ overflow-wrap: anywhere; }
+
+/* (Tuỳ chọn) Làm scrollbar gọn gàng */
+.guide-list::-webkit-scrollbar{ width: 10px; }
+.guide-list::-webkit-scrollbar-thumb{ background: rgba(148,163,184,.35); border-radius: 8px; }
+.guide-list::-webkit-scrollbar-track{ background: transparent; }
 
   </style>
 </head>
@@ -57,7 +135,7 @@ body.modal-open { overflow: hidden; }
           Cấu hình bảng <span class="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent">MAYMOC</span>
         </h1>
         <p class="mt-3 max-w-3xl text-slate-600">
-          <strong>Mục tiêu:</strong> "Tiếp theo là phần <b>MAYMOC</b> – nơi khai báo mã máy để MEDS xếp lịch và tránh trùng máy."
+          <strong></strong>Tiếp theo là phần <b>MAYMOC</b> – nơi khai báo mã máy để MEDS xếp lịch và tránh trùng máy.
         </p>
       </div>
     </header>
@@ -66,7 +144,7 @@ body.modal-open { overflow: hidden; }
     <section class="mt-10 grid gap-6 lg:grid-cols-3">
       <div class="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 class="mb-3 text-xl font-bold text-slate-900">Truy cập & cấu trúc bảng</h2>
-        <p class="mb-4 text-slate-600">Anh/chị mở sheet <b>MAYMOC</b>. Trong bảng có các cột:</p>
+        <p class="mb-4 text-slate-600">Anh/chị bấm nút CẤU HÌNH và mở sheet <b>MAYMOC</b>. Trong bảng có các cột:</p>
         <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2">
           <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🏷️</span>MAMAY</li>
           <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🧩</span>DICHVU</li>
@@ -115,7 +193,7 @@ body.modal-open { overflow: hidden; }
       <!-- KHOAPHONG -->
       <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <h3 class="mb-2 text-lg font-bold">Cột KHOAPHONG – xác định phạm vi dùng máy</h3>
-        <p class="text-slate-600">Nếu máy <b>chỉ dùng trong khoa</b>, có thể <b>để trống</b>. Nếu máy <b>toàn viện dùng</b>, nên <b>ghi rõ khoa</b> (đơn vị quản lý) để theo dõi nguồn lực.</p>
+        <p class="text-slate-600">Nếu máy <b>chỉ dùng trong 1 khoa</b>, có thể <b>để "trống"</b>. Nếu máy <b>toàn viện dùng</b>, nên <b>ghi rõ khoa</b> (đơn vị quản lý) để theo dõi nguồn lực.</p>
       </div>
 
       <!-- QUANLY -->
@@ -124,7 +202,7 @@ body.modal-open { overflow: hidden; }
         <ul class="list-disc pl-5 text-slate-600">
           <li>Nhập tên <b>nhân viên quản lý</b> máy (có thể nhiều người, ngăn cách bằng dấu phẩy).</li>
           <li><b>Để trống</b>: mọi nhân viên có dịch vụ phù hợp đều dùng được máy → <b>tối ưu</b> chia tải.</li>
-          <li><b>Có điền</b>: chỉ <b>nhân viên liệt kê</b> mới được xếp vào máy đó.</li>
+          <li><b>Có điền</b>: chỉ <b>nhân viên liệt kê</b> mới được xếp dùng vào máy đó.</li>
           <li><b>Lưu ý quan trọng</b>: Tên nhân viên phải <b>khớp 100%</b> với bảng <b>NHANVIEN</b>; khác 1 ký tự cũng <b>không xếp</b> được.</li>
         </ul>
       </div>
@@ -184,7 +262,19 @@ body.modal-open { overflow: hidden; }
       <p><span class="font-semibold text-slate-900">Ghi nhớ:</span> Duy trì <b>đồng bộ</b> giữa <b>MAYMOC</b> ↔ <b>THOIGIAN</b> (tên viết tắt dịch vụ) và <b>MAYMOC</b> ↔ <b>NHANVIEN</b> (tên nhân viên ở QUANLY). Điều này giúp MEDS xếp lịch đúng người – đúng máy – đúng ca.</p>
     </footer>
   </article>
-  <!-- ===== MODAL MỤC LỤC ===== -->
+<!-- ===== MỤC LỤC HƯỚNG DẪN (NÚT MỞ) ===== -->
+<div class="guide-dock">
+  <button id="openGuideBtn" class="guide-btn" aria-label="Mở mục lục hướng dẫn" title="Mục lục hướng dẫn">
+    <!-- Icon sách -->
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16.5A1.5 1.5 0 0 1 18.5 21H6.5A2.5 2.5 0 0 0 4 23V5.5Z" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M8 7h8M8 10h8M8 13h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+
+<!-- ===== MODAL MỤC LỤC ===== -->
 <div id="guideModal" class="hidden fixed inset-0 z-50">
   <!-- overlay -->
   <div id="guideOverlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
@@ -272,12 +362,12 @@ body.modal-open { overflow: hidden; }
     lastActive = document.activeElement;
     renderGuideList();
     guideModal.classList.remove('hidden');
-    document.body.classList.add('modal-open')
+    document.body.classList.add('modal-open');
     closeGuideBtn.focus();
   }
   function closeGuide() {
     guideModal.classList.add('hidden');
-     document.body.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
     if (lastActive && typeof lastActive.focus === 'function') lastActive.focus();
   }
 
@@ -286,5 +376,6 @@ body.modal-open { overflow: hidden; }
   guideOverlay.addEventListener('click', closeGuide);
   document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && !guideModal.classList.contains('hidden')) closeGuide(); });
 </script>
+
 </body>
 </html>
