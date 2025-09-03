@@ -1,1 +1,318 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MEDS • Giới thiệu & Hướng dẫn nhanh</title>
+  <meta name="description" content="MEDS – Công cụ chia giờ dịch vụ kỹ thuật tự động cho khoa YHCT & PHCN. Bài viết hướng dẫn cấu hình nhanh và bắt đầu sử dụng." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            meds: {
+              bg: '#0b1220',
+              primary: '#2563eb',
+              dark: '#1e40af',
+              accent: '#06b6d4',
+              ok: '#2dd4bf',
+            }
+          },
+          boxShadow: {
+            glow: '0 10px 30px rgba(37, 99, 235, .25)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth scroll for in-page anchors */
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="bg-[radial-gradient(ellipse_at_top_left,rgba(37,99,235,.15),transparent_40%),radial-gradient(ellipse_at_bottom_right,rgba(6,182,212,.12),transparent_40%)] bg-slate-950 text-slate-100">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-slate-950/70 border-b border-white/10">
+    <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+      <a href="#home" class="group flex items-center gap-3">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-slate-800 ring-1 ring-white/10 shadow-glow">
+          <!-- simple logo -->
+          <svg viewBox="0 0 24 24" class="h-5 w-5 text-meds-accent group-hover:scale-110 transition">
+            <path fill="currentColor" d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm1 5h-2v4H7v2h4v4h2v-4h4v-2h-4V8Z"/>
+          </svg>
+        </span>
+        <div>
+          <div class="font-extrabold tracking-tight">MEDS</div>
+          <div class="text-xs text-slate-400 -mt-0.5">Medical Schedule • YHCT & PHCN</div>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-300">
+        <a href="#dangnhap" class="hover:text-white">Đăng nhập</a>
+        <a href="#tongquan" class="hover:text-white">Giao diện</a>
+        <a href="#cauhinh" class="hover:text-white">Cấu hình</a>
+        <a href="#bien" class="hover:text-white">Biến thường dùng</a>
+        <a href="#batdau" class="hover:text-white">Bắt đầu</a>
+        <a href="#loi" class="hover:text-white">Lỗi thường gặp</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a href="#batdau" class="rounded-xl bg-meds-primary px-3.5 py-2 text-sm font-semibold shadow-glow hover:bg-meds-dark transition">Dùng thử</a>
+      </div>
+    </div>
+  </header>
 
+  <!-- Hero -->
+  <section id="home" class="relative">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="py-14 md:py-20 grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
+            MEDS – Giới thiệu &<br class="hidden md:block"/> Hướng dẫn nhanh
+          </h1>
+          <p class="mt-4 text-slate-300 md:text-lg max-w-xl">Công cụ <span class="font-semibold text-white">chia giờ dịch vụ kỹ thuật tự động</span> cho khoa YHCT & PHCN, giúp tránh trùng lịch giữa <em>nhân viên – máy – bệnh nhân</em> và tối ưu luồng hoạt động.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#dangnhap" class="rounded-xl bg-white/10 ring-1 ring-white/15 px-4 py-2.5 text-sm hover:bg-white/15">MEDS là gì?</a>
+            <a href="#batdau" class="rounded-xl bg-meds-primary px-4 py-2.5 text-sm font-semibold shadow-glow hover:bg-meds-dark">Bắt đầu ngay</a>
+          </div>
+          <p class="mt-4 text-xs text-slate-400">Tác giả: BS. Thắng – Nhà phát triển MEDS</p>
+        </div>
+        <div class="relative">
+          <div class="rounded-2xl bg-slate-900/60 ring-1 ring-white/10 p-5 md:p-6 shadow-2xl">
+            <div class="grid grid-cols-3 gap-3 text-xs">
+              <div class="col-span-3 rounded-xl bg-gradient-to-br from-meds-primary/30 to-meds-accent/20 p-4 ring-1 ring-white/10">
+                <div class="font-semibold">Tránh trùng lặp giờ</div>
+                <div class="text-slate-300 mt-1">Nhân viên • Máy • Bệnh nhân</div>
+              </div>
+              <div class="rounded-xl bg-white/5 p-4 ring-1 ring-white/10">
+                <div class="text-slate-400">Thiết lập</div>
+                <div class="font-semibold">CAUHINH</div>
+              </div>
+              <div class="rounded-xl bg-white/5 p-4 ring-1 ring-white/10">
+                <div class="text-slate-400">Danh mục</div>
+                <div class="font-semibold">THOIGIAN</div>
+              </div>
+              <div class="rounded-xl bg-white/5 p-4 ring-1 ring-white/10">
+                <div class="text-slate-400">Nhân sự & Máy</div>
+                <div class="font-semibold">NHANVIEN • MAYMOC</div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -inset-x-6 -bottom-6 -z-10 blur-2xl opacity-40 bg-gradient-to-tr from-meds-primary/30 to-meds-accent/20 rounded-3xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: MEDS là gì & đăng nhập -->
+  <section id="dangnhap" class="py-12 md:py-16">
+    <div class="mx-auto max-w-5xl px-4">
+      <div class="rounded-2xl bg-slate-900/60 ring-1 ring-white/10 p-6 md:p-8">
+        <h2 class="text-2xl md:text-3xl font-bold">1) MEDS là gì & cách đăng nhập</h2>
+        <ul class="mt-5 space-y-2 text-slate-300 list-disc list-inside">
+          <li><span class="font-semibold">MEDS</span> chạy trên trình duyệt web (không cần cài đặt).</li>
+          <li>Đăng nhập qua <span class="font-semibold">đường link</span> được cung cấp.</li>
+          <li><span class="font-semibold">Mật khẩu mặc định:</span> <code class="px-1.5 py-0.5 bg-white/10 rounded">meds</code> (chữ thường). Sau khi đăng nhập, vui lòng <span class="font-semibold">đổi mật khẩu</span>.</li>
+        </ul>
+        <div class="mt-4 text-xs text-slate-400">💡 Mẹo: Nếu đăng nhập xong không thấy dữ liệu, bấm <span class="font-semibold text-slate-300">Tải lại</span> hoặc kiểm tra quyền truy cập Google Sheets liên kết.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Tổng quan giao diện -->
+  <section id="tongquan" class="py-12 md:py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="text-2xl md:text-3xl font-bold">2) Tổng quan giao diện</h2>
+      <p class="mt-3 text-slate-300">Sau khi đăng nhập, anh/chị sẽ thấy các khu vực chính:</p>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+          <div class="text-sm text-slate-400">Tác vụ nhanh</div>
+          <div class="mt-1 font-semibold">Chia giờ • Cấu hình • Xuất dữ liệu</div>
+        </div>
+        <div class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+          <div class="text-sm text-slate-400">Biểu mẫu</div>
+          <div class="mt-1 font-semibold">Nhập/Quản lý bệnh nhân & dịch vụ</div>
+        </div>
+        <div class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+          <div class="text-sm text-slate-400">Bảng kết quả</div>
+          <div class="mt-1 font-semibold">Hiển thị lịch theo thời gian – nhân viên – máy</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Cấu hình lần đầu -->
+  <section id="cauhinh" class="py-12 md:py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="text-2xl md:text-3xl font-bold">3) Cấu hình lần đầu (bắt buộc)</h2>
+      <p class="mt-3 text-slate-300">Vào <span class="font-semibold">Cấu hình</span> → sẽ có các mục:</p>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-2xl bg-gradient-to-br from-meds-primary/20 to-transparent p-5 ring-1 ring-white/10">
+          <div class="text-sm text-slate-400">NHANVIEN</div>
+          <div class="mt-1 font-semibold">Danh sách nhân sự, chuyên môn, ca làm</div>
+        </div>
+        <div class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+          <div class="text-sm text-slate-400">THOIGIAN</div>
+          <div class="mt-1 font-semibold">Danh mục dịch vụ, thời lượng, nhóm</div>
+        </div>
+        <div class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+          <div class="text-sm text-slate-400">MAYMOC</div>
+          <div class="mt-1 font-semibold">Mã máy, khoa sử dụng</div>
+        </div>
+        <div class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+          <div class="text-sm text-slate-400">CAUHINH</div>
+          <div class="mt-1 font-semibold">Thiết lập chung cho thuật toán</div>
+        </div>
+      </div>
+      <div class="mt-4 text-xs text-amber-300/90">⚠️ Thiết lập đúng giúp MEDS <span class="font-semibold">không trùng giờ</span>, tối ưu luồng và hạn chế sai sót khi xuất toán BHYT.</div>
+    </div>
+  </section>
+
+  <!-- Section: Thiết lập chung trong CAUHINH -->
+  <section id="cauhinhchung" class="py-12 md:py-16">
+    <div class="mx-auto max-w-5xl px-4">
+      <div class="rounded-2xl bg-slate-900/60 ring-1 ring-white/10 p-6 md:p-8">
+        <h2 class="text-2xl md:text-3xl font-bold">4) Thiết lập chung trong CAUHINH</h2>
+        <p class="mt-3 text-slate-300">Sheet <span class="font-semibold">CAUHINH</span> gồm hai cột <span class="font-semibold">KEY</span> và <span class="font-semibold">VALUE</span>:</p>
+        <ul class="mt-4 space-y-2 text-slate-300 list-disc list-inside">
+          <li><span class="font-semibold">Chỉ chỉnh cột VALUE</span>, không sửa cột KEY.</li>
+          <li>Nếu thay đổi KEY → <span class="font-semibold text-rose-300">chương trình sẽ không chạy</span>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Biến thường dùng (table) -->
+  <section id="bien" class="py-12 md:py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="text-2xl md:text-3xl font-bold">5) Các biến thường dùng (kèm ví dụ)</h2>
+      <div class="mt-6 overflow-hidden rounded-2xl ring-1 ring-white/10">
+        <table class="min-w-full divide-y divide-white/10">
+          <thead class="bg-white/5">
+            <tr>
+              <th class="px-4 py-3.5 text-left text-sm font-semibold">Biến</th>
+              <th class="px-4 py-3.5 text-left text-sm font-semibold">Ý nghĩa</th>
+              <th class="px-4 py-3.5 text-right text-sm font-semibold">Gợi ý</th>
+              <th class="px-4 py-3.5 text-left text-sm font-semibold">Ví dụ áp dụng</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/10">
+            <tr class="hover:bg-white/5">
+              <td class="px-4 py-3 font-semibold">NV_HANDS_ON_MIN</td>
+              <td class="px-4 py-3 text-slate-300">Số phút <span class="font-medium">nhân viên</span> thao tác trực tiếp trước khi chuyển ca/thiết bị khác.</td>
+              <td class="px-4 py-3 text-right">1–5</td>
+              <td class="px-4 py-3 text-slate-300">KTV A đặt Điện xung lúc <span class="font-medium">07:00</span> → để 1’ thì <span class="font-medium">07:01</span> mới đặt ca tiếp theo; 2’ → 07:02; 5’ → 07:05.</td>
+            </tr>
+            <tr class="hover:bg-white/5">
+              <td class="px-4 py-3 font-semibold">BN_GAP_MIN</td>
+              <td class="px-4 py-3 text-slate-300">Khoảng nghỉ tối thiểu của <span class="font-medium">bệnh nhân</span> giữa hai dịch vụ.</td>
+              <td class="px-4 py-3 text-right">1</td>
+              <td class="px-4 py-3 text-slate-300">BN có Điện xung và Siêu âm → hai dịch vụ cách nhau ≥ 1’.</td>
+            </tr>
+            <tr class="hover:bg-white/5">
+              <td class="px-4 py-3 font-semibold">NV_BREAK_MIN</td>
+              <td class="px-4 py-3 text-slate-300">Khoảng nghỉ tối thiểu của <span class="font-medium">nhân viên</span> giữa hai bệnh nhân.</td>
+              <td class="px-4 py-3 text-right">1</td>
+              <td class="px-4 py-3 text-slate-300">KTV A tập vận động BN1 xong → ít nhất 1’ sau mới chuyển BN2.</td>
+            </tr>
+            <tr class="hover:bg-white/5">
+              <td class="px-4 py-3 font-semibold">MACHINE_BUFFER_MIN</td>
+              <td class="px-4 py-3 text-slate-300">Khoảng nghỉ tối thiểu của <span class="font-medium">máy</span> giữa hai bệnh nhân.</td>
+              <td class="px-4 py-3 text-right">1</td>
+              <td class="px-4 py-3 text-slate-300">Máy Điện xung 1 chạy xong BN A → ≥ 1’ sau mới đến BN B.</td>
+            </tr>
+            <tr class="hover:bg-white/5">
+              <td class="px-4 py-3 font-semibold">YL_GROUP_SPACING_MIN</td>
+              <td class="px-4 py-3 text-slate-300">Khoảng cách giữa hai <span class="font-medium">nhóm y lệnh</span> (VD: YHCT & PHCN).</td>
+              <td class="px-4 py-3 text-right">1</td>
+              <td class="px-4 py-3 text-slate-300">Tránh chồng chỉ định khi chạy xen kẽ nhóm.</td>
+            </tr>
+            <tr class="hover:bg-white/5">
+              <td class="px-4 py-3 font-semibold">FULL_HANDS_ON_DV</td>
+              <td class="px-4 py-3 text-slate-300">Danh sách dịch vụ <span class="font-medium">cần bám máy liên tục</span>.</td>
+              <td class="px-4 py-3 text-right">SA, LA…</td>
+              <td class="px-4 py-3 text-slate-300">Siêu âm (SA), Laser (LA) yêu cầu nhân viên đi kèm toàn bộ thời lượng.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-sm text-slate-400">ℹ️ Các biến nâng cao (cân bằng tải…) có thể giữ mặc định. Khi quen hệ thống, điều chỉnh dần theo quy trình khoa.</p>
+    </div>
+  </section>
+
+  <!-- Section: Bắt đầu sử dụng -->
+  <section id="batdau" class="py-12 md:py-16">
+    <div class="mx-auto max-w-5xl px-4">
+      <h2 class="text-2xl md:text-3xl font-bold">6) Bắt đầu sử dụng (demo nhanh)</h2>
+      <ol class="mt-5 space-y-3 text-slate-300 list-decimal list-inside">
+        <li>Hoàn tất cấu hình: cập nhật <span class="font-semibold">THOIGIAN – NHANVIEN – MAYMOC – CAUHINH</span>.</li>
+        <li>Nhập danh sách bệnh nhân & y lệnh (đủ dịch vụ, thời lượng).</li>
+        <li>Bấm <span class="font-semibold">Chia giờ tự động</span>.
+          <ul class="mt-2 ml-6 list-disc space-y-1">
+            <li>Tránh <span class="font-semibold">trùng lịch</span> giữa <em>nhân viên – máy – bệnh nhân</em>.</li>
+            <li>Tôn trọng các <span class="font-semibold">khoảng nghỉ</span> theo CAUHINH.</li>
+            <li>Ưu tiên dịch vụ <span class="font-semibold">có máy/ít máy/full-hands-on</span> đúng logic.</li>
+          </ul>
+        </li>
+        <li>Kiểm tra <span class="font-semibold">Bảng kết quả</span> → lọc theo ngày/khoa/nhân viên/máy.</li>
+        <li>Xuất dữ liệu hoặc in để bàn giao điều trị.</li>
+      </ol>
+      <div class="mt-6 rounded-xl bg-meds-ok/10 p-4 ring-1 ring-meds-ok/30">
+        <div class="font-semibold text-meds-ok">Kết quả mong đợi</div>
+        <p class="text-slate-300">Lịch gọn – không chồng chéo – phù hợp tài nguyên người & máy – luồng bệnh nhân mượt.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Lỗi thường gặp -->
+  <section id="loi" class="py-12 md:py-16">
+    <div class="mx-auto max-w-5xl px-4">
+      <h2 class="text-2xl md:text-3xl font-bold">7) Lỗi thường gặp & cách xử lý nhanh</h2>
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+          <div class="font-semibold">Không ra lịch</div>
+          <p class="mt-1 text-slate-300 text-sm">Kiểm tra <span class="font-semibold">CAUHINH</span> có sửa nhầm <span class="font-semibold">KEY</span> không.</p>
+        </div>
+        <div class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+          <div class="font-semibold">Trùng giờ</div>
+          <p class="mt-1 text-slate-300 text-sm">Xem lại <span class="font-semibold">FULL_HANDS_ON_DV</span>, buffer của <span class="font-semibold">máy/NV/BN</span>.</p>
+        </div>
+        <div class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+          <div class="font-semibold">Thiếu tài nguyên</div>
+          <p class="mt-1 text-slate-300 text-sm">Bổ sung <span class="font-semibold">MAYMOC/NHANVIEN</span> hoặc nới thời gian làm việc.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Kết luận / CTA -->
+  <section id="ketluan" class="py-12 md:py-16">
+    <div class="mx-auto max-w-5xl px-4">
+      <div class="rounded-2xl bg-gradient-to-br from-meds-primary/20 to-meds-accent/10 p-8 ring-1 ring-white/10">
+        <h2 class="text-2xl md:text-3xl font-bold">8) Kết luận</h2>
+        <p class="mt-3 text-slate-200">Chỉ với vài bước cấu hình, <span class="font-semibold">MEDS</span> giúp khoa chia giờ tự động nhanh, chuẩn và tránh trùng lặp. Thực hiện một ca thao tác mẫu ngay trên giao diện để kiểm chứng luồng làm việc của đơn vị.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#batdau" class="rounded-xl bg-meds-primary px-4 py-2.5 text-sm font-semibold shadow-glow hover:bg-meds-dark">Chia giờ ngay</a>
+          <a href="#dangnhap" class="rounded-xl bg-white/10 ring-1 ring-white/15 px-4 py-2.5 text-sm hover:bg-white/15">Xem lại đăng nhập</a>
+        </div>
+        <p class="mt-4 text-xs text-slate-300">Cần hỗ trợ tinh chỉnh theo quy trình thực tế? Liên hệ để cùng tối ưu cấu hình cho khoa của anh/chị.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10">
+    <div class="mx-auto max-w-7xl px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-slate-400">
+      <div>© <span id="yearNow"></span> MEDS • Medical Schedule</div>
+      <div class="flex items-center gap-5">
+        <a href="#home" class="hover:text-slate-200">Về đầu trang</a>
+        <a href="#cauhinh" class="hover:text-slate-200">Cấu hình</a>
+        <a href="#bien" class="hover:text-slate-200">Biến</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('yearNow').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
