@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MEDS • Hướng dẫn cấu hình bảng THOIGIAN</title>
+  <title>MEDS • Hướng dẫn cấu hình bảng MAYMOC</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root{
@@ -11,32 +11,6 @@
       --meds-accent:#06b6d4;  /* cyan-500   */
       --meds-ink:#0f172a;     /* slate-900  */
     }
-    /* ===== Guide Dock (Mục lục hướng dẫn) ===== */
-.guide-dock {
-  position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
-  z-index: 40;
-}
-@media (max-width: 640px){
-  /* Tránh đè nút Zalo: đưa lên trên nút Zalo ~86px */
-  .guide-dock{ top: auto; bottom: 86px; transform: none; right: 12px; }
-}
-
-/* Nhỏ nhắn, đồng bộ theme */
-.guide-btn {
-  width: 44px; height: 44px;
-  border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center;
-  background: var(--surface); color: #e5e7eb;
-  border: 1px solid var(--meds-border);
-  box-shadow: 0 10px 25px rgba(2,6,23,.35);
-  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
-}
-.guide-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(2,6,23,.5); background: rgba(255,255,255,.06); }
-.guide-btn:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(37,99,235,.25); }
-
-/* Modal animation (nhẹ) */
-.guide-fade { animation: guideFade .18s ease-out; }
-@keyframes guideFade { from { opacity: 0; transform: scale(.98) translateY(6px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-
   </style>
 </head>
 <body class="bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-800">
@@ -47,158 +21,138 @@
       <div class="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-cyan-100 blur-2xl"></div>
       <div class="relative p-8 sm:p-10">
         <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-[13px] font-medium text-indigo-700">
-          <span>⏱️</span>
+          <span>⚙️</span>
           <span>MEDS · Cấu hình cơ bản</span>
         </div>
         <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-          Cấu hình bảng <span class="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent">THOIGIAN</span>
+          Cấu hình bảng <span class="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent">MAYMOC</span>
         </h1>
         <p class="mt-3 max-w-3xl text-slate-600">
-          <strong>Mục tiêu:</strong> "Tiếp theo là phần cấu hình <b>THOIGIAN</b>. Đây là nơi khai báo <b>mã dịch vụ</b>, <b>thời lượng</b>, <b>có dùng máy hay không</b>, và <b>nhóm dịch vụ</b> để MEDS xếp giờ chính xác."
+          <strong>Mục tiêu:</strong> "Tiếp theo là phần <b>MAYMOC</b> – nơi khai báo mã máy để MEDS xếp lịch và tránh trùng máy."
         </p>
       </div>
     </header>
 
-    <!-- Structure -->
+    <!-- Access & Structure -->
     <section class="mt-10 grid gap-6 lg:grid-cols-3">
       <div class="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 class="mb-3 text-xl font-bold text-slate-900">Cấu trúc sheet</h2>
-        <p class="mb-4 text-slate-600">Trong sheet <b>THOIGIAN</b>, có các cột:</p>
+        <h2 class="mb-3 text-xl font-bold text-slate-900">Truy cập & cấu trúc bảng</h2>
+        <p class="mb-4 text-slate-600">Anh/chị mở sheet <b>MAYMOC</b>. Trong bảng có các cột:</p>
         <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2">
-          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🏷️</span>DICHVU</li>
-          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>⏳</span>THOILUONG (phút)</li>
-          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🖥️</span>DUNGMAY (TRUE/FALSE)</li>
-          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🗂️</span>NHOMDICHVU</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🏷️</span>MAMAY</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🧩</span>DICHVU</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🏥</span>KHOAPHONG</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🧑‍💼</span>QUANLY</li>
         </ul>
         <div class="mt-4 flex gap-3">
           <button class="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">+ Thêm dòng</button>
           <button class="rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95">💾 Lưu</button>
         </div>
+        <p class="mt-3 text-sm text-slate-500">Khuyến nghị: Mã máy nên <b>trùng</b> với mã đã đăng ký trên cổng <b>BHXH</b> để đồng bộ hồ sơ.</p>
       </div>
 
       <aside class="rounded-2xl border border-indigo-200 bg-indigo-50 p-6 text-indigo-900">
         <h3 class="mb-2 text-base font-semibold">🎯 Tip nhanh</h3>
         <ul class="list-disc pl-5 text-sm leading-6">
-          <li><b>DICHVU</b> phải đồng bộ với các sheet khác (đặc biệt <b>YLENH</b>, <b>KETQUA</b>).</li>
-          <li><b>THOILUONG</b> dùng đơn vị <b>phút</b> và nên bám theo hướng dẫn <b>BHXH</b>.</li>
-          <li><b>DUNGMAY</b> bắt buộc điền <code class="rounded bg-slate-100 px-1">TRUE</code>/<code class="rounded bg-slate-100 px-1">FALSE</code>.</li>
+          <li>Mã máy dùng <b>định danh thống nhất</b> (DX01, SA02, LA02…).</li>
+          <li>Viết tắt <b>DICHVU</b> phải khớp bảng <b>THOIGIAN</b> (DX, SA, LA…).</li>
+          <li>Tên trong <b>QUANLY</b> phải <b>khớp 100%</b> với cột HOTEN ở bảng <b>NHANVIEN</b>.</li>
         </ul>
       </aside>
     </section>
 
     <!-- Field Guides -->
     <section class="mt-8 grid gap-6 md:grid-cols-2">
+      <!-- MAMAY -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-2 text-lg font-bold">Cột MAMAY – nhập đúng định danh</h3>
+        <p class="text-slate-600">Nhập đúng mã máy theo chuẩn đơn vị. Ví dụ:</p>
+        <div class="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm">
+          <code class="block whitespace-pre-wrap leading-6">DX01, DX02, DX03, SA01, SA02, SA03…</code>
+        </div>
+      </div>
+
       <!-- DICHVU -->
       <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="mb-2 text-lg font-bold">Cột DICHVU – viết tắt, phải đồng bộ</h3>
-        <p class="text-slate-600">Điền <b>chữ viết tắt</b> của dịch vụ và giữ <b>đồng bộ</b> giữa các bảng để hệ thống hiểu đúng.</p>
-        <div class="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm">
-          <p class="mb-2">Ví dụ viết tắt:</p>
-          <code class="block whitespace-pre-wrap leading-6">DX = Điện xung, SA = Siêu âm, LA = Laser, VD = Tập vận động, DC = Điện châm…</code>
-          <p class="mt-2 text-slate-600">Lưu ý: viết tắt phải nhất quán giữa <b>THOIGIAN</b> ↔ <b>YLENH</b> ↔ <b>KETQUA</b>.</p>
-        </div>
-      </div>
-
-      <!-- THOILUONG -->
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="mb-2 text-lg font-bold">Cột THOILUONG – theo hướng dẫn BHXH</h3>
-        <p class="text-slate-600">Nhập <b>thời gian thực hiện</b> của từng dịch vụ (đơn vị: <b>phút</b>), tuân thủ hướng dẫn <b>BHXH</b> và quy định đơn vị.</p>
+        <h3 class="mb-2 text-lg font-bold">Cột DICHVU – viết tắt đồng bộ</h3>
+        <p class="text-slate-600">Điền <b>viết tắt</b> của dịch vụ máy phục vụ (có thể nhiều dịch vụ, ngăn cách bằng <b>dấu phẩy</b>). Các viết tắt phải <b>đồng bộ</b> với bảng <b>THOIGIAN</b>.</p>
         <div class="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm">
           <p class="mb-2">Ví dụ:</p>
-          <code class="block whitespace-pre-wrap leading-6">SA: 10 phút · DX: 15 phút · VD: 20 phút</code>
+          <code class="block whitespace-pre-wrap leading-6">DX, SA, LA</code>
+          <p class="mt-2 text-slate-600">Nếu một máy hỗ trợ nhiều dịch vụ, ghi <b>tất cả</b> dịch vụ để MEDS phân ca chính xác.</p>
         </div>
       </div>
 
-      <!-- DUNGMAY -->
+      <!-- KHOAPHONG -->
       <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="mb-2 text-lg font-bold">Cột DUNGMAY – TRUE/FALSE rõ ràng</h3>
-        <p class="text-slate-600">Xác định dịch vụ <b>có dùng máy</b> hay <b>không</b>:</p>
-        <ul class="mt-2 list-disc pl-5 text-slate-600">
-          <li><b>TRUE</b>: có máy hỗ trợ (ví dụ: Điện xung, Siêu âm, Laser…).</li>
-          <li><b>FALSE</b>: không dùng máy (ví dụ: Tập vận động, Xoa bóp, Thuỷ châm…).</li>
-        </ul>
-        <p class="mt-2 text-sm text-slate-600">Điền đúng cột này để công cụ giữ tay nhân viên theo <b>NV_HANDS_ON_MIN</b> và tránh <b>trùng máy</b>.</p>
+        <h3 class="mb-2 text-lg font-bold">Cột KHOAPHONG – xác định phạm vi dùng máy</h3>
+        <p class="text-slate-600">Nếu máy <b>chỉ dùng trong khoa</b>, có thể <b>để trống</b>. Nếu máy <b>toàn viện dùng</b>, nên <b>ghi rõ khoa</b> (đơn vị quản lý) để theo dõi nguồn lực.</p>
       </div>
 
-      <!-- NHOMDICHVU -->
+      <!-- QUANLY -->
       <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="mb-2 text-lg font-bold">Cột NHOMDICHVU – giúp chọn đúng bác sĩ chỉ định</h3>
-        <p class="text-slate-600">Thường dùng các nhóm: <b>YHCT</b> và <b>PHCN</b>. Khai báo đúng nhóm để MEDS chọn được bác sĩ chỉ định phù hợp và xếp lịch theo nhóm y lệnh.</p>
+        <h3 class="mb-2 text-lg font-bold">Cột QUANLY – giới hạn người được phép dùng máy</h3>
+        <ul class="list-disc pl-5 text-slate-600">
+          <li>Nhập tên <b>nhân viên quản lý</b> máy (có thể nhiều người, ngăn cách bằng dấu phẩy).</li>
+          <li><b>Để trống</b>: mọi nhân viên có dịch vụ phù hợp đều dùng được máy → <b>tối ưu</b> chia tải.</li>
+          <li><b>Có điền</b>: chỉ <b>nhân viên liệt kê</b> mới được xếp vào máy đó.</li>
+          <li><b>Lưu ý quan trọng</b>: Tên nhân viên phải <b>khớp 100%</b> với bảng <b>NHANVIEN</b>; khác 1 ký tự cũng <b>không xếp</b> được.</li>
+        </ul>
+      </div>
+
+      <!-- Save -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:col-span-2">
+        <h3 class="mb-2 text-lg font-bold">Lưu dữ liệu</h3>
+        <p class="text-slate-600">Sau khi nhập xong, anh/chị nhớ nhấn <b>Lưu</b> trước khi chuyển sang mục khác để tránh mất dữ liệu.</p>
       </div>
     </section>
 
     <!-- Example Table -->
     <section class="mt-10">
-      <h2 class="mb-3 text-xl font-bold text-slate-900">Ví dụ minh hoạ (4 dòng)</h2>
+      <h2 class="mb-3 text-xl font-bold text-slate-900">Ví dụ minh hoạ (3 dòng)</h2>
       <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
         <table class="min-w-full text-left text-sm">
           <thead class="bg-slate-50 text-slate-600">
             <tr>
+              <th class="px-4 py-3 font-semibold">MAMAY</th>
               <th class="px-4 py-3 font-semibold">DICHVU</th>
-              <th class="px-4 py-3 font-semibold">THOILUONG (phút)</th>
-              <th class="px-4 py-3 font-semibold">DUNGMAY</th>
-              <th class="px-4 py-3 font-semibold">NHOMDICHVU</th>
+              <th class="px-4 py-3 font-semibold">KHOAPHONG</th>
+              <th class="px-4 py-3 font-semibold">QUANLY</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-200">
             <tr class="hover:bg-slate-50">
-              <td class="px-4 py-3 font-medium text-slate-900">DX</td>
-              <td class="px-4 py-3">15</td>
-              <td class="px-4 py-3">TRUE</td>
-              <td class="px-4 py-3">PHCN</td>
+              <td class="px-4 py-3 font-medium text-slate-900">DX01</td>
+              <td class="px-4 py-3">DX</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
             </tr>
             <tr class="hover:bg-slate-50">
-              <td class="px-4 py-3 font-medium text-slate-900">SA</td>
-              <td class="px-4 py-3">10</td>
-              <td class="px-4 py-3">TRUE</td>
+              <td class="px-4 py-3 font-medium text-slate-900">SA01</td>
+              <td class="px-4 py-3">SA</td>
               <td class="px-4 py-3">PHCN</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
             </tr>
             <tr class="hover:bg-slate-50">
-              <td class="px-4 py-3 font-medium text-slate-900">VD</td>
-              <td class="px-4 py-3">20</td>
-              <td class="px-4 py-3">FALSE</td>
+              <td class="px-4 py-3 font-medium text-slate-900">LA02</td>
+              <td class="px-4 py-3">LA</td>
               <td class="px-4 py-3">PHCN</td>
-            </tr>
-            <tr class="hover:bg-slate-50">
-              <td class="px-4 py-3 font-medium text-slate-900">DC</td>
-              <td class="px-4 py-3">20</td>
-              <td class="px-4 py-3">FALSE</td>
-              <td class="px-4 py-3">YHCT</td>
+              <td class="px-4 py-3">Nguyễn Văn A, Trần Thị B</td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- Actions -->
-    <section class="mt-6 grid gap-6 md:grid-cols-2">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="mb-2 text-lg font-bold">Thêm & Lưu</h3>
-        <ol class="list-decimal pl-5 text-slate-600">
-          <li>Nhấn <b>“Thêm dòng”</b> để thêm dịch vụ mới.</li>
-          <li>Nhập đầy đủ bốn cột: <b>DICHVU</b>, <b>THOILUONG</b>, <b>DUNGMAY</b>, <b>NHOMDICHVU</b>.</li>
-          <li>Nhấn <b>Lưu</b> trước khi chuyển sang mục khác để tránh mất dữ liệu.</li>
-        </ol>
-        <div class="mt-4 flex gap-3">
-          <button class="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">+ Thêm dòng</button>
-          <button class="rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95">💾 Lưu thay đổi</button>
-        </div>
-      </div>
-
-      <!-- Quick Checks -->
-      <div class="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-amber-900">
-        <h3 class="mb-2 text-base font-semibold">✅ Checklist trước khi rời trang</h3>
-        <ul class="list-disc pl-5 text-sm leading-6">
-          <li><b>DICHVU</b> viết tắt nhất quán giữa các sheet.</li>
-          <li><b>THOILUONG</b> đúng quy định <b>BHXH</b>.</li>
-          <li><b>DUNGMAY</b> điền đúng <b>TRUE/FALSE</b> để tránh trùng nhân viên & máy.</li>
-        </ul>
-      </div>
+    <!-- Closing Tips -->
+    <section class="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-6 text-amber-900">
+      <h3 class="mb-2 text-base font-semibold">💡 Mẹo thiết lập</h3>
+      <p class="text-sm leading-6">Khuyến nghị <b>để QUANLY trống</b> nếu đơn vị cần <b>chia tải linh hoạt</b>; chỉ thiết lập QUANLY khi <b>thật sự</b> muốn giới hạn người được dùng máy.</p>
     </section>
 
     <!-- Footer note -->
     <footer class="mt-10 rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-600">
-      <p><span class="font-semibold text-slate-900">Chốt – 3 nguyên tắc:</span> (1) Viết tắt <b>DICHVU</b> phải nhất quán giữa các sheet. (2) <b>THOILUONG</b> đúng quy định <b>BHXH</b>. (3) <b>DUNGMAY</b> điền đúng <code>TRUE</code>/<code>FALSE</code> để MEDS giữ tay nhân viên theo <b>NV_HANDS_ON_MIN</b> và tránh trùng máy.</p>
+      <p><span class="font-semibold text-slate-900">Ghi nhớ:</span> Duy trì <b>đồng bộ</b> giữa <b>MAYMOC</b> ↔ <b>THOIGIAN</b> (tên viết tắt dịch vụ) và <b>MAYMOC</b> ↔ <b>NHANVIEN</b> (tên nhân viên ở QUANLY). Điều này giúp MEDS xếp lịch đúng người – đúng máy – đúng ca.</p>
     </footer>
   </article>
   

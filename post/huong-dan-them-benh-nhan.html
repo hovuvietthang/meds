@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MEDS • Hướng dẫn cấu hình bảng THOIGIAN</title>
+  <title>MEDS • Thêm bệnh nhân mới</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root{
@@ -47,14 +47,14 @@
       <div class="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-cyan-100 blur-2xl"></div>
       <div class="relative p-8 sm:p-10">
         <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-[13px] font-medium text-indigo-700">
-          <span>⏱️</span>
-          <span>MEDS · Cấu hình cơ bản</span>
+          <span>🧾</span>
+          <span>MEDS · Nhập danh sách bệnh nhân</span>
         </div>
         <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-          Cấu hình bảng <span class="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent">THOIGIAN</span>
+          Thêm <span class="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent">bệnh nhân mới</span>
         </h1>
         <p class="mt-3 max-w-3xl text-slate-600">
-          <strong>Mục tiêu:</strong> "Tiếp theo là phần cấu hình <b>THOIGIAN</b>. Đây là nơi khai báo <b>mã dịch vụ</b>, <b>thời lượng</b>, <b>có dùng máy hay không</b>, và <b>nhóm dịch vụ</b> để MEDS xếp giờ chính xác."
+          <strong>Mục tiêu:</strong> "Tiếp theo, mình sẽ hướng dẫn phần <b>thêm bệnh nhân mới</b>. Đây là bảng nhập danh sách bệnh nhân để công cụ <b>chia giờ tự động</b>."
         </p>
       </div>
     </header>
@@ -62,143 +62,168 @@
     <!-- Structure -->
     <section class="mt-10 grid gap-6 lg:grid-cols-3">
       <div class="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 class="mb-3 text-xl font-bold text-slate-900">Cấu trúc sheet</h2>
-        <p class="mb-4 text-slate-600">Trong sheet <b>THOIGIAN</b>, có các cột:</p>
+        <h2 class="mb-3 text-xl font-bold text-slate-900">Cấu trúc bảng</h2>
+        <p class="mb-4 text-slate-600">Bảng này có các cột:</p>
         <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2">
-          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🏷️</span>DICHVU</li>
-          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>⏳</span>THOILUONG (phút)</li>
-          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🖥️</span>DUNGMAY (TRUE/FALSE)</li>
-          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🗂️</span>NHOMDICHVU</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>📅</span>Ngày (<b>NGAY</b>)</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>👤</span>Họ tên (<b>HOTEN</b>)</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🆔</span>HSBA (<b>HSBA</b>)</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🧩</span>Dịch vụ (<b>DICHVU</b>)</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🕒</span>Buổi (<b>BUOI</b>)</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🏥</span>Khoa phòng (<b>KHOAPHONG</b>)</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm sm:col-span-2"><span>⏱️</span>Giờ vào (<b>GIOVAO</b>)</li>
         </ul>
-        <div class="mt-4 flex gap-3">
+        <div class="mt-4 flex flex-wrap gap-3">
           <button class="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">+ Thêm dòng</button>
-          <button class="rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95">💾 Lưu</button>
+          <button class="rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95">📥 THÊM CÁC BỆNH NHÂN</button>
         </div>
       </div>
 
       <aside class="rounded-2xl border border-indigo-200 bg-indigo-50 p-6 text-indigo-900">
         <h3 class="mb-2 text-base font-semibold">🎯 Tip nhanh</h3>
         <ul class="list-disc pl-5 text-sm leading-6">
-          <li><b>DICHVU</b> phải đồng bộ với các sheet khác (đặc biệt <b>YLENH</b>, <b>KETQUA</b>).</li>
-          <li><b>THOILUONG</b> dùng đơn vị <b>phút</b> và nên bám theo hướng dẫn <b>BHXH</b>.</li>
-          <li><b>DUNGMAY</b> bắt buộc điền <code class="rounded bg-slate-100 px-1">TRUE</code>/<code class="rounded bg-slate-100 px-1">FALSE</code>.</li>
+          <li>Định dạng <b>Ngày</b>: nên dùng <b>dd/mm/yyyy</b> để thống nhất.</li>
+          <li><b>Dịch vụ</b> viết tắt phải khớp với bảng <b>THOIGIAN</b>.</li>
+          <li><b>HSBA</b> là <b>duy nhất</b> cho mỗi bệnh nhân.</li>
         </ul>
       </aside>
     </section>
 
     <!-- Field Guides -->
     <section class="mt-8 grid gap-6 md:grid-cols-2">
-      <!-- DICHVU -->
+      <!-- Ngày -->
       <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="mb-2 text-lg font-bold">Cột DICHVU – viết tắt, phải đồng bộ</h3>
-        <p class="text-slate-600">Điền <b>chữ viết tắt</b> của dịch vụ và giữ <b>đồng bộ</b> giữa các bảng để hệ thống hiểu đúng.</p>
-        <div class="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm">
-          <p class="mb-2">Ví dụ viết tắt:</p>
-          <code class="block whitespace-pre-wrap leading-6">DX = Điện xung, SA = Siêu âm, LA = Laser, VD = Tập vận động, DC = Điện châm…</code>
-          <p class="mt-2 text-slate-600">Lưu ý: viết tắt phải nhất quán giữa <b>THOIGIAN</b> ↔ <b>YLENH</b> ↔ <b>KETQUA</b>.</p>
-        </div>
+        <h3 class="mb-2 text-lg font-bold">Cột Ngày (NGAY) – thống nhất 1 ngày chung</h3>
+        <p class="text-slate-600">Đây <b>không phải</b> ngày vào viện. Anh/chị nên thống nhất <b>một ngày chung</b> cho toàn bộ bệnh nhân. Ví dụ: chọn <b>02/09/2025</b>, thì tất cả bệnh nhân về sau cũng nhập ngày <b>02/09/2025</b>.</p>
       </div>
 
-      <!-- THOILUONG -->
+      <!-- Họ tên -->
       <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="mb-2 text-lg font-bold">Cột THOILUONG – theo hướng dẫn BHXH</h3>
-        <p class="text-slate-600">Nhập <b>thời gian thực hiện</b> của từng dịch vụ (đơn vị: <b>phút</b>), tuân thủ hướng dẫn <b>BHXH</b> và quy định đơn vị.</p>
+        <h3 class="mb-2 text-lg font-bold">Cột Họ tên (HOTEN) – nhập đầy đủ</h3>
+        <p class="text-slate-600">Nhập <b>đủ họ và tên</b> của bệnh nhân, <b>không viết tắt</b>.</p>
+      </div>
+
+      <!-- HSBA -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-2 text-lg font-bold">Cột HSBA – duy nhất, bắt buộc</h3>
+        <p class="text-slate-600">Mỗi bệnh nhân chỉ có <b>một</b> số HSBA duy nhất. Công cụ dựa vào mã hồ sơ bệnh án để chia giờ nên <b>bắt buộc</b> phải nhập <b>chính xác</b> và <b>không trùng lặp</b>.</p>
+      </div>
+
+      <!-- Dịch vụ -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-2 text-lg font-bold">Cột Dịch vụ (DICHVU) – viết tắt, ngăn cách bằng dấu phẩy</h3>
+        <p class="text-slate-600">Nhập các <b>viết tắt</b> dịch vụ, ngăn cách nhau bằng <b>dấu phẩy</b>.</p>
         <div class="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm">
           <p class="mb-2">Ví dụ:</p>
-          <code class="block whitespace-pre-wrap leading-6">SA: 10 phút · DX: 15 phút · VD: 20 phút</code>
+          <code class="block whitespace-pre-wrap leading-6">DX, SA, VD</code>
+          <p class="mt-2 text-slate-600">Lưu ý: các viết tắt phải <b>thống nhất</b> với <b>THOIGIAN</b>/<b>CAUHINH</b>.</p>
         </div>
       </div>
 
-      <!-- DUNGMAY -->
+      <!-- Buổi -->
       <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="mb-2 text-lg font-bold">Cột DUNGMAY – TRUE/FALSE rõ ràng</h3>
-        <p class="text-slate-600">Xác định dịch vụ <b>có dùng máy</b> hay <b>không</b>:</p>
-        <ul class="mt-2 list-disc pl-5 text-slate-600">
-          <li><b>TRUE</b>: có máy hỗ trợ (ví dụ: Điện xung, Siêu âm, Laser…).</li>
-          <li><b>FALSE</b>: không dùng máy (ví dụ: Tập vận động, Xoa bóp, Thuỷ châm…).</li>
+        <h3 class="mb-2 text-lg font-bold">Cột Buổi (BUOI) – chọn thời gian trong ngày</h3>
+        <ul class="list-disc pl-5 text-slate-600">
+          <li><b>Để trống</b> = cả ngày</li>
+          <li><b>Gõ "Sáng"</b> = chia vào buổi sáng</li>
+          <li><b>Gõ "Chiều"</b> = chia vào buổi chiều</li>
         </ul>
-        <p class="mt-2 text-sm text-slate-600">Điền đúng cột này để công cụ giữ tay nhân viên theo <b>NV_HANDS_ON_MIN</b> và tránh <b>trùng máy</b>.</p>
+        <p class="mt-2 text-slate-600">Việc chọn buổi sẽ giúp công cụ xếp <b>đúng khung giờ</b>.</p>
       </div>
 
-      <!-- NHOMDICHVU -->
+      <!-- Khoa phòng -->
       <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="mb-2 text-lg font-bold">Cột NHOMDICHVU – giúp chọn đúng bác sĩ chỉ định</h3>
-        <p class="text-slate-600">Thường dùng các nhóm: <b>YHCT</b> và <b>PHCN</b>. Khai báo đúng nhóm để MEDS chọn được bác sĩ chỉ định phù hợp và xếp lịch theo nhóm y lệnh.</p>
+        <h3 class="mb-2 text-lg font-bold">Cột Khoa phòng (KHOAPHONG) – khi dùng nhiều khoa</h3>
+        <ul class="list-disc pl-5 text-slate-600">
+          <li>Nếu chỉ dùng <b>một khoa</b>, có thể <b>để trống</b>.</li>
+          <li>Nếu có <b>nhiều khoa</b>, nhập <b>chính xác</b> và <b>đồng bộ</b> với các sheet trong <b>CẤU HÌNH</b>.</li>
+        </ul>
       </div>
+
+      <!-- Giờ vào -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:col-span-2">
+        <h3 class="mb-2 text-lg font-bold">Cột Giờ vào (GIOVAO) – để tính giờ xếp dịch vụ</h3>
+        <p class="text-slate-600">Nhập <b>giờ bệnh nhân nhập viện</b>. Các giờ y lệnh và giờ thực hiện dịch vụ sẽ được <b>xếp sau</b> mốc này. Định dạng đề xuất: <b>HH:MM</b> (ví dụ 06:30, 08:10).</p>
+      </div>
+    </section>
+
+    <!-- Bulk Add -->
+    <section class="mt-8 grid gap-6 lg:grid-cols-3">
+      <div class="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 class="mb-3 text-xl font-bold text-slate-900">Thêm nhiều bệnh nhân cùng lúc</h2>
+        <ol class="list-decimal pl-5 text-slate-600">
+          <li>Nhấn <b>“Thêm dòng”</b> để nhập nhiều bệnh nhân.</li>
+          <li>Điền đủ các cột theo cấu trúc trên.</li>
+          <li>Bấm nút <b>“THÊM CÁC BỆNH NHÂN”</b> để <b>lưu danh sách</b>.</li>
+        </ol>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <button class="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">+ Thêm dòng</button>
+          <button class="rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95">📥 THÊM CÁC BỆNH NHÂN</button>
+        </div>
+      </div>
+
+      <aside class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-emerald-900">
+        <h3 class="mb-2 text-base font-semibold">✅ Checklist trước khi lưu</h3>
+        <ul class="list-disc pl-5 text-sm leading-6">
+          <li><b>HSBA</b> không trùng lặp.</li>
+          <li><b>Dịch vụ</b> viết tắt đúng & đồng bộ.</li>
+          <li><b>GIOVAO</b> đúng định dạng <b>HH:MM</b>.</li>
+        </ul>
+      </aside>
     </section>
 
     <!-- Example Table -->
     <section class="mt-10">
-      <h2 class="mb-3 text-xl font-bold text-slate-900">Ví dụ minh hoạ (4 dòng)</h2>
+      <h2 class="mb-3 text-xl font-bold text-slate-900">Ví dụ minh hoạ (3 dòng)</h2>
       <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
         <table class="min-w-full text-left text-sm">
           <thead class="bg-slate-50 text-slate-600">
             <tr>
-              <th class="px-4 py-3 font-semibold">DICHVU</th>
-              <th class="px-4 py-3 font-semibold">THOILUONG (phút)</th>
-              <th class="px-4 py-3 font-semibold">DUNGMAY</th>
-              <th class="px-4 py-3 font-semibold">NHOMDICHVU</th>
+              <th class="px-4 py-3 font-semibold">Ngày</th>
+              <th class="px-4 py-3 font-semibold">Họ tên</th>
+              <th class="px-4 py-3 font-semibold">HSBA</th>
+              <th class="px-4 py-3 font-semibold">Dịch vụ</th>
+              <th class="px-4 py-3 font-semibold">Buổi</th>
+              <th class="px-4 py-3 font-semibold">Khoa phòng</th>
+              <th class="px-4 py-3 font-semibold">Giờ vào</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-200">
             <tr class="hover:bg-slate-50">
-              <td class="px-4 py-3 font-medium text-slate-900">DX</td>
-              <td class="px-4 py-3">15</td>
-              <td class="px-4 py-3">TRUE</td>
-              <td class="px-4 py-3">PHCN</td>
+              <td class="px-4 py-3">02/09/2025</td>
+              <td class="px-4 py-3 font-medium text-slate-900">Nguyễn Văn A</td>
+              <td class="px-4 py-3">20004214</td>
+              <td class="px-4 py-3">DX, SA, VD</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
+              <td class="px-4 py-3">06:30</td>
             </tr>
             <tr class="hover:bg-slate-50">
-              <td class="px-4 py-3 font-medium text-slate-900">SA</td>
-              <td class="px-4 py-3">10</td>
-              <td class="px-4 py-3">TRUE</td>
+              <td class="px-4 py-3">02/09/2025</td>
+              <td class="px-4 py-3 font-medium text-slate-900">Đào Thị B</td>
+              <td class="px-4 py-3">20004455</td>
+              <td class="px-4 py-3">DX, SA</td>
+              <td class="px-4 py-3">Sáng</td>
               <td class="px-4 py-3">PHCN</td>
+              <td class="px-4 py-3">08:10</td>
             </tr>
             <tr class="hover:bg-slate-50">
-              <td class="px-4 py-3 font-medium text-slate-900">VD</td>
-              <td class="px-4 py-3">20</td>
-              <td class="px-4 py-3">FALSE</td>
-              <td class="px-4 py-3">PHCN</td>
-            </tr>
-            <tr class="hover:bg-slate-50">
-              <td class="px-4 py-3 font-medium text-slate-900">DC</td>
-              <td class="px-4 py-3">20</td>
-              <td class="px-4 py-3">FALSE</td>
+              <td class="px-4 py-3">02/09/2025</td>
+              <td class="px-4 py-3 font-medium text-slate-900">Lê Minh C</td>
+              <td class="px-4 py-3">20004677</td>
+              <td class="px-4 py-3">DC</td>
+              <td class="px-4 py-3">Chiều</td>
               <td class="px-4 py-3">YHCT</td>
+              <td class="px-4 py-3">13:45</td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- Actions -->
-    <section class="mt-6 grid gap-6 md:grid-cols-2">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="mb-2 text-lg font-bold">Thêm & Lưu</h3>
-        <ol class="list-decimal pl-5 text-slate-600">
-          <li>Nhấn <b>“Thêm dòng”</b> để thêm dịch vụ mới.</li>
-          <li>Nhập đầy đủ bốn cột: <b>DICHVU</b>, <b>THOILUONG</b>, <b>DUNGMAY</b>, <b>NHOMDICHVU</b>.</li>
-          <li>Nhấn <b>Lưu</b> trước khi chuyển sang mục khác để tránh mất dữ liệu.</li>
-        </ol>
-        <div class="mt-4 flex gap-3">
-          <button class="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">+ Thêm dòng</button>
-          <button class="rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95">💾 Lưu thay đổi</button>
-        </div>
-      </div>
-
-      <!-- Quick Checks -->
-      <div class="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-amber-900">
-        <h3 class="mb-2 text-base font-semibold">✅ Checklist trước khi rời trang</h3>
-        <ul class="list-disc pl-5 text-sm leading-6">
-          <li><b>DICHVU</b> viết tắt nhất quán giữa các sheet.</li>
-          <li><b>THOILUONG</b> đúng quy định <b>BHXH</b>.</li>
-          <li><b>DUNGMAY</b> điền đúng <b>TRUE/FALSE</b> để tránh trùng nhân viên & máy.</li>
-        </ul>
-      </div>
-    </section>
-
     <!-- Footer note -->
     <footer class="mt-10 rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-600">
-      <p><span class="font-semibold text-slate-900">Chốt – 3 nguyên tắc:</span> (1) Viết tắt <b>DICHVU</b> phải nhất quán giữa các sheet. (2) <b>THOILUONG</b> đúng quy định <b>BHXH</b>. (3) <b>DUNGMAY</b> điền đúng <code>TRUE</code>/<code>FALSE</code> để MEDS giữ tay nhân viên theo <b>NV_HANDS_ON_MIN</b> và tránh trùng máy.</p>
+      <p><span class="font-semibold text-slate-900">Kết – 3 nguyên tắc:</span> (1) <b>HSBA</b> duy nhất cho mỗi bệnh nhân. (2) <b>Dịch vụ</b> viết tắt đồng bộ với cấu hình. (3) Nhớ nhấn <b>“THÊM CÁC BỆNH NHÂN”</b> để dữ liệu được lưu.</p>
     </footer>
   </article>
   
