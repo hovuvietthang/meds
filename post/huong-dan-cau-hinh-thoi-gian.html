@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>THOIGIAN – Khai báo dịch vụ để MEDS xếp giờ chính xác</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+  <!-- Hero -->
+  <header class="bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 text-white">
+    <div class="mx-auto max-w-5xl px-6 py-12">
+      <p class="mb-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold tracking-wide">
+        <span>⚙️</span> Cấu hình MEDS
+      </p>
+      <h1 class="text-3xl font-extrabold leading-tight sm:text-4xl">Cấu hình <span class="underline decoration-white/40">THOIGIAN</span> – Khai báo dịch vụ để MEDS xếp giờ chính xác</h1>
+      <p class="mt-3 max-w-3xl text-white/90">
+        <strong>THOIGIAN</strong> là nơi khai báo mã dịch vụ, thời lượng, có dùng máy hay không, và nhóm dịch vụ. Dữ liệu ở đây giúp MEDS xếp lịch đúng, tránh trùng giữa <em>nhân viên – máy – bệnh nhân</em>.
+      </p>
+    </div>
+  </header>
+  
+
+  <main class="mx-auto max-w-5xl px-6 py-10">
+    <!-- Tóm tắt nhanh -->
+     <!-- Bảng minh hoạ -->
+    <section class="mb-10">
+      <div class="mb-3 flex items-center justify-between">
+        <h3 class="text-lg font-bold">Bảng minh họa (5 dòng mẫu)</h3>
+        <span class="rounded-full bg-slate-200 px-3 py-1 text-xs font-semibold text-slate-700">Ví dụ</span>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <table class="min-w-full text-left text-sm">
+          <thead class="bg-slate-50 text-slate-600">
+            <tr>
+              <th class="px-4 py-3 font-semibold">DICHVU</th>
+              <th class="px-4 py-3 font-semibold">THOILUONG (phút)</th>
+              <th class="px-4 py-3 font-semibold">DUNG_MAY</th>
+              <th class="px-4 py-3 font-semibold">NHOMDICHVU</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr class="hover:bg-slate-50/60">
+              <td class="px-4 py-3 font-medium">DX</td>
+              <td class="px-4 py-3">15</td>
+              <td class="px-4 py-3"><code>TRUE</code></td>
+              <td class="px-4 py-3"><code>PHCN</code></td>
+            </tr>
+            <tr class="hover:bg-slate-50/60">
+              <td class="px-4 py-3 font-medium">SA</td>
+              <td class="px-4 py-3">10</td>
+              <td class="px-4 py-3"><code>TRUE</code></td>
+              <td class="px-4 py-3"><code>PHCN</code></td>
+            </tr>
+            <tr class="hover:bg-slate-50/60">
+              <td class="px-4 py-3 font-medium">LA</td>
+              <td class="px-4 py-3">10</td>
+              <td class="px-4 py-3"><code>TRUE</code></td>
+              <td class="px-4 py-3"><code>PHCN</code></td>
+            </tr>
+            <tr class="hover:bg-slate-50/60">
+              <td class="px-4 py-3 font-medium">VD</td>
+              <td class="px-4 py-3">20</td>
+              <td class="px-4 py-3"><code>FALSE</code></td>
+              <td class="px-4 py-3"><code>PHCN</code></td>
+            </tr>
+            <tr class="hover:bg-slate-50/60">
+              <td class="px-4 py-3 font-medium">DC</td>
+              <td class="px-4 py-3">20</td>
+              <td class="px-4 py-3"><code>FALSE</code></td>
+              <td class="px-4 py-3"><code>YHCT</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-xs text-slate-500">* Đây là ví dụ tham khảo. Điều chỉnh theo thực tế và quy định của đơn vị.</p>
+    </section>
+    <section class="mb-8 grid gap-4 sm:grid-cols-2">
+      <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 class="mb-2 flex items-center gap-2 text-base font-bold text-slate-900">
+          <span>📄</span> Cấu trúc sheet
+        </h2>
+        <ul class="space-y-2 text-sm leading-6">
+          <li><span class="inline-flex min-w-[8rem] font-semibold text-slate-700">DICHVU</span> – Mã viết tắt dịch vụ</li>
+          <li><span class="inline-flex min-w-[8rem] font-semibold text-slate-700">THOILUONG</span> – Số phút thực hiện</li>
+          <li><span class="inline-flex min-w-[8rem] font-semibold text-slate-700">DUNGMAY</span> – <code>TRUE</code>/<code>FALSE</code></li>
+          <li><span class="inline-flex min-w-[8rem] font-semibold text-slate-700">NHOMDICHVU</span> – Thường là <code>YHCT</code> hoặc <code>PHCN</code></li>
+        </ul>
+        <p class="mt-3 rounded-lg bg-blue-50 p-3 text-xs text-blue-900">🔸 Phía trên sheet có nút <strong>“Thêm dòng”</strong> để thêm dịch vụ mới.</p>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 class="mb-2 flex items-center gap-2 text-base font-bold text-slate-900">
+          <span>✅</span> Ba nguyên tắc quan trọng
+        </h2>
+        <ul class="space-y-2 text-sm">
+          <li>✔️ <strong>DICHVU</strong> viết tắt <u>nhất quán</u> giữa các sheet (<code>THOIGIAN</code> ↔ <code>MAYMOC, </code><code>NHANVIEN, </code><code>NHANVIENT7CN, </code> và <code>CAUHINH</code>.</li>
+          <li>✔️ <strong>THOILUONG</strong> đúng quy định BHXH, <u>đơn vị: phút</u>.</li>
+          <li>✔️ <strong>DUNG_MAY</strong> đúng <code>TRUE/FALSE</code> để MEDS giữ tay NV theo <code>NV_HANDS_ON_MIN</code> và tránh trùng máy.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Hướng dẫn từng cột -->
+    <section class="mb-10 space-y-6">
+      <!-- DICHVU -->
+      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-1 text-lg font-bold">DICHVU (viết tắt, phải đồng bộ)</h3>
+        <p class="text-sm leading-6">
+          Nhập chữ viết tắt của dịch vụ và giữ <strong>nhất quán</strong> giữa các sheet để hệ thống hiểu đúng.
+          Ví dụ: <code>DX</code> (Điện xung), <code>SA</code> (Siêu âm), <code>LA</code> (Laser), <code>VD</code> (Tập vận động), <code>DC</code> (Điện châm)…
+        </p>
+        <p class="mt-2 rounded-lg bg-amber-50 p-3 text-xs text-amber-900">⚠️ Lưu ý: Viết tắt phải trùng khớp với <code>MAYMOC, </code><code>NHANVIEN, </code><code>NHANVIENT7CN, </code> và <code>CAUHINH</code>.</p>
+      </article>
+
+      <!-- THOILUONG -->
+      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-1 text-lg font-bold">THOILUONG (theo hướng dẫn BHXH)</h3>
+        <p class="text-sm leading-6">
+          Nhập thời gian thực hiện của từng dịch vụ, <u>đơn vị: phút</u>, theo hướng dẫn BHXH.
+          Ví dụ: <code>SA = 10</code> phút, <code>DX = 15</code> phút… (có thể tuỳ quy định của đơn vị).
+        </p>
+      </article>
+
+      <!-- DUNGMAY -->
+      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-1 text-lg font-bold">DUNG_MAY (TRUE hoặc FALSE rõ ràng)</h3>
+        <ul class="list-inside list-disc text-sm leading-6">
+          <li><strong>Có máy hỗ trợ</strong> (ví dụ: DX, SA, LA…): nhập <code>TRUE</code>.</li>
+          <li><strong>Không dùng máy (Nhân viên dùng tay 1:1)</strong> (ví dụ: VD, Xoa bóp, Thuỷ châm…): nhập <code>FALSE</code>.</li>
+        </ul>
+        <p class="mt-2 rounded-lg bg-emerald-50 p-3 text-xs text-emerald-900">
+          💡 Điền đúng trường này để MEDS <strong>giữ tay nhân viên</strong> theo <code>NV_HANDS_ON_MIN</code> và <strong>tránh trùng máy</strong>.
+        </p>
+      </article>
+
+      <!-- NHOMDICHVU -->
+      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-1 text-lg font-bold">NHOMDICHVU (giúp chọn đúng Bác sĩ chỉ định đúng nhóm dịch vụ)</h3>
+        <p class="text-sm leading-6">
+          Thường dùng <code>YHCT</code> và <code>PHCN</code>. Khai báo đúng nhóm để MEDS chọn bác sĩ chỉ định phù hợp và xếp lịch theo nhóm y lệnh.
+        </p>
+      </article>
+    </section>
+
+    <!-- Lưu thay đổi -->
+    <section class="mb-10 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-emerald-900">
+      <h3 class="mb-1 text-base font-bold">💾 Lưu</h3>
+      <p class="text-sm leading-6">
+        Sau khi nhập xong, bấm <strong>Lưu</strong> trước khi chuyển mục khác; nếu không, dữ liệu mới sẽ không được ghi lại.
+      </p>
+    </section>
+
+    <!-- Lỗi thường gặp -->
+    <section class="mb-4 rounded-2xl border border-rose-200 bg-rose-50 p-5 text-rose-900">
+      <h3 class="mb-2 text-base font-bold">🚧 Lỗi thường gặp (check nhanh)</h3>
+      <ul class="list-inside list-disc text-sm leading-7">
+        <li>Viết tắt <strong>không đồng bộ</strong> giữa <code>THOIGIAN</code> ↔ <code>MAYMOC, </code><code>NHANVIEN, </code><code>NHANVIENT7CN, </code> và <code>CAUHINH</code>.</li>
+        <li><strong>Quên Lưu</strong> sau khi thêm/sửa dữ liệu.</li>
+        <li>Gõ <code>true/false</code> (chữ thường) thay vì <code>TRUE/FALSE</code>.</li>
+        <li>Nhập <strong>THOILUONG theo giờ</strong> thay vì <strong>phút</strong>.</li>
+      </ul>
+    </section>
+
+    <!-- Footer hint -->
+    <footer class="mt-10 border-t border-slate-200 pt-6 text-sm text-slate-500">
+      Gợi ý tiếp theo: <em>Cấu hình NHANVIEN / NHANVIENT7CN</em> để MEDS chọn đúng KTV/BS &amp; ca làm.
+    </footer>
+  </main>
+</body>
+</html>
