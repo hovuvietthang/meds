@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MEDS • Hướng dẫn cấu hình bảng MAYMOC</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --meds-primary:#2563eb; /* indigo-600 */
+      --meds-accent:#06b6d4;  /* cyan-500   */
+      --meds-ink:#0f172a;     /* slate-900  */
+    }
+    /* Khóa cuộn nền khi mở modal */
+body.modal-open { overflow: hidden; }
+
+/* Panel modal: giới hạn chiều cao theo viewport, cho layout cột */
+.guide-sheet{
+  max-height: calc(100vh - 4rem);
+  display: flex;            /* header + list (flex-col) */
+  flex-direction: column;
+  overflow: hidden;         /* phần list sẽ cuộn, panel không tràn */
+}
+@media (max-width: 640px){
+  .guide-sheet{ max-height: calc(100vh - 2rem); }
+}
+
+/* Vùng danh sách: cuộn dọc, mượt mobile */
+.guide-list{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain; /* chạm đáy không “bật” nền */
+}
+
+/* Chống tràn ngang bởi link dài */
+.guide-list a{ overflow-wrap: anywhere; }
+
+/* (Tuỳ chọn) Làm scrollbar gọn gàng */
+.guide-list::-webkit-scrollbar{ width: 10px; }
+.guide-list::-webkit-scrollbar-thumb{ background: rgba(148,163,184,.35); border-radius: 8px; }
+.guide-list::-webkit-scrollbar-track{ background: transparent; }
+    /* ===== Guide Dock (Mục lục hướng dẫn) ===== */
+    .guide-dock {
+  position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
+  z-index: 40;
+}
+@media (max-width: 640px){
+  /* Tránh đè nút Zalo: đưa lên trên nút Zalo ~86px */
+  .guide-dock{ top: auto; bottom: 86px; transform: none; right: 12px; }
+}
+
+/* Nhỏ nhắn, đồng bộ theme */
+.guide-btn {
+  width: 44px; height: 44px;
+  border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface); color: #e5e7eb;
+  border: 1px solid var(--meds-border);
+  box-shadow: 0 10px 25px rgba(2,6,23,.35);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.guide-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(2,6,23,.5); background: rgba(255,255,255,.06); }
+.guide-btn:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(37,99,235,.25); }
+
+/* Modal animation (nhẹ) */
+.guide-fade { animation: guideFade .18s ease-out; }
+@keyframes guideFade { from { opacity: 0; transform: scale(.98) translateY(6px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+/* ===== Guide Dock (Mục lục hướng dẫn) ===== */
+.guide-dock {
+  position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
+  z-index: 40;
+}
+@media (max-width: 640px){
+  /* Tránh đè nút Zalo: đưa lên trên nút Zalo ~86px */
+  .guide-dock{ top: auto; bottom: 86px; transform: none; right: 12px; }
+}
+
+/* Nhỏ nhắn, đồng bộ theme */
+.guide-btn {
+  width: 44px; height: 44px;
+  border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface); color: #e5e7eb;
+  border: 1px solid var(--meds-border);
+  box-shadow: 0 10px 25px rgba(2,6,23,.35);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.guide-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(2,6,23,.5); background: rgba(255,255,255,.06); }
+.guide-btn:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(37,99,235,.25); }
+
+/* Modal animation (nhẹ) */
+.guide-fade { animation: guideFade .18s ease-out; }
+@keyframes guideFade { from { opacity: 0; transform: scale(.98) translateY(6px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+/* Khóa cuộn nền khi mở modal */
+body.modal-open { overflow: hidden; }
+
+/* Panel modal: giới hạn chiều cao theo viewport, cho layout cột */
+.guide-sheet{
+  max-height: calc(100vh - 4rem);
+  display: flex;            /* header + list (flex-col) */
+  flex-direction: column;
+  overflow: hidden;         /* phần list sẽ cuộn, panel không tràn */
+}
+@media (max-width: 640px){
+  .guide-sheet{ max-height: calc(100vh - 2rem); }
+}
+
+/* Vùng danh sách: cuộn dọc, mượt mobile */
+.guide-list{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain; /* chạm đáy không “bật” nền */
+}
+
+/* Chống tràn ngang bởi link dài */
+.guide-list a{ overflow-wrap: anywhere; }
+
+/* (Tuỳ chọn) Làm scrollbar gọn gàng */
+.guide-list::-webkit-scrollbar{ width: 10px; }
+.guide-list::-webkit-scrollbar-thumb{ background: rgba(148,163,184,.35); border-radius: 8px; }
+.guide-list::-webkit-scrollbar-track{ background: transparent; }
+
+  </style>
+</head>
+<body class="bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-800">
+  <article class="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+    <!-- Hero / Title -->
+    <header class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div class="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-indigo-100 blur-2xl"></div>
+      <div class="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-cyan-100 blur-2xl"></div>
+      <div class="relative p-8 sm:p-10">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-[13px] font-medium text-indigo-700">
+          <span>⚙️</span>
+          <span>MEDS · Cấu hình cơ bản</span>
+        </div>
+        <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          Cấu hình bảng <span class="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent">MAYMOC</span>
+        </h1>
+        <p class="mt-3 max-w-3xl text-slate-600">
+          <strong>Mục tiêu:</strong> "Tiếp theo là phần <b>MAYMOC</b> – nơi khai báo mã máy để MEDS xếp lịch và tránh trùng máy."
+        </p>
+      </div>
+    </header>
+
+    <!-- Access & Structure -->
+    <section class="mt-10 grid gap-6 lg:grid-cols-3">
+      <div class="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 class="mb-3 text-xl font-bold text-slate-900">Truy cập & cấu trúc bảng</h2>
+        <p class="mb-4 text-slate-600">Anh/chị mở sheet <b>MAYMOC</b>. Trong bảng có các cột:</p>
+        <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🏷️</span>MAMAY</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🧩</span>DICHVU</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🏥</span>KHOAPHONG</li>
+          <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"><span>🧑‍💼</span>QUANLY</li>
+        </ul>
+        <div class="mt-4 flex gap-3">
+          <button class="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">+ Thêm dòng</button>
+          <button class="rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95">💾 Lưu</button>
+        </div>
+        <p class="mt-3 text-sm text-slate-500">Khuyến nghị: Mã máy nên <b>trùng</b> với mã đã đăng ký trên cổng <b>BHXH</b> để đồng bộ hồ sơ.</p>
+      </div>
+
+      <aside class="rounded-2xl border border-indigo-200 bg-indigo-50 p-6 text-indigo-900">
+        <h3 class="mb-2 text-base font-semibold">🎯 Tip nhanh</h3>
+        <ul class="list-disc pl-5 text-sm leading-6">
+          <li>Mã máy dùng <b>định danh thống nhất</b> (DX01, SA02, LA02…).</li>
+          <li>Viết tắt <b>DICHVU</b> phải khớp bảng <b>THOIGIAN</b> (DX, SA, LA…).</li>
+          <li>Tên trong <b>QUANLY</b> phải <b>khớp 100%</b> với cột HOTEN ở bảng <b>NHANVIEN</b>.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- Field Guides -->
+    <section class="mt-8 grid gap-6 md:grid-cols-2">
+      <!-- MAMAY -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-2 text-lg font-bold">Cột MAMAY – nhập đúng định danh</h3>
+        <p class="text-slate-600">Nhập đúng mã máy theo chuẩn đơn vị. Ví dụ:</p>
+        <div class="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm">
+          <code class="block whitespace-pre-wrap leading-6">DX01, DX02, DX03, SA01, SA02, SA03…</code>
+        </div>
+      </div>
+
+      <!-- DICHVU -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-2 text-lg font-bold">Cột DICHVU – viết tắt đồng bộ</h3>
+        <p class="text-slate-600">Điền <b>viết tắt</b> của dịch vụ máy phục vụ (có thể nhiều dịch vụ, ngăn cách bằng <b>dấu phẩy</b>). Các viết tắt phải <b>đồng bộ</b> với bảng <b>THOIGIAN</b>.</p>
+        <div class="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm">
+          <p class="mb-2">Ví dụ:</p>
+          <code class="block whitespace-pre-wrap leading-6">DX, SA, LA</code>
+          <p class="mt-2 text-slate-600">Nếu một máy hỗ trợ nhiều dịch vụ, ghi <b>tất cả</b> dịch vụ để MEDS phân ca chính xác.</p>
+        </div>
+      </div>
+
+      <!-- KHOAPHONG -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-2 text-lg font-bold">Cột KHOAPHONG – xác định phạm vi dùng máy</h3>
+        <p class="text-slate-600">Nếu máy <b>chỉ dùng trong khoa</b>, có thể <b>để trống</b>. Nếu máy <b>toàn viện dùng</b>, nên <b>ghi rõ khoa</b> (đơn vị quản lý) để theo dõi nguồn lực.</p>
+      </div>
+
+      <!-- QUANLY -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-2 text-lg font-bold">Cột QUANLY – giới hạn người được phép dùng máy</h3>
+        <ul class="list-disc pl-5 text-slate-600">
+          <li>Nhập tên <b>nhân viên quản lý</b> máy (có thể nhiều người, ngăn cách bằng dấu phẩy).</li>
+          <li><b>Để trống</b>: mọi nhân viên có dịch vụ phù hợp đều dùng được máy → <b>tối ưu</b> chia tải.</li>
+          <li><b>Có điền</b>: chỉ <b>nhân viên liệt kê</b> mới được xếp vào máy đó.</li>
+          <li><b>Lưu ý quan trọng</b>: Tên nhân viên phải <b>khớp 100%</b> với bảng <b>NHANVIEN</b>; khác 1 ký tự cũng <b>không xếp</b> được.</li>
+        </ul>
+      </div>
+
+      <!-- Save -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:col-span-2">
+        <h3 class="mb-2 text-lg font-bold">Lưu dữ liệu</h3>
+        <p class="text-slate-600">Sau khi nhập xong, anh/chị nhớ nhấn <b>Lưu</b> trước khi chuyển sang mục khác để tránh mất dữ liệu.</p>
+      </div>
+    </section>
+
+    <!-- Example Table -->
+    <section class="mt-10">
+      <h2 class="mb-3 text-xl font-bold text-slate-900">Ví dụ minh hoạ (3 dòng)</h2>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <table class="min-w-full text-left text-sm">
+          <thead class="bg-slate-50 text-slate-600">
+            <tr>
+              <th class="px-4 py-3 font-semibold">MAMAY</th>
+              <th class="px-4 py-3 font-semibold">DICHVU</th>
+              <th class="px-4 py-3 font-semibold">KHOAPHONG</th>
+              <th class="px-4 py-3 font-semibold">QUANLY</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3 font-medium text-slate-900">DX01</td>
+              <td class="px-4 py-3">DX</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3 font-medium text-slate-900">SA01</td>
+              <td class="px-4 py-3">SA</td>
+              <td class="px-4 py-3">PHCN</td>
+              <td class="px-4 py-3 italic text-slate-400">(trống)</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3 font-medium text-slate-900">LA02</td>
+              <td class="px-4 py-3">LA</td>
+              <td class="px-4 py-3">PHCN</td>
+              <td class="px-4 py-3">Nguyễn Văn A, Trần Thị B</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Closing Tips -->
+    <section class="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-6 text-amber-900">
+      <h3 class="mb-2 text-base font-semibold">💡 Mẹo thiết lập</h3>
+      <p class="text-sm leading-6">Khuyến nghị <b>để QUANLY trống</b> nếu đơn vị cần <b>chia tải linh hoạt</b>; chỉ thiết lập QUANLY khi <b>thật sự</b> muốn giới hạn người được dùng máy.</p>
+    </section>
+
+    <!-- Footer note -->
+    <footer class="mt-10 rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-600">
+      <p><span class="font-semibold text-slate-900">Ghi nhớ:</span> Duy trì <b>đồng bộ</b> giữa <b>MAYMOC</b> ↔ <b>THOIGIAN</b> (tên viết tắt dịch vụ) và <b>MAYMOC</b> ↔ <b>NHANVIEN</b> (tên nhân viên ở QUANLY). Điều này giúp MEDS xếp lịch đúng người – đúng máy – đúng ca.</p>
+    </footer>
+  </article>
+<!-- ===== MỤC LỤC HƯỚNG DẪN (NÚT MỞ) ===== -->
+<div class="guide-dock">
+  <button id="openGuideBtn" class="guide-btn" aria-label="Mở mục lục hướng dẫn" title="Mục lục hướng dẫn">
+    <!-- Icon sách -->
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16.5A1.5 1.5 0 0 1 18.5 21H6.5A2.5 2.5 0 0 0 4 23V5.5Z" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M8 7h8M8 10h8M8 13h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+
+<!-- ===== MODAL MỤC LỤC ===== -->
+<div id="guideModal" class="hidden fixed inset-0 z-50">
+  <!-- overlay -->
+  <div id="guideOverlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+  <!-- sheet -->
+  <div class="absolute inset-x-0 top-10 mx-auto w-full max-w-2xl px-4">
+    <div class="glass guide-fade guide-sheet p-5 md:p-6">
+      <div class="mb-4 flex items-center justify-between gap-3">
+        <h2 class="text-lg font-bold text-slate-100">Mục lục hướng dẫn</h2>
+        <button id="closeGuideBtn" class="rounded-xl border border-[var(--meds-border)] bg-white/5 px-3 py-1.5 text-sm text-slate-200 hover:bg-white/10">
+          Đóng
+        </button>
+      </div>
+
+      <!-- danh sách -->
+      <div class="space-y-3 guide-list" id="guideList" role="list"></div>
+
+      <div class="mt-4 text-xs text-slate-400">
+        * Nút <span class="font-semibold">Video</span> chỉ hiện khi có liên kết video tương ứng.
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // ===== DỮ LIỆU HƯỚNG DẪN (GIỮ ĐÚNG THỨ TỰ BẠN ĐƯA) =====
+  // Mẹo: nếu url KHÔNG bắt đầu bằng http, mình tự động thêm domain /post/
+  const GUIDE_BASE = 'https://medstrial.toihocy.com/post/';
+  const guides = [
+    { title: 'Hướng dẫn cấu hình chung',            url: 'https://medstrial.toihocy.com/post/huong-dan-cau-hinh-chung.html', video: null },
+    { title: 'Hướng dẫn cấu thời gian',              url: 'huong-dan-cau-thoi-gian.html',            video: null },
+    { title: 'Hướng dẫn cấu hình nhân viên',        url: 'huong-dan-cau-hinh-nhan-vien.html',       video: null },
+    { title: 'Hướng dẫn cấu hình máy móc',          url: 'huong-dan-cau-hinh-may-moc.html',         video: null },
+    { title: 'Hướng dẫn cấu hình email',            url: 'huong-dan-cau-hinh-email.html',           video: null },
+    { title: 'Hướng dẫn cấu hình tài khoản',        url: 'huong-dan-cau-hinh-tai-khoan.html',       video: null },
+    { title: 'Hướng dẫn thêm bệnh nhân',            url: 'huong-dan-them-benh-nhan.html',           video: null },
+    { title: 'Hướng dẫn chia giờ hằng ngày',        url: 'huong-dan-chia-gio-hang-ngay.html',       video: null },
+    { title: 'Hướng dẫn xóa bệnh nhân',             url: 'huong-dan-xoa-benh-nhan.html',            video: null },
+    { title: 'Hướng dẫn sửa bệnh nhân',             url: 'huong-dan-sua-benh-nhan.html',            video: null }
+  ];
+
+  const absUrl = u => /^https?:\/\//i.test(u) ? u : (GUIDE_BASE + u.replace(/^\/+/, ''));
+
+  // ===== RENDER LIST =====
+  function renderGuideList() {
+    const wrap = document.getElementById('guideList');
+    wrap.innerHTML = '';
+    guides.forEach((g, idx) => {
+      const readHref = absUrl(g.url);
+      const hasVideo = !!g.video;
+      const videoHref = hasVideo ? g.video : '#';
+
+      const item = document.createElement('div');
+      item.setAttribute('role', 'listitem');
+      item.className = 'rounded-xl border border-[var(--meds-border)] bg-white/5 p-3 md:p-4';
+
+      item.innerHTML = `
+        <div class="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+          <div class="min-w-0">
+            <div class="text-sm text-slate-300"><span class="mr-2 inline-flex h-5 w-5 items-center justify-center rounded-lg border border-[var(--meds-border)] bg-white/5 text-[11px] font-semibold">#${String(idx+1).padStart(2,'0')}</span>${g.title}</div>
+            <a href="${readHref}" target="_blank" rel="noopener" class="block truncate text-xs text-blue-300 underline">${readHref}</a>
+          </div>
+          <div class="flex shrink-0 gap-2">
+            <a href="${readHref}" target="_blank" rel="noopener"
+               class="rounded-xl bg-[var(--meds-primary)] px-3 py-2 text-xs font-semibold text-white hover:bg-[var(--meds-dark)]">
+              Đọc bài
+            </a>
+            <a ${hasVideo ? `href="${videoHref}" target="_blank" rel="noopener"` : ''}
+               class="rounded-xl border border-[var(--meds-border)] bg-white/5 px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-white/10 ${hasVideo ? '' : 'pointer-events-none opacity-50'}">
+              Video
+            </a>
+          </div>
+        </div>
+      `;
+      wrap.appendChild(item);
+    });
+  }
+
+  // ===== OPEN/CLOSE MODAL =====
+  const guideModal   = document.getElementById('guideModal');
+  const openGuideBtn = document.getElementById('openGuideBtn');
+  const closeGuideBtn= document.getElementById('closeGuideBtn');
+  const guideOverlay = document.getElementById('guideOverlay');
+  let lastActive = null;
+
+  function openGuide() {
+    lastActive = document.activeElement;
+    renderGuideList();
+    guideModal.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+    closeGuideBtn.focus();
+  }
+  function closeGuide() {
+    guideModal.classList.add('hidden');
+    document.body.classList.remove('modal-open');
+    if (lastActive && typeof lastActive.focus === 'function') lastActive.focus();
+  }
+
+  openGuideBtn.addEventListener('click', openGuide);
+  closeGuideBtn.addEventListener('click', closeGuide);
+  guideOverlay.addEventListener('click', closeGuide);
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && !guideModal.classList.contains('hidden')) closeGuide(); });
+</script>
+
+</body>
+</html>

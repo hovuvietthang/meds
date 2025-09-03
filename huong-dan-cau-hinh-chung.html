@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MEDS • Giới thiệu & Hướng dẫn nhanh</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --meds-primary:#2563eb; /* indigo-600 */
+      --meds-accent:#06b6d4;  /* cyan-500   */
+      --meds-ink:#0f172a;     /* slate-900  */
+    }
+    /* ===== Guide Dock (Mục lục hướng dẫn) ===== */
+.guide-dock {
+  position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
+  z-index: 40;
+}
+@media (max-width: 640px){
+  /* Tránh đè nút Zalo: đưa lên trên nút Zalo ~86px */
+  .guide-dock{ top: auto; bottom: 86px; transform: none; right: 12px; }
+}
+
+/* Nhỏ nhắn, đồng bộ theme */
+.guide-btn {
+  width: 44px; height: 44px;
+  border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface); color: #e5e7eb;
+  border: 1px solid var(--meds-border);
+  box-shadow: 0 10px 25px rgba(2,6,23,.35);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.guide-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(2,6,23,.5); background: rgba(255,255,255,.06); }
+.guide-btn:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(37,99,235,.25); }
+
+/* Modal animation (nhẹ) */
+.guide-fade { animation: guideFade .18s ease-out; }
+@keyframes guideFade { from { opacity: 0; transform: scale(.98) translateY(6px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+/* ===== Guide Dock (Mục lục hướng dẫn) ===== */
+.guide-dock {
+  position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
+  z-index: 40;
+}
+@media (max-width: 640px){
+  /* Tránh đè nút Zalo: đưa lên trên nút Zalo ~86px */
+  .guide-dock{ top: auto; bottom: 86px; transform: none; right: 12px; }
+}
+
+/* Nhỏ nhắn, đồng bộ theme */
+.guide-btn {
+  width: 44px; height: 44px;
+  border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface); color: #e5e7eb;
+  border: 1px solid var(--meds-border);
+  box-shadow: 0 10px 25px rgba(2,6,23,.35);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.guide-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(2,6,23,.5); background: rgba(255,255,255,.06); }
+.guide-btn:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(37,99,235,.25); }
+
+/* Modal animation (nhẹ) */
+.guide-fade { animation: guideFade .18s ease-out; }
+@keyframes guideFade { from { opacity: 0; transform: scale(.98) translateY(6px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+/* Khóa cuộn nền khi mở modal */
+body.modal-open { overflow: hidden; }
+
+/* Panel modal: giới hạn chiều cao theo viewport, cho layout cột */
+.guide-sheet{
+  max-height: calc(100vh - 4rem);
+  display: flex;            /* header + list (flex-col) */
+  flex-direction: column;
+  overflow: hidden;         /* phần list sẽ cuộn, panel không tràn */
+}
+@media (max-width: 640px){
+  .guide-sheet{ max-height: calc(100vh - 2rem); }
+}
+
+/* Vùng danh sách: cuộn dọc, mượt mobile */
+.guide-list{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain; /* chạm đáy không “bật” nền */
+}
+
+/* Chống tràn ngang bởi link dài */
+.guide-list a{ overflow-wrap: anywhere; }
+
+/* (Tuỳ chọn) Làm scrollbar gọn gàng */
+.guide-list::-webkit-scrollbar{ width: 10px; }
+.guide-list::-webkit-scrollbar-thumb{ background: rgba(148,163,184,.35); border-radius: 8px; }
+.guide-list::-webkit-scrollbar-track{ background: transparent; }
+
+  </style>
+</head>
+<body class="bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-800">
+  <article class="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+    <!-- Hero / Title -->
+    <header class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div class="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-indigo-100 blur-2xl"></div>
+      <div class="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-cyan-100 blur-2xl"></div>
+      <div class="relative p-8 sm:p-10">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-[13px] font-medium text-indigo-700">
+          <span>🚀</span>
+          <span>MEDS · Bắt đầu nhanh</span>
+        </div>
+        <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          Giới thiệu & Hướng dẫn nhanh <span class="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent">MEDS</span>
+        </h1>
+        <p class="mt-3 max-w-3xl text-slate-600">
+          <strong>Mở đầu:</strong> "Xin chào quý anh/chị đồng nghiệp. Mình là bác sĩ Thắng, người phát triển <b>MEDS</b> – công cụ chia giờ dịch vụ kỹ thuật tự động. Hôm nay, mình sẽ hướng dẫn anh/chị cách sử dụng MEDS một cách nhanh gọn."
+        </p>
+      </div>
+    </header>
+
+    <!-- What is MEDS / Login -->
+    <section class="mt-10 grid gap-6 lg:grid-cols-3">
+      <div class="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 class="mb-3 text-xl font-bold text-slate-900">MEDS là gì & Đăng nhập</h2>
+        <p class="text-slate-600">"<b>MEDS</b> hoạt động trên nền website. Mình sẽ gửi đường link đăng nhập cho anh/chị. <br/>Mật khẩu mặc định là <code class="rounded bg-slate-100 px-2 py-0.5">meds</code> (chữ thường). <b>Khuyến nghị:</b> sau khi đăng nhập, anh/chị nhớ đổi mật khẩu để bảo mật."</p>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a href="#" class="rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95">🔑 Đăng nhập</a>
+          <a href="#" class="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">🔒 Đổi mật khẩu</a>
+        </div>
+      </div>
+
+      <aside class="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-amber-900">
+        <h3 class="mb-2 text-base font-semibold">⚠️ Bảo mật</h3>
+        <p class="text-sm leading-6">Đổi mật khẩu ngay lần đăng nhập đầu tiên. Không chia sẻ tài khoản. Sử dụng mật khẩu tối thiểu 8 ký tự, gồm chữ hoa, chữ thường và số.</p>
+      </aside>
+    </section>
+
+    <!-- UI Overview -->
+    <section class="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h2 class="mb-3 text-xl font-bold text-slate-900">Tổng quan giao diện</h2>
+      <p class="text-slate-600">"Sau khi đăng nhập, anh/chị sẽ thấy các nút công cụ và biểu mẫu để quản lý bệnh nhân và dịch vụ kỹ thuật."</p>
+      <ul class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
+        <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2"><span>🧑‍⚕️</span>Quản lý bệnh nhân</li>
+        <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2"><span>🧩</span>Danh mục dịch vụ kỹ thuật</li>
+        <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2"><span>🗓️</span>Chia giờ & Lịch KETQUA</li>
+        <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2"><span>⚙️</span>Cấu hình hệ thống</li>
+        <li class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2"><span>📈</span>Tổng hợp & báo cáo</li>
+      </ul>
+    </section>
+
+    <!-- First-time Setup -->
+    <section class="mt-8 grid gap-6 lg:grid-cols-3">
+      <div class="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 class="mb-3 text-xl font-bold text-slate-900">Cấu hình lần đầu</h2>
+        <p class="text-slate-600">"Trước khi dùng, anh/chị vui lòng cấu hình <b>Thời gian – Nhân viên – Máy móc</b> theo đơn vị mình. Bấm <b>‘Cấu hình’</b> → bảng hiển thị các mục: <b>NHANVIEN</b>, <b>THOIGIAN</b>, <b>MAYMOC</b>, <b>CAUHINH</b>."</p>
+        <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4 text-sm">
+          <div class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">👥 NHANVIEN</div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">⏱️ THOIGIAN</div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">🖥️ MAYMOC</div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">⚙️ CAUHINH</div>
+        </div>
+      </div>
+      <aside class="rounded-2xl border border-indigo-200 bg-indigo-50 p-6 text-indigo-900">
+        <h3 class="mb-2 text-base font-semibold">🧭 Lộ trình 5 phút</h3>
+        <ol class="list-decimal pl-5 text-sm leading-6">
+          <li>Đăng nhập hệ thống</li>
+          <li>Cấu hình THOIGIAN</li>
+          <li>Thêm NHANVIEN</li>
+          <li>Khai báo MAYMOC</li>
+          <li>Mở KETQUA và bấm <b>Chia giờ</b></li>
+        </ol>
+      </aside>
+    </section>
+
+    <!-- CAUHINH -->
+    <section class="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h2 class="mb-3 text-xl font-bold text-slate-900">Thiết lập chung trong CAUHINH</h2>
+      <p class="text-slate-600">"Trong sheet <b>CAUHINH</b> có hai cột <b>KEY</b> và <b>VALUE</b>. Anh/chị chỉ chỉnh cột <b>VALUE</b>, <u>không sửa cột KEY</u>. Nếu đổi KEY, chương trình sẽ không chạy."</p>
+      <div class="mt-4 overflow-x-auto rounded-xl border border-slate-200">
+        <table class="min-w-full text-left text-sm">
+          <thead class="bg-slate-50 text-slate-600">
+            <tr>
+              <th class="px-4 py-2 font-semibold">KEY</th>
+              <th class="px-4 py-2 font-semibold">VALUE (ví dụ)</th>
+              <th class="px-4 py-2 font-semibold">Ghi chú</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr>
+              <td class="px-4 py-2">MORNING_START</td>
+              <td class="px-4 py-2">07:30</td>
+              <td class="px-4 py-2">Giờ bắt đầu buổi sáng</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2">MORNING_END</td>
+              <td class="px-4 py-2">11:30</td>
+              <td class="px-4 py-2">Giờ kết thúc buổi sáng</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2">AFTERNOON_START</td>
+              <td class="px-4 py-2">13:30</td>
+              <td class="px-4 py-2">Giờ bắt đầu buổi chiều</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2">AFTERNOON_END</td>
+              <td class="px-4 py-2">17:00</td>
+              <td class="px-4 py-2">Giờ kết thúc buổi chiều</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Quick Vars Guide -->
+    <section class="mt-8">
+      <h2 class="mb-4 text-xl font-bold text-slate-900">Giải thích nhanh các biến hay dùng</h2>
+      <div class="grid gap-6 md:grid-cols-2">
+        <!-- NV_HANDS_ON_MIN -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="mb-2 text-lg font-bold">NV_HANDS_ON_MIN</h3>
+          <p class="text-slate-600">Số phút nhân viên phải thao tác trực tiếp với máy trước khi chuyển sang ca/thiết bị khác.</p>
+          <ul class="mt-2 list-disc pl-5 text-sm text-slate-600">
+            <li>Mặc định: <b>1</b> phút (có thể chỉnh 2 hoặc 5 tuỳ quy trình).</li>
+            <li>Ví dụ: KTV A đặt máy Điện xung cho BN lúc <b>07:00</b> → nếu để <b>1</b> phút thì <b>07:01</b> mới tiếp tục đặt ca tiếp theo; nếu <b>2</b> phút là <b>07:02</b>; nếu <b>5</b> phút là <b>07:05</b>.</li>
+          </ul>
+        </div>
+        <!-- BN_GAP_MIN -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="mb-2 text-lg font-bold">BN_GAP_MIN</h3>
+          <p class="text-slate-600">Khoảng nghỉ tối thiểu của bệnh nhân giữa hai dịch vụ.</p>
+          <ul class="mt-2 list-disc pl-5 text-sm text-slate-600">
+            <li>Mặc định: <b>1</b> phút để tối ưu luồng.</li>
+            <li>Ví dụ: BN có Điện xung và Siêu âm → hai dịch vụ cách nhau tối thiểu <b>1</b> phút.</li>
+          </ul>
+        </div>
+        <!-- NV_BREAK_MIN -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="mb-2 text-lg font-bold">NV_BREAK_MIN</h3>
+          <p class="text-slate-600">Khoảng nghỉ tối thiểu của nhân viên giữa hai bệnh nhân.</p>
+          <ul class="mt-2 list-disc pl-5 text-sm text-slate-600">
+            <li>Mặc định: <b>1</b> phút.</li>
+            <li>Ví dụ: KTV A tập vận động BN1 xong → ít nhất <b>1</b> phút sau mới chuyển sang BN2.</li>
+          </ul>
+        </div>
+        <!-- MACHINE_BUFFER_MIN -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="mb-2 text-lg font-bold">MACHINE_BUFFER_MIN</h3>
+          <p class="text-slate-600">Khoảng nghỉ tối thiểu của máy giữa hai bệnh nhân, giúp máy không bị xếp dồn.</p>
+          <ul class="mt-2 list-disc pl-5 text-sm text-slate-600">
+            <li>Ví dụ: Máy Điện xung 1 chạy cho BN A xong → tối thiểu <b>1</b> phút sau mới đến BN B.</li>
+          </ul>
+        </div>
+        <!-- YL_GROUP_SPACING_MIN -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="mb-2 text-lg font-bold">YL_GROUP_SPACING_MIN</h3>
+          <p class="text-slate-600">Khoảng cách tối thiểu giữa hai nhóm y lệnh (ví dụ YHCT và PHCN) để tránh chồng chỉ định.</p>
+          <ul class="mt-2 list-disc pl-5 text-sm text-slate-600">
+            <li>Mặc định: <b>1</b> phút.</li>
+          </ul>
+        </div>
+        <!-- FULL_HANDS_ON_DV -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="mb-2 text-lg font-bold">FULL_HANDS_ON_DV</h3>
+          <p class="text-slate-600">Danh sách dịch vụ đòi hỏi nhân viên thao tác liên tục cùng máy.</p>
+          <ul class="mt-2 list-disc pl-5 text-sm text-slate-600">
+            <li>Mặc định gồm: <b>SA</b>, <b>LA</b> (Siêu âm, Laser). Có thể điều chỉnh theo thực tế.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="mt-4 text-sm text-slate-500">Các biến còn lại dùng để phân phối tải và cân bằng lịch — nếu chưa quen, anh/chị <b>chưa cần chỉnh</b>.</p>
+    </section>
+
+    <!-- Quick Checklist -->
+    <section class="mt-8 grid gap-6 md:grid-cols-2">
+      <div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-emerald-900">
+        <h3 class="mb-2 text-base font-semibold">✅ Checklist trước khi chạy</h3>
+        <ul class="list-disc pl-5 text-sm leading-6">
+          <li>Hoàn thiện <b>THOIGIAN</b> (mã DV, thời lượng, nhóm DV).</li>
+          <li>Nhập <b>NHANVIEN</b> (chuyên môn, buổi, khung giờ).</li>
+          <li>Khai báo <b>MAYMOC</b> (mã máy, dịch vụ, quản lý nếu cần).</li>
+          <li>Kiểm tra <b>CAUHINH</b> (không đổi KEY; chỉ sửa VALUE).</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="mb-2 text-base font-semibold">▶️ Chạy thử</h3>
+        <ol class="list-decimal pl-5 text-sm leading-6 text-slate-700">
+          <li>Mở trang <b>KETQUA</b>.</li>
+          <li>Bấm <b>Chia giờ</b>.</li>
+          <li>Kiểm tra xung đột (nếu có) và điều chỉnh.</li>
+          <li>Lưu & xuất/in lịch làm việc.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Footer note -->
+    <footer class="mt-10 rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-600">
+      <p><span class="font-semibold text-slate-900">Ghi nhớ:</span> Giữ đồng bộ <b>tên viết tắt dịch vụ</b> giữa các bảng, và <b>tên nhân viên</b> khớp 100% giữa <b>NHANVIEN</b> ↔ <b>MAYMOC</b> (cột QUANLY) để MEDS xếp đúng người – đúng máy – đúng ca.</p>
+    </footer>
+  </article>
+  <!-- ===== MỤC LỤC HƯỚNG DẪN (NÚT MỞ) ===== -->
+<div class="guide-dock">
+  <button id="openGuideBtn" class="guide-btn" aria-label="Mở mục lục hướng dẫn" title="Mục lục hướng dẫn">
+    <!-- Icon sách -->
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16.5A1.5 1.5 0 0 1 18.5 21H6.5A2.5 2.5 0 0 0 4 23V5.5Z" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M8 7h8M8 10h8M8 13h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+<!-- ===== MODAL MỤC LỤC ===== -->
+<div id="guideModal" class="hidden fixed inset-0 z-50">
+  <!-- overlay -->
+  <div id="guideOverlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+  <!-- sheet -->
+  <div class="absolute inset-x-0 top-10 mx-auto w-full max-w-2xl px-4">
+    <div class="glass guide-fade guide-sheet p-5 md:p-6">
+      <div class="mb-4 flex items-center justify-between gap-3">
+        <h2 class="text-lg font-bold text-slate-100">Mục lục hướng dẫn</h2>
+        <button id="closeGuideBtn" class="rounded-xl border border-[var(--meds-border)] bg-white/5 px-3 py-1.5 text-sm text-slate-200 hover:bg-white/10">
+          Đóng
+        </button>
+      </div>
+
+      <!-- danh sách -->
+      <div class="space-y-3 guide-list" id="guideList" role="list"></div>
+
+      <div class="mt-4 text-xs text-slate-400">
+        * Nút <span class="font-semibold">Video</span> chỉ hiện khi có liên kết video tương ứng.
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // ===== DỮ LIỆU HƯỚNG DẪN (GIỮ ĐÚNG THỨ TỰ BẠN ĐƯA) =====
+  // Mẹo: nếu url KHÔNG bắt đầu bằng http, mình tự động thêm domain /post/
+  const GUIDE_BASE = 'https://medstrial.toihocy.com/post/';
+  const guides = [
+    { title: 'Hướng dẫn cấu hình chung',            url: 'https://medstrial.toihocy.com/post/huong-dan-cau-hinh-chung.html', video: null },
+    { title: 'Hướng dẫn cấu thời gian',              url: 'huong-dan-cau-thoi-gian.html',            video: null },
+    { title: 'Hướng dẫn cấu hình nhân viên',        url: 'huong-dan-cau-hinh-nhan-vien.html',       video: null },
+    { title: 'Hướng dẫn cấu hình máy móc',          url: 'huong-dan-cau-hinh-may-moc.html',         video: null },
+    { title: 'Hướng dẫn cấu hình email',            url: 'huong-dan-cau-hinh-email.html',           video: null },
+    { title: 'Hướng dẫn cấu hình tài khoản',        url: 'huong-dan-cau-hinh-tai-khoan.html',       video: null },
+    { title: 'Hướng dẫn thêm bệnh nhân',            url: 'huong-dan-them-benh-nhan.html',           video: null },
+    { title: 'Hướng dẫn chia giờ hằng ngày',        url: 'huong-dan-chia-gio-hang-ngay.html',       video: null },
+    { title: 'Hướng dẫn xóa bệnh nhân',             url: 'huong-dan-xoa-benh-nhan.html',            video: null },
+    { title: 'Hướng dẫn sửa bệnh nhân',             url: 'huong-dan-sua-benh-nhan.html',            video: null }
+  ];
+
+  const absUrl = u => /^https?:\/\//i.test(u) ? u : (GUIDE_BASE + u.replace(/^\/+/, ''));
+
+  // ===== RENDER LIST =====
+  function renderGuideList() {
+    const wrap = document.getElementById('guideList');
+    wrap.innerHTML = '';
+    guides.forEach((g, idx) => {
+      const readHref = absUrl(g.url);
+      const hasVideo = !!g.video;
+      const videoHref = hasVideo ? g.video : '#';
+
+      const item = document.createElement('div');
+      item.setAttribute('role', 'listitem');
+      item.className = 'rounded-xl border border-[var(--meds-border)] bg-white/5 p-3 md:p-4';
+
+      item.innerHTML = `
+        <div class="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+          <div class="min-w-0">
+            <div class="text-sm text-slate-300"><span class="mr-2 inline-flex h-5 w-5 items-center justify-center rounded-lg border border-[var(--meds-border)] bg-white/5 text-[11px] font-semibold">#${String(idx+1).padStart(2,'0')}</span>${g.title}</div>
+            <a href="${readHref}" target="_blank" rel="noopener" class="block truncate text-xs text-blue-300 underline">${readHref}</a>
+          </div>
+          <div class="flex shrink-0 gap-2">
+            <a href="${readHref}" target="_blank" rel="noopener"
+               class="rounded-xl bg-[var(--meds-primary)] px-3 py-2 text-xs font-semibold text-white hover:bg-[var(--meds-dark)]">
+              Đọc bài
+            </a>
+            <a ${hasVideo ? `href="${videoHref}" target="_blank" rel="noopener"` : ''}
+               class="rounded-xl border border-[var(--meds-border)] bg-white/5 px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-white/10 ${hasVideo ? '' : 'pointer-events-none opacity-50'}">
+              Video
+            </a>
+          </div>
+        </div>
+      `;
+      wrap.appendChild(item);
+    });
+  }
+
+  // ===== OPEN/CLOSE MODAL =====
+  const guideModal   = document.getElementById('guideModal');
+  const openGuideBtn = document.getElementById('openGuideBtn');
+  const closeGuideBtn= document.getElementById('closeGuideBtn');
+  const guideOverlay = document.getElementById('guideOverlay');
+  let lastActive = null;
+
+  function openGuide() {
+    lastActive = document.activeElement;
+    renderGuideList();
+    guideModal.classList.remove('hidden');
+    document.body.classList.add('modal-open')
+    closeGuideBtn.focus();
+  }
+  function closeGuide() {
+    guideModal.classList.add('hidden');
+     document.body.classList.remove('modal-open');
+    if (lastActive && typeof lastActive.focus === 'function') lastActive.focus();
+  }
+
+  openGuideBtn.addEventListener('click', openGuide);
+  closeGuideBtn.addEventListener('click', closeGuide);
+  guideOverlay.addEventListener('click', closeGuide);
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && !guideModal.classList.contains('hidden')) closeGuide(); });
+</script>
+
+</body>
+</html>
