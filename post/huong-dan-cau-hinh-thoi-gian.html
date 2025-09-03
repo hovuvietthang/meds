@@ -36,6 +36,34 @@
 /* Modal animation (nhẹ) */
 .guide-fade { animation: guideFade .18s ease-out; }
 @keyframes guideFade { from { opacity: 0; transform: scale(.98) translateY(6px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+/* Khóa cuộn nền khi mở modal */
+body.modal-open { overflow: hidden; }
+
+/* Panel modal: giới hạn chiều cao theo viewport, cho layout cột */
+.guide-sheet{
+  max-height: calc(100vh - 4rem);
+  display: flex;            /* header + list (flex-col) */
+  flex-direction: column;
+  overflow: hidden;         /* phần list sẽ cuộn, panel không tràn */
+}
+@media (max-width: 640px){
+  .guide-sheet{ max-height: calc(100vh - 2rem); }
+}
+
+/* Vùng danh sách: cuộn dọc, mượt mobile */
+.guide-list{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain; /* chạm đáy không “bật” nền */
+}
+
+/* Chống tràn ngang bởi link dài */
+.guide-list a{ overflow-wrap: anywhere; }
+
+/* (Tuỳ chọn) Làm scrollbar gọn gàng */
+.guide-list::-webkit-scrollbar{ width: 10px; }
+.guide-list::-webkit-scrollbar-thumb{ background: rgba(148,163,184,.35); border-radius: 8px; }
+.guide-list::-webkit-scrollbar-track{ background: transparent; }
 
   </style>
 </head>
@@ -201,14 +229,13 @@
       <p><span class="font-semibold text-slate-900">Chốt – 3 nguyên tắc:</span> (1) Viết tắt <b>DICHVU</b> phải nhất quán giữa các sheet. (2) <b>THOILUONG</b> đúng quy định <b>BHXH</b>. (3) <b>DUNGMAY</b> điền đúng <code>TRUE</code>/<code>FALSE</code> để MEDS giữ tay nhân viên theo <b>NV_HANDS_ON_MIN</b> và tránh trùng máy.</p>
     </footer>
   </article>
-  
 <!-- ===== MODAL MỤC LỤC ===== -->
 <div id="guideModal" class="hidden fixed inset-0 z-50">
   <!-- overlay -->
   <div id="guideOverlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
   <!-- sheet -->
   <div class="absolute inset-x-0 top-10 mx-auto w-full max-w-2xl px-4">
-    <div class="glass guide-fade p-5 md:p-6">
+    <div class="glass guide-fade guide-sheet p-5 md:p-6">
       <div class="mb-4 flex items-center justify-between gap-3">
         <h2 class="text-lg font-bold text-slate-100">Mục lục hướng dẫn</h2>
         <button id="closeGuideBtn" class="rounded-xl border border-[var(--meds-border)] bg-white/5 px-3 py-1.5 text-sm text-slate-200 hover:bg-white/10">
@@ -217,7 +244,7 @@
       </div>
 
       <!-- danh sách -->
-      <div class="space-y-3" id="guideList" role="list"></div>
+      <div class="space-y-3 guide-list" id="guideList" role="list"></div>
 
       <div class="mt-4 text-xs text-slate-400">
         * Nút <span class="font-semibold">Video</span> chỉ hiện khi có liên kết video tương ứng.
@@ -290,10 +317,12 @@
     lastActive = document.activeElement;
     renderGuideList();
     guideModal.classList.remove('hidden');
+    document.body.classList.add('modal-open')
     closeGuideBtn.focus();
   }
   function closeGuide() {
     guideModal.classList.add('hidden');
+     document.body.classList.remove('modal-open');
     if (lastActive && typeof lastActive.focus === 'function') lastActive.focus();
   }
 
@@ -302,6 +331,5 @@
   guideOverlay.addEventListener('click', closeGuide);
   document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && !guideModal.classList.contains('hidden')) closeGuide(); });
 </script>
-
 </body>
 </html>
