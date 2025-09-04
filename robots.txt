@@ -1,0 +1,46 @@
+# robots.txt cho MEDS+ (SEO hiện đại)
+# Cập nhật: 2025-09-04 — thay domain bên dưới nếu khác
+
+# Mặc định cho mọi bot
+User-agent: *
+
+# Cho phép thu thập toàn site (trừ các mục bị chặn rõ bên dưới)
+Allow: /
+
+# Đảm bảo Google có thể tải tài nguyên cần cho render
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.webp$
+Allow: /*.avif$
+Allow: /*.svg$
+
+# Chặn crawl các URL tham số gây trùng lặp (vẫn có thể index qua canonical)
+Disallow: /*?*utm_*
+Disallow: /*?*gclid=*
+Disallow: /*?*fbclid=*
+Disallow: /*?*ref=*
+Disallow: /*?*replytocom=*
+Disallow: /*?*sort=*
+
+# Chặn các vùng nội bộ/nháp (nếu có). Xóa dòng nếu không dùng.
+Disallow: /admin/
+Disallow: /private/
+Disallow: /draft/
+Disallow: /tmp/
+Disallow: /api/private/
+
+# (Tùy chọn) Giảm tải cho một số bot “mạnh tay” — Google bỏ qua Crawl-delay
+User-agent: AhrefsBot
+Crawl-delay: 5
+
+User-agent: SemrushBot
+Crawl-delay: 5
+
+User-agent: MJ12bot
+Crawl-delay: 5
+
+# Vị trí sitemap (khai báo nhiều file nếu có)
+Sitemap: https://medstrial.toihocy.com/sitemap.xml
