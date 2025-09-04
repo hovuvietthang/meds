@@ -1,68 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- sitemap.xml (INDEX) — đặt ở https://medstrial.toihocy.com/sitemap.xml -->
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap>
-    <loc>https://medstrial.toihocy.com/sitemap-pages.xml</loc>
-    <lastmod>2025-09-04T00:00:00+07:00</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://medstrial.toihocy.com/sitemap-guides.xml</loc>
-    <lastmod>2025-09-04T00:00:00+07:00</lastmod>
-  </sitemap>
-</sitemapindex>
-
-<!-- ========================= -->
-<!-- LƯU THÀNH FILE RIÊNG: /sitemap-pages.xml -->
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://medstrial.toihocy.com/</loc>
     <lastmod>2025-09-04T00:00:00+07:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi-VN" href="https://medstrial.toihocy.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://medstrial.toihocy.com/"/>
+    <image:image>
+      <image:loc>https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi83GQbdQ8_DLOjQp0CibSWrozQDt2_tLB5oTrKUb_fM20ksyH0HAbeQ6FTP2ZcUjT8p48Ra7XHP4_P6j3KL_JAHUlEVjLlVszOK5uG0-9hC3unw1ppK3QPjT7R5yLL4JK38mCFf34tMRA4j9R2vRkk58EqaSt2pE8yfZkjjWyQnkWOJT4UDXwFd89QE5DY/s16000/chia-gio-y-hoc-co-truyen-phuc-hoi-chuc-nang%20(6).png</image:loc>
+      <image:title>MEDS — Medical Schedule</image:title>
+    </image:image>
   </url>
-</urlset>
-
-<!-- ========================= -->
-<!-- LƯU THÀNH FILE RIÊNG: /sitemap-guides.xml -->
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://medstrial.toihocy.com/post/huong-dan-cau-hinh-chung.html</loc>
     <lastmod>2025-09-04T00:00:00+07:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi-VN" href="https://medstrial.toihocy.com/post/huong-dan-cau-hinh-chung.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://medstrial.toihocy.com/post/huong-dan-cau-hinh-chung.html"/>
   </url>
   <url>
     <loc>https://medstrial.toihocy.com/post/huong-dan-cau-thoi-gian.html</loc>
     <lastmod>2025-09-04T00:00:00+07:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi-VN" href="https://medstrial.toihocy.com/post/huong-dan-cau-hinh-thoi-gian.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://medstrial.toihocy.com/post/huong-dan-cau-hinh-thoi-gian.html"/>
   </url>
   <url>
     <loc>https://medstrial.toihocy.com/post/huong-dan-cau-hinh-nhan-vien.html</loc>
     <lastmod>2025-09-04T00:00:00+07:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi-VN" href="https://medstrial.toihocy.com/post/huong-dan-cau-hinh-nhan-vien.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://medstrial.toihocy.com/post/huong-dan-cau-hinh-nhan-vien.html"/>
   </url>
   <url>
     <loc>https://medstrial.toihocy.com/post/huong-dan-cau-hinh-may-moc.html</loc>
     <lastmod>2025-09-04T00:00:00+07:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi-VN" href="https://medstrial.toihocy.com/post/huong-dan-cau-hinh-may-moc.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://medstrial.toihocy.com/post/huong-dan-cau-hinh-may-moc.html"/>
   </url>
   <url>
     <loc>https://medstrial.toihocy.com/post/huong-dan-cau-hinh-email.html</loc>
     <lastmod>2025-09-04T00:00:00+07:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi-VN" href="https://medstrial.toihocy.com/post/huong-dan-cau-hinh-email.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://medstrial.toihocy.com/post/huong-dan-cau-hinh-email.html"/>
   </url>
   <url>
     <loc>https://medstrial.toihocy.com/post/huong-dan-cau-hinh-tai-khoan.html</loc>
     <lastmod>2025-09-04T00:00:00+07:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi-VN" href="https://medstrial.toihocy.com/post/huong-dan-cau-hinh-tai-khoan.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://medstrial.toihocy.com/post/huong-dan-cau-hinh-tai-khoan.html"/>
   </url>
   <url>
     <loc>https://medstrial.toihocy.com/post/huong-dan-them-benh-nhan.html</loc>
     <lastmod>2025-09-04T00:00:00+07:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi-VN" href="https://medstrial.toihocy.com/post/huong-dan-them-benh-nhan.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://medstrial.toihocy.com/post/huong-dan-them-benh-nhan.html"/>
   </url>
   <url>
     <loc>https://medstrial.toihocy.com/post/huong-dan-chia-gio-hang-ngay.html</loc>
     <lastmod>2025-09-04T00:00:00+07:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi-VN" href="https://medstrial.toihocy.com/post/huong-dan-chia-gio-hang-ngay.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://medstrial.toihocy.com/post/huong-dan-chia-gio-hang-ngay.html"/>
   </url>
   <url>
     <loc>https://medstrial.toihocy.com/post/huong-dan-xoa-benh-nhan.html</loc>
     <lastmod>2025-09-04T00:00:00+07:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi-VN" href="https://medstrial.toihocy.com/post/huong-dan-xoa-benh-nhan.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://medstrial.toihocy.com/post/huong-dan-xoa-benh-nhan.html"/>
   </url>
   <url>
     <loc>https://medstrial.toihocy.com/post/huong-dan-sua-benh-nhan.html</loc>
     <lastmod>2025-09-04T00:00:00+07:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi-VN" href="https://medstrial.toihocy.com/post/huong-dan-sua-benh-nhan.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://medstrial.toihocy.com/post/huong-dan-sua-benh-nhan.html"/>
   </url>
 </urlset>
