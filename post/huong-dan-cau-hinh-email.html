@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MEDS • Cấu hình EMAIL nhận KETQUA (gửi Excel tự động)</title>
+  <meta name="description" content="Hướng dẫn cấu hình sheet EMAIL trong MEDS để nhận file Excel KETQUA qua email: cách thêm địa chỉ, lưu dữ liệu, gửi thử, mẹo tránh lỗi và FAQ." />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="MEDS • Cấu hình EMAIL nhận KETQUA" />
+  <meta property="og:description" content="Thêm địa chỉ email, lưu dữ liệu, bấm 'Gửi EMAIL' để nhận file Excel KETQUA. Hướng dẫn chi tiết + mẹo tránh lỗi." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="vi_VN" />
+  <link rel="canonical" href="#" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{ --meds-primary:#2563eb; --meds-accent:#06b6d4; --meds-ink:#0f172a; }
+    /* ===== Guide Dock (Mục lục hướng dẫn) ===== */
+    .guide-dock { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); z-index: 40; }
+    @media (max-width: 640px){ .guide-dock{ top: auto; bottom: 86px; transform: none; right: 12px; }}
+    .guide-btn { width: 44px; height: 44px; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center; background: var(--surface); color: #e5e7eb; border: 1px solid var(--meds-border); box-shadow: 0 10px 25px rgba(2,6,23,.35); transition: transform .15s ease, box-shadow .15s ease, background .15s ease; }
+    .guide-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(2,6,23,.5); background: rgba(255,255,255,.06); }
+    .guide-btn:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(37,99,235,.25); }
+    .guide-fade { animation: guideFade .18s ease-out; }
+    @keyframes guideFade { from { opacity: 0; transform: scale(.98) translateY(6px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    body.modal-open { overflow: hidden; }
+    .guide-sheet{ max-height: calc(100vh - 4rem); display: flex; flex-direction: column; overflow: hidden; }
+    @media (max-width: 640px){ .guide-sheet{ max-height: calc(100vh - 2rem); }}
+    .guide-list{ overflow: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+    .guide-list a{ overflow-wrap: anywhere; }
+    .guide-list::-webkit-scrollbar{ width: 10px; }
+    .guide-list::-webkit-scrollbar-thumb{ background: rgba(148,163,184,.35); border-radius: 8px; }
+    .guide-list::-webkit-scrollbar-track{ background: transparent; }
+  </style>
+  <!-- FAQ Schema for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Không thấy email KETQUA thì làm gì?",
+        "acceptedAnswer": {"@type": "Answer","text": "Kiểm tra thư mục Spam/Quảng cáo. Nếu đơn vị có bộ lọc, hãy whitelist địa chỉ người gửi. Đảm bảo email trong sheet viết đúng chính tả và đã bấm Lưu trước khi gửi."}
+      },
+      {
+        "@type": "Question",
+        "name": "Có thể nhập nhiều email trong một ô không?",
+        "acceptedAnswer": {"@type": "Answer","text": "Không. Mỗi dòng chỉ chứa 1 email. Không ghép nhiều địa chỉ trong cùng một ô."}
+      },
+      {
+        "@type": "Question",
+        "name": "MEDS gửi định dạng gì?",
+        "acceptedAnswer": {"@type": "Answer","text": "Hệ thống tạo file Excel KETQUA và gửi đến các địa chỉ có trong sheet EMAIL."}
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-800">
+  <article class="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+    <!-- Hero / Title -->
+    <header class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div class="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-indigo-100 blur-2xl"></div>
+      <div class="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-cyan-100 blur-2xl"></div>
+      <div class="relative p-8 sm:p-10">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-[13px] font-medium text-indigo-700">
+          <span>✉️</span>
+          <span>MEDS · Cấu hình cơ bản</span>
+        </div>
+        <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          Cấu hình <span class="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent">EMAIL</span> nhận file KETQUA
+        </h1>
+        <p class="mt-3 max-w-3xl text-slate-600"><strong>Mục tiêu:</strong> Tiếp theo là phần <b>EMAIL</b> – nơi khai báo địa chỉ nhận file kết quả <b>KETQUA</b> sau khi chia giờ.</p>
+      </div>
+    </header>
+
+    <!-- Structure / How-to -->
+      <!-- Example Table -->
+    <section class="mt-10">
+      <h2 class="mb-3 text-xl font-bold text-slate-900">Ví dụ minh hoạ (thêm 2 email)</h2>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <table class="min-w-full text-left text-sm">
+          <thead class="bg-slate-50 text-slate-600">
+            <tr>
+              <th class="px-4 py-3 font-semibold">EMAIL</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3">khoa.phcn@gmail.com</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-3">truongkhoa@gmail.com</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mt-10 grid gap-6 lg:grid-cols-3">
+      <div class="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 class="mb-3 text-xl font-bold text-slate-900">Thao tác & cấu trúc sheet</h2>
+        <p class="text-slate-600">Anh/chị mở sheet <b>EMAIL</b>. Trong sheet có <b>1 cột</b>: <code class="rounded bg-slate-100 px-2 py-0.5">EMAIL</code>.</p>
+        <ol class="mt-3 list-decimal pl-5 text-slate-700">
+          <li>Nhấn <b>“Thêm dòng”</b>.</li>
+          <li>Nhập địa chỉ email, <b>mỗi email một dòng</b>.</li>
+          <li>Nhấn <b>Lưu</b> để ghi dữ liệu.</li>
+        </ol>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <button class="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">+ Thêm dòng</button>
+          <button class="rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95">💾 Lưu</button>
+          <button class="rounded-xl border border-emerald-300 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-800 shadow-sm hover:bg-emerald-500/20">📤 Gửi EMAIL</button>
+        </div>
+      </div>
+
+      <aside class="rounded-2xl border border-indigo-200 bg-indigo-50 p-6 text-indigo-900">
+        <h3 class="mb-2 text-base font-semibold">🎯 Lợi ích</h3>
+        <ul class="list-disc pl-5 text-sm leading-6">
+          <li>Nhận <b>Excel KETQUA</b> tự động, sẵn sàng in/tra cứu.</li>
+          <li>Chia sẻ nhanh cho lãnh đạo/khoa phòng.</li>
+          <li>Lưu vết lịch sử gửi theo hộp thư.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- Send result -->
+    <section class="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h2 class="mb-3 text-xl font-bold text-slate-900">Gửi kết quả qua email</h2>
+      <p class="text-slate-600">Khi đã cấu hình xong, bấm nút <b>“Gửi EMAIL”</b>. Hệ thống sẽ tạo <b>file Excel KETQUA</b> và gửi về <b>tất cả địa chỉ</b> trong sheet <b>EMAIL</b>.</p>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <button class="rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95">📤 Gửi EMAIL</button>
+        <button class="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">🧪 Gửi thử 1 email</button>
+      </div>
+    </section>
+
+    <!-- Tips & Notes -->
+    <section class="mt-8 grid gap-6 md:grid-cols-2">
+      <div class="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-amber-900">
+        <h3 class="mb-2 text-base font-semibold">💡 Gợi ý & lưu ý nhanh</h3>
+        <ul class="list-disc pl-5 text-sm leading-6">
+          <li>Kiểm tra <b>đúng chính tả</b> email; sai 1 ký tự là <b>không nhận được</b>.</li>
+          <li>Nếu <b>không thấy mail</b>, kiểm tra <b>Spam/Quảng cáo</b>.</li>
+          <li>Nên dùng <b>email cơ quan</b> để dễ tra cứu và đồng bộ quy trình.</li>
+          <li><b>Mỗi dòng 1 email</b>; không ghép nhiều địa chỉ trong cùng một ô.</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border border-rose-200 bg-rose-50 p-6 text-rose-900">
+        <h3 class="mb-2 text-base font-semibold">🚫 Lỗi hay gặp & cách tránh</h3>
+        <ul class="list-disc pl-5 text-sm leading-6">
+          <li>Nhập <b>nhiều email/ô</b> → <span class="font-medium">Sửa:</span> tách ra <b>mỗi dòng 1 email</b>.</li>
+          <li><b>Quên Lưu</b> trước khi gửi → <span class="font-medium">Sửa:</span> bấm <b>💾 Lưu</b> rồi mới <b>📤 Gửi EMAIL</b>.</li>
+          <li>Thừa <b>khoảng trắng</b> (" abc@xyz.com ") → <span class="font-medium">Sửa:</span> xoá khoảng trắng trước/sau địa chỉ.</li>
+          <li>Đơn vị có <b>bộ lọc</b> → <span class="font-medium">Sửa:</span> whitelist địa chỉ người gửi để tránh rơi vào spam.</li>
+        </ul>
+      </div>
+    </section>
+    <!-- Demo CTA -->
+    <section class="mt-8 rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-emerald-900">
+      <h3 class="mb-2 text-base font-semibold">🧪 Kết đoạn – thao tác mẫu</h3>
+      <ol class="list-decimal pl-5 text-sm leading-6">
+        <li>Thêm <b>2 địa chỉ email</b> mẫu như bảng trên.</li>
+        <li>Bấm <b>💾 Lưu</b>.</li>
+        <li>Bấm <b>📤 Gửi EMAIL</b> và kiểm tra hộp thư đến.</li>
+      </ol>
+      <p class="mt-3 text-sm">Mẹo quay màn hình: vừa đọc vừa thêm 1–2 email thật (có thể ẩn bớt ký tự), sau khi bấm <b>Gửi EMAIL</b> chèn khung nhỏ quay hộp thư đến để minh họa mail đã đến.</p>
+    </section>
+
+    <!-- Footer note -->
+    <footer class="mt-10 rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-600">
+      <p><span class="font-semibold text-slate-900">Tóm tắt:</span> Thêm email → <b>Lưu</b> → <b>Gửi EMAIL</b>. Kiểm tra <b>Spam/Quảng cáo</b> nếu chưa thấy thư. Duy trì mỗi dòng 1 địa chỉ để MEDS gửi KETQUA chính xác.</p>
+    </footer>
+  </article>
+    <!-- ===== MỤC LỤC HƯỚNG DẪN (NÚT MỞ) ===== -->
+<div class="guide-dock">
+  <button id="openGuideBtn" class="guide-btn" aria-label="Mở mục lục hướng dẫn" title="Mục lục hướng dẫn">
+    <!-- Icon sách -->
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16.5A1.5 1.5 0 0 1 18.5 21H6.5A2.5 2.5 0 0 0 4 23V5.5Z" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M8 7h8M8 10h8M8 13h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+<!-- ===== MODAL MỤC LỤC ===== -->
+<div id="guideModal" class="hidden fixed inset-0 z-50">
+  <!-- overlay -->
+  <div id="guideOverlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+  <!-- sheet -->
+  <div class="absolute inset-x-0 top-10 mx-auto w-full max-w-2xl px-4">
+    <div class="glass guide-fade guide-sheet p-5 md:p-6">
+      <div class="mb-4 flex items-center justify-between gap-3">
+        <h2 class="text-lg font-bold text-slate-100">Mục lục hướng dẫn</h2>
+        <button id="closeGuideBtn" class="rounded-xl border border-[var(--meds-border)] bg-white/5 px-3 py-1.5 text-sm text-slate-200 hover:bg-white/10">
+          Đóng
+        </button>
+      </div>
+
+      <!-- danh sách -->
+      <div class="space-y-3 guide-list" id="guideList" role="list"></div>
+
+      <div class="mt-4 text-xs text-slate-400">
+        * Nút <span class="font-semibold">Video</span> chỉ hiện khi có liên kết video tương ứng.
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // ===== DỮ LIỆU HƯỚNG DẪN (GIỮ ĐÚNG THỨ TỰ BẠN ĐƯA) =====
+  // Mẹo: nếu url KHÔNG bắt đầu bằng http, mình tự động thêm domain /post/
+  const GUIDE_BASE = 'https://medstrial.toihocy.com/post/';
+  const guides = [
+    { title: 'Hướng dẫn cấu hình chung',            url: 'https://medstrial.toihocy.com/post/huong-dan-cau-hinh-chung.html', video: null },
+    { title: 'Hướng dẫn cấu hình thời gian',              url: 'huong-dan-cau-hinh-thoi-gian.html',            video: null },
+    { title: 'Hướng dẫn cấu hình nhân viên',        url: 'huong-dan-cau-hinh-nhan-vien.html',       video: null },
+    { title: 'Hướng dẫn cấu hình máy móc',          url: 'huong-dan-cau-hinh-may-moc.html',         video: null },
+    { title: 'Hướng dẫn cấu hình email',            url: 'huong-dan-cau-hinh-email.html',           video: null },
+    { title: 'Hướng dẫn cấu hình tài khoản',        url: 'huong-dan-cau-hinh-tai-khoan.html',       video: null },
+    { title: 'Hướng dẫn thêm bệnh nhân',            url: 'huong-dan-them-benh-nhan.html',           video: null },
+    { title: 'Hướng dẫn chia giờ hằng ngày',        url: 'huong-dan-chia-gio-hang-ngay.html',       video: null },
+    { title: 'Hướng dẫn xóa bệnh nhân',             url: 'huong-dan-xoa-benh-nhan.html',            video: null },
+    { title: 'Hướng dẫn sửa bệnh nhân',             url: 'huong-dan-sua-benh-nhan.html',            video: null }
+  ];
+
+  const absUrl = u => /^https?:\/\//i.test(u) ? u : (GUIDE_BASE + u.replace(/^\/+/, ''));
+
+  // ===== RENDER LIST =====
+  function renderGuideList() {
+    const wrap = document.getElementById('guideList');
+    wrap.innerHTML = '';
+    guides.forEach((g, idx) => {
+      const readHref = absUrl(g.url);
+      const hasVideo = !!g.video;
+      const videoHref = hasVideo ? g.video : '#';
+
+      const item = document.createElement('div');
+      item.setAttribute('role', 'listitem');
+      item.className = 'rounded-xl border border-[var(--meds-border)] bg-white/5 p-3 md:p-4';
+
+      item.innerHTML = `
+        <div class="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+          <div class="min-w-0">
+            <div class="text-sm text-slate-300"><span class="mr-2 inline-flex h-5 w-5 items-center justify-center rounded-lg border border-[var(--meds-border)] bg-white/5 text-[11px] font-semibold">#${String(idx+1).padStart(2,'0')}</span>${g.title}</div>
+            <a href="${readHref}" target="_blank" rel="noopener" class="block truncate text-xs text-blue-300 underline">${readHref}</a>
+          </div>
+          <div class="flex shrink-0 gap-2">
+            <a href="${readHref}" target="_blank" rel="noopener"
+               class="rounded-xl bg-[var(--meds-primary)] px-3 py-2 text-xs font-semibold text-white hover:bg-[var(--meds-dark)]">
+              Đọc bài
+            </a>
+            <a ${hasVideo ? `href="${videoHref}" target="_blank" rel="noopener"` : ''}
+               class="rounded-xl border border-[var(--meds-border)] bg-white/5 px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-white/10 ${hasVideo ? '' : 'pointer-events-none opacity-50'}">
+              Video
+            </a>
+          </div>
+        </div>
+      `;
+      wrap.appendChild(item);
+    });
+  }
+
+  // ===== OPEN/CLOSE MODAL =====
+  const guideModal   = document.getElementById('guideModal');
+  const openGuideBtn = document.getElementById('openGuideBtn');
+  const closeGuideBtn= document.getElementById('closeGuideBtn');
+  const guideOverlay = document.getElementById('guideOverlay');
+  let lastActive = null;
+
+  function openGuide() {
+    lastActive = document.activeElement;
+    renderGuideList();
+    guideModal.classList.remove('hidden');
+    document.body.classList.add('modal-open')
+    closeGuideBtn.focus();
+  }
+  function closeGuide() {
+    guideModal.classList.add('hidden');
+     document.body.classList.remove('modal-open');
+    if (lastActive && typeof lastActive.focus === 'function') lastActive.focus();
+  }
+
+  openGuideBtn.addEventListener('click', openGuide);
+  closeGuideBtn.addEventListener('click', closeGuide);
+  guideOverlay.addEventListener('click', closeGuide);
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && !guideModal.classList.contains('hidden')) closeGuide(); });
+</script>
+</body>
+</html>
