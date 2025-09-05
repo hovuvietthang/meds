@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hướng dẫn MEDS • Trang tổng hợp | Cấu hình & Sử dụng nhanh</title>
+  <meta name="description" content="Trang tổng hợp hướng dẫn MEDS: Giới thiệu nhanh, cấu hình THOIGIAN, NHANVIEN, MAYMOC, thêm bệnh nhân mới, cấu hình EMAIL và quy trình gửi Excel KETQUA." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#2563eb"/>
+  <link rel="canonical" href="/huong-dan.html" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Hướng dẫn MEDS • Trang tổng hợp" />
+  <meta property="og:description" content="Giới thiệu nhanh • THOIGIAN • NHANVIEN • MAYMOC • Thêm bệnh nhân • EMAIL • Gửi Excel KETQUA" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="vi_VN" />
+  <meta property="og:site_name" content="MEDS" />
+  <meta property="og:url" content="/huong-dan.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hướng dẫn MEDS • Trang tổng hợp" />
+  <meta name="twitter:description" content="Giới thiệu nhanh • THOIGIAN • NHANVIEN • MAYMOC • Thêm bệnh nhân • EMAIL • Gửi Excel KETQUA" />
+
+  <!-- Structured Data: CollectionPage + Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Hướng dẫn MEDS",
+    "url": "/huong-dan.html",
+    "hasPart": [
+      {"@type":"WebPage","name":"Giới thiệu & Hướng dẫn nhanh","url":"gioi-thieu.html"},
+      {"@type":"WebPage","name":"Cấu hình THOIGIAN","url":"thoigian.html"},
+      {"@type":"WebPage","name":"Cấu hình NHANVIEN","url":"nhanvien.html"},
+      {"@type":"WebPage","name":"Cấu hình MAYMOC","url":"maymoc.html"},
+      {"@type":"WebPage","name":"Thêm bệnh nhân mới","url":"them-benh-nhan.html"},
+      {"@type":"WebPage","name":"Cấu hình EMAIL nhận KETQUA","url":"email.html"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"Trang chủ","item":"/"},
+      {"@type":"ListItem","position":2,"name":"Hướng dẫn MEDS","item":"/huong-dan.html"}
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{ --meds-primary:#2563eb; --meds-accent:#06b6d4; --meds-ink:#0f172a; }
+    html{ scroll-behavior:smooth; }
+    .active-link{ color:#1e40af; font-weight:700; }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-800">
+  <article class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+    <!-- Hero -->
+    <header class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div class="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-indigo-100 blur-2xl"></div>
+      <div class="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-cyan-100 blur-2xl"></div>
+      <div class="relative p-8 sm:p-10">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-[13px] font-medium text-indigo-700">
+          <span>📚</span>
+          <span>MEDS · Trang tổng hợp hướng dẫn</span>
+        </div>
+        <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          Hướng dẫn <span class="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent">MEDS</span> — Cấu hình & Sử dụng
+        </h1>
+        <p class="mt-3 max-w-3xl text-slate-600">Tổng hợp các bài hướng dẫn: Giới thiệu nhanh, cấu hình <b>THOIGIAN</b>, <b>NHANVIEN</b>, <b>MAYMOC</b>, thêm <b>bệnh nhân</b>, cấu hình <b>EMAIL</b> và quy trình gửi <b>Excel KETQUA</b>.</p>
+        <p class="mt-2 text-sm text-slate-500">Cập nhật: 05/09/2025 · Múi giờ: Asia/Ho_Chi_Minh</p>
+      </div>
+    </header>
+
+    <!-- Search & Quick actions -->
+    <section class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div class="relative w-full sm:max-w-md">
+        <input id="searchBox" type="text" placeholder="Tìm trong hướng dẫn (ví dụ: NHANVIEN, EMAIL, DX, SA)" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 pr-10 text-sm shadow-sm focus:border-indigo-500 focus:outline-none"/>
+        <span class="pointer-events-none absolute right-3 top-2.5 text-slate-400">🔎</span>
+      </div>
+      <div class="flex flex-wrap gap-2 text-sm">
+        <a href="#toc" class="rounded-lg border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-700 shadow-sm hover:bg-slate-50">📑 Mục lục</a>
+        <a href="#faq" class="rounded-lg border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-700 shadow-sm hover:bg-slate-50">❓ FAQ</a>
+      </div>
+    </section>
+
+    <!-- TOC + Cards -->
+    <section id="toc" class="mt-8 grid gap-6 lg:grid-cols-3">
+      <!-- TOC -->
+      <nav class="lg:col-span-1 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 class="mb-3 text-base font-semibold text-slate-900">Mục lục</h2>
+        <ol class="space-y-2 text-sm leading-6">
+          <li><a href="#intro" class="toc-link block hover:text-indigo-700">1. Giới thiệu & Bắt đầu nhanh</a></li>
+          <li><a href="#thoigian" class="toc-link block hover:text-indigo-700">2. Cấu hình THOIGIAN</a></li>
+          <li><a href="#nhanvien" class="toc-link block hover:text-indigo-700">3. Cấu hình NHANVIEN</a></li>
+          <li><a href="#maymoc" class="toc-link block hover:text-indigo-700">4. Cấu hình MAYMOC</a></li>
+          <li><a href="#patients" class="toc-link block hover:text-indigo-700">5. Thêm bệnh nhân mới</a></li>
+          <li><a href="#email" class="toc-link block hover:text-indigo-700">6. Cấu hình EMAIL nhận KETQUA</a></li>
+          <li><a href="#run" class="toc-link block hover:text-indigo-700">7. Chạy chia giờ & nhận Excel</a></li>
+          <li><a href="#faq" class="toc-link block hover:text-indigo-700">8. FAQ & Lỗi thường gặp</a></li>
+        </ol>
+      </nav>
+
+      <!-- Cards Grid -->
+      <div class="lg:col-span-2 grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <!-- Card: Intro -->
+        <a href="#intro" data-keywords="gioi thieu bat dau nhanh" class="guide-card rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow">
+          <div class="mb-2 text-sm font-semibold text-indigo-700">🚀 Giới thiệu</div>
+          <h3 class="text-lg font-bold text-slate-900">Giới thiệu & Bắt đầu nhanh</h3>
+          <p class="mt-1 text-sm text-slate-600">Đăng nhập, tổng quan giao diện, lộ trình 5 phút để chạy thử.</p>
+          <div class="mt-3 text-sm font-semibold text-indigo-600">Xem chi tiết →</div>
+        </a>
+        <!-- Card: THOIGIAN -->
+        <a href="#thoigian" data-keywords="thoigian dichvu thoiluong dungmay nhomdichvu" class="guide-card rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow">
+          <div class="mb-2 text-sm font-semibold text-indigo-700">⏱️ Cấu hình</div>
+          <h3 class="text-lg font-bold text-slate-900">Cấu hình THOIGIAN</h3>
+          <p class="mt-1 text-sm text-slate-600">Khai báo mã DV, thời lượng (phút), dùng máy (TRUE/FALSE), nhóm DV.</p>
+          <div class="mt-3 text-sm font-semibold text-indigo-600">Xem chi tiết →</div>
+        </a>
+        <!-- Card: NHANVIEN -->
+        <a href="#nhanvien" data-keywords="nhanvien chuyenmon buoi gio lam viec nhom dich vu" class="guide-card rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow">
+          <div class="mb-2 text-sm font-semibold text-indigo-700">👥 Cấu hình</div>
+          <h3 class="text-lg font-bold text-slate-900">Cấu hình NHANVIEN</h3>
+          <p class="mt-1 text-sm text-slate-600">Nhân sự, chuyên môn, ca làm, nhóm DV cho bác sĩ chỉ định.</p>
+          <div class="mt-3 text-sm font-semibold text-indigo-600">Xem chi tiết →</div>
+        </a>
+        <!-- Card: MAYMOC -->
+        <a href="#maymoc" data-keywords="may moc mamay dichvu khoaphong quanly" class="guide-card rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow">
+          <div class="mb-2 text-sm font-semibold text-indigo-700">🖥️ Cấu hình</div>
+          <h3 class="text-lg font-bold text-slate-900">Cấu hình MAYMOC</h3>
+          <p class="mt-1 text-sm text-slate-600">Mã máy, dịch vụ, khoa phòng, người quản lý máy.</p>
+          <div class="mt-3 text-sm font-semibold text-indigo-600">Xem chi tiết →</div>
+        </a>
+        <!-- Card: Patients -->
+        <a href="#patients" data-keywords="them benh nhan moi ngay hsba dich vu buoi giovao" class="guide-card rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow">
+          <div class="mb-2 text-sm font-semibold text-indigo-700">🧾 Nhập liệu</div>
+          <h3 class="text-lg font-bold text-slate-900">Thêm bệnh nhân mới</h3>
+          <p class="mt-1 text-sm text-slate-600">Ngày (chung), họ tên, HSBA (duy nhất), dịch vụ, buổi, khoa phòng, giờ vào.</p>
+          <div class="mt-3 text-sm font-semibold text-indigo-600">Xem chi tiết →</div>
+        </a>
+        <!-- Card: EMAIL -->
+        <a href="#email" data-keywords="email ketqua excel gui tu dong" class="guide-card rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow">
+          <div class="mb-2 text-sm font-semibold text-indigo-700">✉️ Thông báo</div>
+          <h3 class="text-lg font-bold text-slate-900">Cấu hình EMAIL nhận KETQUA</h3>
+          <p class="mt-1 text-sm text-slate-600">Thêm email, lưu, gửi Excel KETQUA, mẹo tránh lỗi.</p>
+          <div class="mt-3 text-sm font-semibold text-indigo-600">Xem chi tiết →</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Sections (condensed from full guides) -->
+    <section id="intro" class="mt-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900">1) Giới thiệu & Bắt đầu nhanh</h2>
+      <p class="mt-2 text-slate-600">Đăng nhập (mật khẩu mặc định <code class="rounded bg-slate-100 px-1">meds</code> → đổi ngay sau đăng nhập), xem tổng quan giao diện, và lộ trình 5 bước: THOIGIAN → NHANVIEN → MAYMOC → thêm bệnh nhân → Chia giờ.</p>
+      <div class="mt-3 flex flex-wrap gap-2 text-sm">
+        <a href="#" class="rounded-lg border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-700 shadow-sm hover:bg-slate-50">Mở bài chi tiết</a>
+        <a href="#toc" class="rounded-lg bg-gradient-to-r from-indigo-600 to-cyan-500 px-3 py-2 font-semibold text-white shadow-sm">Lên đầu trang</a>
+      </div>
+    </section>
+
+    <section id="thoigian" class="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900">2) Cấu hình THOIGIAN</h2>
+      <ul class="mt-2 list-disc pl-5 text-slate-600">
+        <li><b>DICHVU</b>: viết tắt nhất quán (VD: DX, SA, LA, VD, DC).</li>
+        <li><b>THOILUONG</b>: phút; bám theo hướng dẫn BHXH.</li>
+        <li><b>DUNGMAY</b>: <code>TRUE</code>/<code>FALSE</code> rõ ràng.</li>
+        <li><b>NHOMDICHVU</b>: thường YHCT/PHCN cho lựa chọn bác sĩ chỉ định.</li>
+      </ul>
+      <div class="mt-3 flex flex-wrap gap-2 text-sm">
+        <a href="https://medstrial.toihocy.com/post/huong-dan-cau-hinh-thoi-gian.html" class="rounded-lg border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-700 shadow-sm hover:bg-slate-50">Mở bài chi tiết</a>
+        <a href="#toc" class="rounded-lg bg-gradient-to-r from-indigo-600 to-cyan-500 px-3 py-2 font-semibold text-white shadow-sm">Lên đầu trang</a>
+      </div>
+    </section>
+
+    <section id="nhanvien" class="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900">3) Cấu hình NHANVIEN</h2>
+      <ul class="mt-2 list-disc pl-5 text-slate-600">
+        <li><b>HOTEN</b>: đúng chính tả, đồng bộ 100% với nơi khác (VD: QUANLY/MAYMOC).</li>
+        <li><b>CHUYENMON</b>: liệt kê viết tắt DV, cách nhau dấu phẩy.</li>
+        <li><b>BUOI</b>: để trống/cả ngày; hoặc "Sáng"/"Chiều".</li>
+        <li><b>Khung giờ</b>: MORNING/AFTERNOON start–end (HH:MM).</li>
+        <li><b>NHOMDICHVU</b>: chỉ với bác sĩ chỉ định (YHCT, PHCN).</li>
+      </ul>
+      <div class="mt-3 flex flex-wrap gap-2 text-sm">
+        <a href="huong-dan-cau-hinh-nhan-vien.html" class="rounded-lg border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-700 shadow-sm hover:bg-slate-50">Mở bài chi tiết</a>
+        <a href="#toc" class="rounded-lg bg-gradient-to-r from-indigo-600 to-cyan-500 px-3 py-2 font-semibold text-white shadow-sm">Lên đầu trang</a>
+      </div>
+    </section>
+
+    <section id="maymoc" class="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900">4) Cấu hình MAYMOC</h2>
+      <ul class="mt-2 list-disc pl-5 text-slate-600">
+        <li><b>MAMAY</b>: định danh chuẩn (VD: DX01, SA02, LA03…).</li>
+        <li><b>DICHVU</b>: viết tắt khớp THOIGIAN; nhiều DV cách dấu phẩy.</li>
+        <li><b>KHOAPHONG</b>: để trống nếu dùng một khoa; ghi rõ nếu toàn viện.</li>
+        <li><b>QUANLY</b>: để trống = ai phù hợp cũng dùng; có tên = giới hạn theo người.</li>
+      </ul>
+      <div class="mt-3 flex flex-wrap gap-2 text-sm">
+        <a href="huong-dan-cau-hinh-may-moc.html" class="rounded-lg border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-700 shadow-sm hover:bg-slate-50">Mở bài chi tiết</a>
+        <a href="#toc" class="rounded-lg bg-gradient-to-r from-indigo-600 to-cyan-500 px-3 py-2 font-semibold text-white shadow-sm">Lên đầu trang</a>
+      </div>
+    </section>
+
+    <section id="patients" class="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900">5) Thêm bệnh nhân mới</h2>
+      <ul class="mt-2 list-disc pl-5 text-slate-600">
+        <li><b>Ngày</b>: thống nhất một ngày chung (không phải ngày vào viện).</li>
+        <li><b>HSBA</b>: duy nhất, bắt buộc, không trùng.</li>
+        <li><b>Dịch vụ</b>: viết tắt, cách nhau dấu phẩy; đồng bộ cấu hình.</li>
+        <li><b>Buổi/Khoa phòng</b>: tuỳ mô hình; để trống nếu không dùng.</li>
+        <li><b>Giờ vào</b>: mốc để xếp y lệnh và giờ thực hiện (HH:MM).</li>
+      </ul>
+      <div class="mt-3 flex flex-wrap gap-2 text-sm">
+        <a href="huong-dan-them-benh-nhan.html" class="rounded-lg border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-700 shadow-sm hover:bg-slate-50">Mở bài chi tiết</a>
+        <a href="#toc" class="rounded-lg bg-gradient-to-r from-indigo-600 to-cyan-500 px-3 py-2 font-semibold text-white shadow-sm">Lên đầu trang</a>
+      </div>
+    </section>
+
+    <section id="email" class="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900">6) Cấu hình EMAIL nhận KETQUA</h2>
+      <ul class="mt-2 list-disc pl-5 text-slate-600">
+        <li>Sheet chỉ có cột <b>EMAIL</b>; mỗi dòng một địa chỉ.</li>
+        <li>Bấm <b>Lưu</b> trước khi bấm <b>Gửi EMAIL</b>.</li>
+        <li>Nếu không thấy thư: kiểm tra <b>Spam/Quảng cáo</b>; whitelist địa chỉ người gửi.</li>
+      </ul>
+      <div class="mt-3 flex flex-wrap gap-2 text-sm">
+        <a href="huong-dan-cau-hinh-email.html" class="rounded-lg border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-700 shadow-sm hover:bg-slate-50">Mở bài chi tiết</a>
+        <a href="#toc" class="rounded-lg bg-gradient-to-r from-indigo-600 to-cyan-500 px-3 py-2 font-semibold text-white shadow-sm">Lên đầu trang</a>
+      </div>
+    </section>
+
+    <section id="run" class="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900">7) Chạy chia giờ & nhận Excel</h2>
+      <ol class="mt-2 list-decimal pl-5 text-slate-700">
+        <li>Hoàn thiện 3 cấu hình: <b>THOIGIAN</b>, <b>NHANVIEN</b>, <b>MAYMOC</b>.</li>
+        <li>Nhập danh sách bệnh nhân đầy đủ.</li>
+        <li>Mở trang <b>KETQUA</b> → bấm <b>Chia giờ</b>.</li>
+        <li>Kiểm tra xung đột (nếu có), điều chỉnh và <b>Lưu</b>.</li>
+        <li>Bấm <b>Gửi EMAIL</b> để nhận <b>Excel KETQUA</b>.</li>
+      </ol>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="mt-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900">8) FAQ & Lỗi thường gặp</h2>
+      <details class="group mt-3 rounded-xl border border-slate-200 p-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between font-medium text-slate-900">
+          Không thấy email KETQUA thì làm gì?
+          <span class="text-slate-500 group-open:hidden">＋</span>
+          <span class="hidden text-slate-500 group-open:inline">－</span>
+        </summary>
+        <div class="mt-2 text-sm text-slate-600">Kiểm tra Spam/Quảng cáo; kiểm tra chính tả email; đảm bảo đã bấm <b>Lưu</b> trước khi gửi; nếu có bộ lọc, hãy whitelist địa chỉ người gửi.</div>
+      </details>
+      <details class="group mt-3 rounded-xl border border-slate-200 p-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between font-medium text-slate-900">
+          Lỗi trùng HSBA khi thêm bệnh nhân
+          <span class="text-slate-500 group-open:hidden">＋</span>
+          <span class="hidden text-slate-500 group-open:inline">－</span>
+        </summary>
+        <div class="mt-2 text-sm text-slate-600">Mỗi bệnh nhân chỉ có một HSBA duy nhất. Dùng tìm kiếm để phát hiện mã đã tồn tại; sửa trước khi lưu.</div>
+      </details>
+      <details class="group mt-3 rounded-xl border border-slate-200 p-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between font-medium text-slate-900">
+          DUNGMAY nên điền thế nào?
+          <span class="text-slate-500 group-open:hidden">＋</span>
+          <span class="hidden text-slate-500 group-open:inline">－</span>
+        </summary>
+        <div class="mt-2 text-sm text-slate-600">Điền <code>TRUE</code> nếu DV có dùng máy (DX, SA, LA…), <code>FALSE</code> nếu không (VD, xoa bóp…). Trường này ảnh hưởng giữ tay KTV (<b>NV_HANDS_ON_MIN</b>) và tránh trùng máy.</div>
+      </details>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-10 rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-600">
+      <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <p><span class="font-semibold text-slate-900">MEDS •</span> Tài liệu hướng dẫn tổng hợp. Giữ đồng bộ viết tắt DV (DX, SA, LA, VD, DC…) giữa các sheet.</p>
+        <a href="#" class="rounded-lg border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-700 shadow-sm hover:bg-slate-50">⬆️ Lên đầu trang</a>
+      </div>
+    </footer>
+  </article>
+
+  <script>
+    // Simple filter for cards
+    const box = document.getElementById('searchBox');
+    const cards = Array.from(document.querySelectorAll('.guide-card'));
+    box?.addEventListener('input', () => {
+      const q = box.value.trim().toLowerCase();
+      cards.forEach(c => {
+        const k = (c.getAttribute('data-keywords') || '') + ' ' + c.textContent;
+        c.style.display = k.toLowerCase().includes(q) ? '' : 'none';
+      });
+    });
+    // Scroll spy for TOC
+    const links = Array.from(document.querySelectorAll('.toc-link'));
+    const sections = ['intro','thoigian','nhanvien','maymoc','patients','email','run','faq'].map(id => document.getElementById(id));
+    const spy = () => {
+      let cur = sections[0];
+      const y = window.scrollY + 120;
+      sections.forEach(s => { if (s && s.offsetTop <= y) cur = s; });
+      links.forEach(a => a.classList.toggle('active-link', a.getAttribute('href') === '#' + cur.id));
+    };
+    window.addEventListener('scroll', spy, { passive: true });
+    spy();
+  </script>
+</body>
+</html>
