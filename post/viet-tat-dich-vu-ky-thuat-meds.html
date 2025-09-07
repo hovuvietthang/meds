@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MEDS • Chuẩn viết tắt dịch vụ kỹ thuật — Thống nhất toàn hệ thống</title>
+  <meta name="description" content="Hướng dẫn thống nhất viết tắt dịch vụ kỹ thuật cho MEDS: nguyên tắc đặt mã, bảng viết tắt khuyến nghị (DX, SA, LA, TT, SN, VD, DC...), cách đồng bộ giữa các sheet THOIGIAN, NHANVIEN, MAYMOC, YLENH/KETQUA, và checklist kiểm tra." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#2563eb" />
+  <link rel="canonical" href="/viet-tat-dich-vu-ky-thuat.html" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Chuẩn viết tắt dịch vụ kỹ thuật — MEDS" />
+  <meta property="og:description" content="Nguyên tắc đặt mã, bảng viết tắt khuyến nghị và cách đồng bộ để MEDS xếp lịch chính xác, tránh trùng." />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="vi_VN" />
+  <meta property="og:site_name" content="MEDS" />
+  
+  <!-- JSON-LD Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Chuẩn viết tắt dịch vụ kỹ thuật — Thống nhất toàn hệ thống",
+    "description": "Hướng dẫn thống nhất viết tắt dịch vụ kỹ thuật cho MEDS: nguyên tắc đặt mã, bảng viết tắt khuyến nghị (DX, SA, LA, TT, SN, VD, DC...), cách đồng bộ, checklist.",
+    "inLanguage": "vi-VN",
+    "datePublished": "2025-09-07",
+    "author": {"@type":"Organization","name":"MEDS"}
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html{ scroll-behavior:smooth }
+    .card{ border-radius:1rem; border:1px solid #e2e8f0; background:#fff; padding:1.25rem; box-shadow:0 1px 2px rgba(0,0,0,.04) }
+    .tag{ display:inline-block; background:#eef2ff; color:#3730a3; font-weight:600; padding:.2rem .5rem; border-radius:.5rem; font-size:.8rem }
+    .kbd{ display:inline-block; background:#f1f5f9; padding:.15rem .5rem; border-radius:.4rem; font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.85em }
+    .pill{ display:inline-flex; align-items:center; gap:.4rem; border:1px solid #e2e8f0; background:#fff; border-radius:999px; padding:.25rem .6rem; font-size:.8rem }
+    @media print{ .no-print{ display:none } }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-800">
+  <article class="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+    <!-- Hero -->
+    <header class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div class="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-indigo-100 blur-2xl"></div>
+      <div class="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-cyan-100 blur-2xl"></div>
+      <div class="relative p-8 sm:p-10">
+        <div class="mb-3 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-[13px] font-medium text-indigo-700">
+          <span>🧭</span><span>Chuẩn hóa dữ liệu • MEDS</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">Thống nhất viết tắt dịch vụ kỹ thuật</h1>
+        <p class="mt-3 max-w-3xl text-slate-600">Viết tắt <b>đồng nhất</b> giúp MEDS xếp lịch chính xác, tránh lỗi trùng máy/nhân viên và dễ tra cứu. Bài viết này đưa ra <b>nguyên tắc đặt mã</b>, <b>bảng viết tắt khuyến nghị</b> và <b>cách đồng bộ</b> giữa các sheet.</p>
+        <p class="mt-2 text-sm text-slate-500">Áp dụng cho: <span class="pill">THOIGIAN</span> <span class="pill">NHANVIEN</span> <span class="pill">MAYMOC</span> <span class="pill">YLENH</span> <span class="pill">KETQUA</span></p>
+      </div>
+    </header>
+
+    <!-- TOC + badges -->
+    <section class="mt-6 grid gap-6 lg:grid-cols-3">
+      <nav class="card lg:col-span-1">
+        <h2 class="mb-3 text-base font-semibold text-slate-900">Mục lục</h2>
+        <ol class="space-y-2 text-sm leading-6">
+          <li><a class="hover:text-indigo-700" href="#rules">1. Nguyên tắc đặt viết tắt</a></li>
+          <li><a class="hover:text-indigo-700" href="#table">2. Bảng viết tắt khuyến nghị</a></li>
+          <li><a class="hover:text-indigo-700" href="#sync">3. Đồng bộ giữa các sheet</a></li>
+          <li><a class="hover:text-indigo-700" href="#examples">4. Ví dụ đúng/sai phổ biến</a></li>
+          <li><a class="hover:text-indigo-700" href="#checklist">5. Checklist kiểm tra nhanh</a></li>
+          <li><a class="hover:text-indigo-700" href="#faq">6. Hỏi nhanh – đáp gọn</a></li>
+        </ol>
+      </nav>
+      <aside class="card lg:col-span-2">
+        <h3 class="text-base font-semibold text-slate-900">Tóm tắt</h3>
+        <ul class="mt-2 grid gap-2 sm:grid-cols-2 text-sm text-slate-700">
+          <li>Viết tắt dùng <b>chữ in hoa</b>, dài 2–3 ký tự: <span class="tag">DX</span>, <span class="tag">SA</span>, <span class="tag">LA</span>.</li>
+          <li>Ghi theo dạng <span class="kbd">DX, SA, LA</span> (ngăn cách bằng dấu phẩy, có khoảng trắng).</li>
+          <li>Phải <b>đồng bộ 100%</b> giữa THOIGIAN ↔ NHANVIEN ↔ MAYMOC ↔ YLENH.</li>
+          <li>Không dùng dấu tiếng Việt, không trùng mã, không dùng khoảng trắng trong mã.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- Rules -->
+    <section id="rules" class="mt-8 card">
+      <h2 class="text-xl font-bold text-slate-900">1) Nguyên tắc đặt viết tắt</h2>
+      <ol class="mt-2 list-decimal pl-5 text-slate-700 leading-7">
+        <li><b>Ngắn – rõ – nhất quán:</b> 2–3 ký tự in hoa, dễ đọc: <span class="kbd">DX</span> (Điện xung), <span class="kbd">SA</span> (Siêu âm), <span class="kbd">LA</span> (Laser).</li>
+        <li><b>ASCII thuần</b>: không dấu, không ký tự đặc biệt; tránh khoảng trắng trong mã.</li>
+        <li><b>Không trùng:</b> mỗi dịch vụ một mã duy nhất trong toàn hệ thống.</li>
+        <li><b>Tên gần gốc:</b> ưu tiên ký tự đầu của từ khóa tiếng Việt để dễ nhớ.</li>
+        <li><b>Viết dạng danh sách:</b> phân tách bằng dấu phẩy và khoảng trắng: <span class="kbd">DX, SA, LA</span>.</li>
+      </ol>
+      <div class="mt-3 rounded-xl border border-amber-200 bg-amber-50 p-4 text-amber-900 text-sm">
+        <b>Lưu ý:</b> Nếu thay đổi mã đã dùng, cần cập nhật đồng loạt ở <b>THOIGIAN</b> (DICHVU), <b>NHANVIEN</b> (Chuyên môn), <b>MAYMOC</b> (DICHVU), <b>YLENH</b> và kiểm tra lại <b>KETQUA</b>.
+      </div>
+    </section>
+
+    <!-- Table of abbreviations with search -->
+    <section id="table" class="mt-8 card">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <h2 class="text-xl font-bold text-slate-900">2) Bảng viết tắt khuyến nghị</h2>
+        <div class="no-print">
+          <label for="q" class="block text-xs font-medium text-slate-600">Tìm nhanh</label>
+          <input id="q" type="text" placeholder="Nhập tên/mã (ví dụ: Siêu âm hoặc SA)" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+      </div>
+      <div class="mt-3 overflow-x-auto rounded-xl border border-slate-200">
+        <table id="abbrTable" class="min-w-full text-left text-sm">
+          <thead class="bg-slate-50 text-slate-600">
+            <tr>
+              <th class="px-4 py-3 font-semibold">Mã</th>
+              <th class="px-4 py-3 font-semibold">Tên dịch vụ</th>
+              <th class="px-4 py-3 font-semibold">Nhóm</th>
+              <th class="px-4 py-3 font-semibold">Ghi chú</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <!-- PHCN -->
+            <tr>
+              <td class="px-4 py-3 font-semibold text-slate-900">DX</td>
+              <td class="px-4 py-3">Điện xung</td>
+              <td class="px-4 py-3">PHCN</td>
+              <td class="px-4 py-3">Dùng máy</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-semibold text-slate-900">SA</td>
+              <td class="px-4 py-3">Siêu âm</td>
+              <td class="px-4 py-3">PHCN</td>
+              <td class="px-4 py-3">Dùng máy; thường hands-on</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-semibold text-slate-900">LA</td>
+              <td class="px-4 py-3">Laser</td>
+              <td class="px-4 py-3">PHCN</td>
+              <td class="px-4 py-3">Dùng máy; thường hands-on</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-semibold text-slate-900">TT</td>
+              <td class="px-4 py-3">Từ trường</td>
+              <td class="px-4 py-3">PHCN</td>
+              <td class="px-4 py-3">Dùng máy</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-semibold text-slate-900">SN</td>
+              <td class="px-4 py-3">Sóng ngắn</td>
+              <td class="px-4 py-3">PHCN</td>
+              <td class="px-4 py-3">Dùng máy</td>
+            </tr>
+            <tr>
+                <td class="px-4 py-3 font-semibold text-slate-900">XK</td>
+                <td class="px-4 py-3">Sóng xung kích</td>
+                <td class="px-4 py-3">PHCN</td>
+                <td class="px-4 py-3">Dùng máy</td>
+              </tr>
+            <tr>
+              <td class="px-4 py-3 font-semibold text-slate-900">PR</td>
+              <td class="px-4 py-3">Paraffin</td>
+              <td class="px-4 py-3">PHCN</td>
+              <td class="px-4 py-3">Dùng máy</td>
+            </tr>
+            <tr>
+                <td class="px-4 py-3 font-semibold text-slate-900">XBV</td>
+                <td class="px-4 py-3">Xoa bóp vùng</td>
+                <td class="px-4 py-3">PHCN</td>
+                <td class="px-4 py-3">Không dùng máy</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-semibold text-slate-900">VD hoặc VD1, VD2</td>
+                <td class="px-4 py-3">Tập vận động hoặc tập kháng trở</td>
+                <td class="px-4 py-3">PHCN</td>
+                <td class="px-4 py-3">Không dùng máy</td>
+              </tr>
+            <tr>
+                <td class="px-4 py-3 font-semibold text-slate-900">NUOT</td>
+                <td class="px-4 py-3">Tập nuốt</td>
+                <td class="px-4 py-3">PHCN</td>
+                <td class="px-4 py-3">Không dùng máy</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-semibold text-slate-900">AMN</td>
+                <td class="px-4 py-3">Âm ngữ trị liệu</td>
+                <td class="px-4 py-3">PHCN</td>
+                <td class="px-4 py-3">Không dùng máy</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-semibold text-slate-900">THO</td>
+                <td class="px-4 py-3">Tập thở</td>
+                <td class="px-4 py-3">PHCN</td>
+                <td class="px-4 py-3">Không dùng máy</td>
+              </tr>
+            <tr>
+              <td class="px-4 py-3 font-semibold text-slate-900">VD</td>
+              <td class="px-4 py-3">Tập vận động</td>
+              <td class="px-4 py-3">PHCN</td>
+              <td class="px-4 py-3">Không dùng máy</td>
+            </tr>
+            <tr>
+                <td class="px-4 py-3 font-semibold text-slate-900">TTL</td>
+                <td class="px-4 py-3">Thủy trị liệu</td>
+                <td class="px-4 py-3">PHCN</td>
+                <td class="px-4 py-3">Không dùng máy</td>
+              </tr>
+            <!-- YHCT -->
+            <tr>
+              <td class="px-4 py-3 font-semibold text-slate-900">DC</td>
+              <td class="px-4 py-3">Điện châm</td>
+              <td class="px-4 py-3">YHCT</td>
+              <td class="px-4 py-3">Dùng máy</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-semibold text-slate-900">XB</td>
+              <td class="px-4 py-3">Xoa bóp bấm huyệt</td>
+              <td class="px-4 py-3">YHCT</td>
+              <td class="px-4 py-3">Không dùng máy</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-semibold text-slate-900">TC</td>
+              <td class="px-4 py-3">Thủy châm</td>
+              <td class="px-4 py-3">YHCT</td>
+              <td class="px-4 py-3">Không dùng máy</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-semibold text-slate-900">HN</td>
+              <td class="px-4 py-3">Hồng ngoại</td>
+              <td class="px-4 py-3">YHCT/PHCN</td>
+              <td class="px-4 py-3">Dùng máy</td>
+            </tr>
+            <tr>
+                <td class="px-4 py-3 font-semibold text-slate-900">GH</td>
+                <td class="px-4 py-3">Giác hơi</td>
+                <td class="px-4 py-3">YHCT</td>
+                <td class="px-4 py-3">Dùng máy</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-semibold text-slate-900">CUU</td>
+                <td class="px-4 py-3">Cứu ngải</td>
+                <td class="px-4 py-3">YHCT</td>
+                <td class="px-4 py-3">Dùng máy/không dùng máy</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-semibold text-slate-900">NGAM</td>
+                <td class="px-4 py-3">Ngâm chân</td>
+                <td class="px-4 py-3">YHCT</td>
+                <td class="px-4 py-3">Dùng máy</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-sm text-slate-600">* Bảng trên là <b>khuyến nghị</b>. Đơn vị có thể thêm/bớt dịch vụ, nhưng phải giữ nguyên tắc đặt mã và cập nhật đồng bộ trên toàn hệ thống.</p>
+    </section>
+
+    <!-- Sync across sheets -->
+    <section id="sync" class="mt-8 card">
+      <h2 class="text-xl font-bold text-slate-900">3) Cách đồng bộ giữa các sheet</h2>
+      <div class="mt-2 grid gap-4 sm:grid-cols-2 text-sm text-slate-700">
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <h3 class="font-semibold text-slate-900">THOIGIAN</h3>
+          <p class="mt-1">Cột <b>DICHVU</b> dùng đúng mã; <b>THOILUONG</b> theo BHXH; <b>DUNGMAY</b> TRUE/FALSE; <b>NHOMDICHVU</b>: YHCT/PHCN.</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <h3 class="font-semibold text-slate-900">NHANVIEN</h3>
+          <p class="mt-1">Cột <b>Chuyên môn</b> liệt kê mã dịch vụ nhân viên làm được: <span class="kbd">DX, SA, LA</span>…</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <h3 class="font-semibold text-slate-900">MAYMOC</h3>
+          <p class="mt-1">Cột <b>DICHVU</b> đúng mã máy hỗ trợ: ví dụ máy <span class="kbd">SA01</span> gắn <span class="kbd">SA</span>.</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <h3 class="font-semibold text-slate-900">YLENH/KETQUA</h3>
+          <p class="mt-1">Các dịch vụ trong y lệnh phải trùng mã với THOIGIAN; KETQUA xuất ra sẽ dùng đúng mã đã thống nhất.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Examples -->
+    <section id="examples" class="mt-8 card">
+      <h2 class="text-xl font-bold text-slate-900">4) Ví dụ nhanh</h2>
+      <div class="mt-2 grid gap-4 text-sm">
+        <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">
+          <b>Đúng:</b> "<span class="kbd">DX, SA, LA</span>" (có dấu phẩy + khoảng trắng; mã in hoa; trùng THOIGIAN)
+        </div>
+        <div class="rounded-xl border border-rose-200 bg-rose-50 p-4 text-rose-900">
+          <b>Sai:</b> "<span class="kbd">dx;sa;la</span>" (sai ký tự phân tách và chữ thường) · "<span class="kbd">Sieu am</span>" (viết tắt sai quy ước)
+        </div>
+      </div>
+    </section>
+
+    <!-- Checklist -->
+    <section id="checklist" class="mt-8 card">
+      <h2 class="text-xl font-bold text-slate-900">5) Checklist kiểm tra nhanh trước khi chạy MEDS</h2>
+      <ul class="mt-2 list-disc pl-5 text-slate-700 leading-7">
+        <li>Toàn bộ dịch vụ trong <b>THOIGIAN</b> đã có mã viết tắt, không trùng nhau.</li>
+        <li>Nhân viên có <b>Chuyên môn</b> trùng mã với THOIGIAN; máy móc có <b>DICHVU</b> trùng mã.</li>
+        <li>Y lệnh nhập bằng mã thống nhất; không lẫn chữ thường/chữ có dấu.</li>
+        <li>Nếu thêm mã mới: cập nhật cả 4 nơi (THOIGIAN/NHANVIEN/MAYMOC/YLENH).</li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="mt-8 card">
+      <h2 class="text-xl font-bold text-slate-900">6) Hỏi nhanh – đáp gọn</h2>
+      <details class="mt-2 rounded-xl border border-slate-200 p-4">
+        <summary class="cursor-pointer font-semibold text-slate-900">Có khoảng trắng sau dấu phẩy không?</summary>
+        <p class="mt-2 text-slate-700">Có. Gợi ý nhập: <span class="kbd">DX, SA, LA</span>. MEDS vẫn hiểu nếu không có khoảng trắng, nhưng thêm khoảng trắng giúp đọc dễ.</p>
+      </details>
+      <details class="mt-2 rounded-xl border border-slate-200 p-4">
+        <summary class="cursor-pointer font-semibold text-slate-900">Có thể dùng 3 ký tự?</summary>
+        <p class="mt-2 text-slate-700">Được (ví dụ <span class="kbd">PAR</span> cho Paraffin). Tuy nhiên ưu tiên 2 ký tự để danh mục gọn.</p>
+      </details>
+      <details class="mt-2 rounded-xl border border-slate-200 p-4">
+        <summary class="cursor-pointer font-semibold text-slate-900">Thay đổi mã cũ thì sao?</summary>
+        <p class="mt-2 text-slate-700">Cập nhật đồng loạt ở THOIGIAN/NHANVIEN/MAYMOC/YLENH; chạy thử với vài hồ sơ trước khi áp dụng toàn bộ.</p>
+      </details>
+    </section>
+
+    <footer class="mt-10 rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-600">
+      <p><span class="font-semibold text-slate-900">Kết luận:</span> Chọn một bộ viết tắt thống nhất, dùng xuyên suốt ở THOIGIAN – NHANVIEN – MAYMOC – YLENH. Khi mọi nơi cùng một ngôn ngữ, MEDS sẽ xếp lịch đúng ngay từ lần chạy đầu tiên.</p>
+    </footer>
+  </article>
+
+  <script>
+    // simple table filter
+    const q = document.getElementById('q');
+    const rows = Array.from(document.querySelectorAll('#abbrTable tbody tr'));
+    q && q.addEventListener('input', () => {
+      const term = q.value.toLowerCase().trim();
+      rows.forEach(r => {
+        const text = r.innerText.toLowerCase();
+        r.style.display = text.includes(term) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
