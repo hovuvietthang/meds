@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TRA CỨU • Văn bản Bộ Y tế & BHXH</title>
+  <meta name="description" content="Hệ thống tra cứu nhanh Thông tư, Hướng dẫn Bộ Y tế và Bảo hiểm xã hội. Tải xuống tài liệu trực tiếp." />
+  <meta property="og:title" content="Tra cứu Văn bản BYT & BHXH" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{ --meds-primary:#2563eb; --meds-accent:#06b6d4; --meds-ink:#0f172a; --surface: #1e293b; --meds-border: rgba(255,255,255,0.1); }
+    
+    /* ===== Guide Dock (Giữ nguyên từ theme cũ) ===== */
+    .guide-dock { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); z-index: 40; }
+    @media (max-width: 640px){ .guide-dock{ top: auto; bottom: 20px; transform: none; right: 16px; }}
+    .guide-btn { width: 44px; height: 44px; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center; background: var(--surface); color: #e5e7eb; border: 1px solid var(--meds-border); box-shadow: 0 10px 25px rgba(2,6,23,.35); transition: transform .15s ease, box-shadow .15s ease, background .15s ease; cursor: pointer; }
+    .guide-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(2,6,23,.5); background: rgba(255,255,255,.1); }
+    .guide-fade { animation: guideFade .18s ease-out; }
+    @keyframes guideFade { from { opacity: 0; transform: scale(.98) translateY(6px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    body.modal-open { overflow: hidden; }
+    .guide-sheet{ max-height: calc(100vh - 4rem); display: flex; flex-direction: column; overflow: hidden; }
+    
+    /* Loader */
+    .loader { border: 3px solid #f3f3f3; border-top: 3px solid var(--meds-primary); border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-800 min-h-screen">
+
+  <article class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+    <header class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm mb-8">
+      <div class="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-indigo-100 blur-2xl"></div>
+      <div class="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-cyan-100 blur-2xl"></div>
+      <div class="relative p-8 sm:p-10 text-center sm:text-left">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-[13px] font-medium text-indigo-700">
+          <span>⚖️</span>
+          <span>Cập nhật liên tục</span>
+        </div>
+        <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          Tra cứu <span class="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent">VĂN BẢN BỘ Y TẾ VÀ HƯỚNG DẪN THANH TOÁN BHXH</span>
+        </h1>
+        <p class="mt-3 max-w-3xl text-slate-600 mx-auto sm:mx-0">
+            Hệ thống tra cứu Thông tư, Hướng dẫn Bộ Y tế & Bảo hiểm xã hội. Nhập từ khóa để tìm kiếm nhanh tài liệu bạn cần.
+        </p>
+      </div>
+    </header>
+
+    <section class="mb-8 sticky top-4 z-30">
+        <div class="relative group">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                <svg class="w-5 h-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+            <input type="text" id="searchInput" 
+                class="block w-full p-4 pl-12 text-base text-slate-900 border border-slate-200 rounded-2xl bg-white/80 backdrop-blur-md shadow-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all" 
+                placeholder="Nhập tên thông tư, số văn bản, hoặc trích yếu..." autocomplete="off">
+            <div id="loadingIndicator" class="absolute inset-y-0 right-0 flex items-center pr-4 hidden">
+                <div class="loader"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden min-h-[400px]">
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-left text-sm">
+          <thead class="bg-slate-50 text-slate-600 border-b border-slate-200">
+            <tr>
+              <th class="px-6 py-4 font-bold uppercase tracking-wider text-xs text-slate-500 w-24">ID</th>
+              <th class="px-6 py-4 font-bold uppercase tracking-wider text-xs text-slate-500">Tên văn bản / Trích yếu</th>
+              <th class="px-6 py-4 font-bold uppercase tracking-wider text-xs text-slate-500 w-32 whitespace-nowrap">Ngày ký</th>
+              <th class="px-6 py-4 font-bold uppercase tracking-wider text-xs text-slate-500 w-24 text-center">Tải về</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody" class="divide-y divide-slate-100">
+            </tbody>
+        </table>
+      </div>
+      
+      <div id="emptyState" class="hidden flex-col items-center justify-center py-12 text-center">
+          <div class="text-4xl mb-3">📂</div>
+          <p class="text-slate-500">Không tìm thấy tài liệu nào khớp với từ khóa.</p>
+      </div>
+      
+      <div id="errorState" class="hidden flex-col items-center justify-center py-12 text-center text-rose-600">
+          <div class="text-4xl mb-3">⚠️</div>
+          <p>Không thể tải dữ liệu. Vui lòng kiểm tra kết nối hoặc cấu hình sheet.</p>
+      </div>
+    </section>
+
+    <footer class="mt-10 rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-600 flex justify-between items-center">
+      <p>© 2024 MEDS Library.</p>
+      <p class="text-xs text-slate-400">Dữ liệu được đồng bộ từ Google Sheets</p>
+    </footer>
+  </article>
+
+  <div class="guide-dock">
+    <button id="openGuideBtn" class="guide-btn" aria-label="Mở danh sách" title="Danh sách tài liệu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <script>
+    // ==========================================
+    // ⚙️ CẤU HÌNH DATABASE TẠI ĐÂY
+    // ==========================================
+    // Bước 1: Mở Google Sheet -> Tệp -> Chia sẻ -> Công bố lên Web (Publish to Web)
+    // Bước 2: Chọn Sheet chứa dữ liệu -> Chọn định dạng "Các giá trị được phân cách bằng dấu phẩy (.csv)"
+    // Bước 3: Dán link vào bên dưới
+    
+    const DATABASE_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTiWp77TAZtFh_5ur_nrFLG_uLRhnaojdxkiixr5xoCMIiY39mhTxMfIjbatxsXF3xYQoJIH2_QnIks/pub?gid=0&single=true&output=csv';
+
+    // ==========================================
+    
+    let allData = [];
+    const tableBody = document.getElementById('tableBody');
+    const searchInput = document.getElementById('searchInput');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const emptyState = document.getElementById('emptyState');
+    const errorState = document.getElementById('errorState');
+
+    // Hàm lấy dữ liệu
+    async function fetchData() {
+        loadingIndicator.classList.remove('hidden');
+        try {
+            const response = await fetch(DATABASE_URL);
+            if (!response.ok) throw new Error("Network response was not ok");
+            const csvText = await response.text();
+            allData = parseCSV(csvText); // Bỏ dòng tiêu đề nếu cần
+            renderTable(allData);
+        } catch (error) {
+            console.error('Lỗi tải dữ liệu:', error);
+            errorState.classList.remove('hidden');
+            tableBody.innerHTML = '';
+        } finally {
+            loadingIndicator.classList.add('hidden');
+        }
+    }
+
+    // Hàm parse CSV đơn giản
+    function parseCSV(text) {
+        // Tách dòng, loại bỏ dòng trống
+        const lines = text.split('\n').filter(line => line.trim() !== '');
+        // Giả sử dòng 1 là tiêu đề, ta lấy từ dòng 2
+        // Cấu trúc mong đợi: ID, Tên, Ngày, Link
+        const result = [];
+        // Bắt đầu từ i=1 để bỏ header
+        for (let i = 1; i < lines.length; i++) {
+            // Xử lý dấu phẩy trong nội dung (đơn giản hoá)
+            // Nếu dữ liệu phức tạp hơn, cần regex mạnh hơn
+            const cols = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/); 
+            
+            if (cols.length >= 4) {
+                result.push({
+                    id: cols[0].replace(/^"|"$/g, '').trim(),
+                    name: cols[1].replace(/^"|"$/g, '').trim(),
+                    date: cols[2].replace(/^"|"$/g, '').trim(),
+                    link: cols[3].replace(/^"|"$/g, '').trim()
+                });
+            }
+        }
+        return result;
+    }
+
+    // Hàm Render Bảng
+    function renderTable(data) {
+        tableBody.innerHTML = '';
+        
+        if (data.length === 0) {
+            emptyState.classList.remove('hidden');
+            return;
+        }
+        emptyState.classList.add('hidden');
+        errorState.classList.add('hidden');
+
+        data.forEach(item => {
+            const row = document.createElement('tr');
+            row.className = 'hover:bg-slate-50 transition-colors group';
+            
+            row.innerHTML = `
+                <td class="px-6 py-4 text-slate-500 font-mono text-xs">${item.id}</td>
+                <td class="px-6 py-4">
+                    <div class="text-sm font-medium text-slate-900 group-hover:text-indigo-600 transition-colors">${item.name}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+                    <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-500/10">
+                        ${item.date}
+                    </span>
+                </td>
+                <td class="px-6 py-4 text-center">
+                    ${item.link ? `
+                    <a href="${item.link}" target="_blank" class="inline-flex items-center justify-center rounded-xl bg-emerald-50 p-2 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 hover:shadow-sm ring-1 ring-inset ring-emerald-600/20 transition-all" title="Tải xuống">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    </a>` : ''}
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    // Logic tìm kiếm
+    searchInput.addEventListener('input', (e) => {
+        const keyword = e.target.value.toLowerCase();
+        const filtered = allData.filter(item => 
+            item.name.toLowerCase().includes(keyword) || 
+            item.id.toLowerCase().includes(keyword) ||
+            item.date.toLowerCase().includes(keyword)
+        );
+        renderTable(filtered);
+    });
+
+    // Chạy khi tải trang
+    // Để test giao diện, tôi tạo dữ liệu giả. 
+    // Khi bạn thay link CSV thật, xoá dòng mockData này đi và uncomment dòng fetchData()
+    
+    // --- MOCK DATA START (Xoá khi dùng thật) ---
+    /*
+    const mockData = [
+        {id: "TT01", name: "Thông tư 01/2025/TT-BYT Hướng dẫn kê đơn thuốc", date: "01/01/2025", link: "#"},
+        {id: "CV23", name: "Công văn 2345/BHXH-CSYT V/v Thanh toán BHYT", date: "15/12/2024", link: "#"},
+        {id: "ND16", name: "Nghị định 146/2018/NĐ-CP hướng dẫn Luật BHYT", date: "17/10/2018", link: "#"},
+        {id: "QD99", name: "Quyết định 130/QĐ-BYT về chuẩn định dạng dữ liệu", date: "18/01/2023", link: "#"}
+    ];
+    allData = mockData;
+    renderTable(mockData);
+    */
+    // --- MOCK DATA END ---
+
+    // BỎ COMMENT DÒNG DƯỚI ĐỂ CHẠY THẬT:
+    if(DATABASE_URL.includes('docs.google.com')) {
+         fetchData(); 
+    } else {
+        // Nếu chưa có link, hiện data mẫu để bạn xem giao diện
+        allData = [
+            {id: "DEMO", name: "Đây là dữ liệu mẫu. Hãy dán link CSV vào code.", date: "07/01/2026", link: "#"}
+        ];
+        renderTable(allData);
+    }
+
+  </script>
+</body>
+</html>
